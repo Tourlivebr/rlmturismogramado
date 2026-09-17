@@ -6,7 +6,7 @@
   <div class="container mx-auto px-2 lg:px-4">
     <nav class="header-nav flex items-center justify-between h-20 lg:h-28" aria-label="Navegação principal">
       <!-- Logo -->
-      <a href="/" class="flex items-center -ml-2 lg:ml-0 group mobile-landscape-hide" aria-label="Página inicial">
+      <a href="/" class="flex items-center -ml-2 lg:ml-0 group mobile-landscape-hide header-logo" aria-label="Página inicial">
         <img 
           src="/images/logo_p_rlmtur.png" 
           alt="RLM Turismo" 
@@ -38,6 +38,26 @@
           </div>
         </div>
       </div>
+
+      <!-- Inline Search - Mobile scrolled (CENTRALIZADO) - Apenas aparece no mobile scrolled -->
+      <div class="hidden md:hidden header-scrolled-search flex-1 max-w-[80%] mx-auto justify-center relative">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="mobile-scrolled-search-input"
+            placeholder="Buscar passeios..."
+            class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm text-sm"
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <div id="mobile-scrolled-search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden z-50">
+          </div>
+        </div>
+      </div>
       
       <!-- Desktop Menu -->
       <ul class="hidden md:flex items-center space-x-8 mobile-landscape-hide" role="menubar">
@@ -47,7 +67,7 @@
             class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 scroll-smooth"
             role="menuitem"
           >
-            Quem sou
+            Início
           </a>
         </li>
         <li role="none" class="relative group">
@@ -119,7 +139,7 @@
       <!-- Mobile Search Button -->
       <button 
         id="mobile-search-button"
-        class="md:hidden lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors mr-2 mobile-landscape-hide"
+        class="md:hidden lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors mr-2 mobile-landscape-hide header-mobile-search-btn"
         aria-label="Abrir busca"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +187,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
       <div class="px-4 py-4 space-y-4">
-        <a href="#quem-sou" class="block text-gray-700 hover:text-blue-600 transition-colors font-medium mobile-menu-link">Quem sou</a>
+        <a href="#quem-sou" class="block text-gray-700 hover:text-blue-600 transition-colors font-medium mobile-menu-link">Inicio</a>
         
         <!-- Mobile Services Dropdown -->
         <div class="space-y-2">
@@ -289,9 +309,11 @@
   const searchInput = document.getElementById('search-input');
   const mobileSearchInput = document.getElementById('mobile-search-input');
   const mobileLandscapeSearchInput = document.getElementById('mobile-landscape-search-input');
+  const mobileScrolledSearchInput = document.getElementById('mobile-scrolled-search-input');
   const searchResults = document.getElementById('search-results');
   const mobileSearchResults = document.getElementById('mobile-search-results');
   const mobileLandscapeSearchResults = document.getElementById('mobile-landscape-search-results');
+  const mobileScrolledSearchResults = document.getElementById('mobile-scrolled-search-results');
   
   let isMenuOpen = false;
   let isServicesOpen = false;
@@ -348,6 +370,10 @@
   mobileLandscapeSearchInput?.addEventListener('input', (e) => {
     performSearch(e.target.value, mobileLandscapeSearchResults);
   });
+
+  mobileScrolledSearchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value, mobileScrolledSearchResults);
+  });
   
   // Hide search results when clicking outside
   document.addEventListener('click', (e) => {
@@ -359,6 +385,9 @@
     }
     if (!e.target.closest('#mobile-landscape-search-input') && !e.target.closest('#mobile-landscape-search-results')) {
       mobileLandscapeSearchResults?.classList.add('hidden');
+    }
+    if (!e.target.closest('#mobile-scrolled-search-input') && !e.target.closest('#mobile-scrolled-search-results')) {
+      mobileScrolledSearchResults?.classList.add('hidden');
     }
   });
   
@@ -463,6 +492,7 @@
         searchResults?.classList.add('hidden');
         mobileSearchResults?.classList.add('hidden');
         mobileLandscapeSearchResults?.classList.add('hidden');
+        mobileScrolledSearchResults?.classList.add('hidden');
       }
     });
   });
@@ -474,6 +504,21 @@
   }
   .scrolled .header-nav img {
     @apply h-16 lg:h-20;
+  }
+
+  @media (max-width: 767px) {
+    #header.scrolled .header-logo {
+      display: none !important;
+    }
+    #header.scrolled .header-mobile-search-btn {
+      display: none !important;
+    }
+    #header.scrolled .header-scrolled-search {
+      display: flex !important;
+    }
+    #header.scrolled .header-nav {
+      height: 3.5rem !important;
+    }
   }
 
   @media (max-height: 600px) and (orientation: landscape) {
@@ -492,6 +537,9 @@
     }
     #header .header-nav {
       height: 4rem !important;
+    }
+    #header.scrolled .header-scrolled-search {
+      display: none !important;
     }
   }
 </style>

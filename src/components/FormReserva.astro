@@ -61,6 +61,8 @@ const faixasCompletasJSON = temFaixasCompletas ? JSON.stringify(passeioFaixasCom
   data-faixas-completas={faixasCompletasJSON}
 >
   {(passeioDuracao || passeioHorarios || passeioCategoria) && (
+  
+    <h2 class="text-2xl font-bold mb-4">Faça sua Reserva:</h2>
     <div class="space-y-4 mb-5">
       {passeioDuracao && (
         <div class="flex justify-between">
@@ -122,7 +124,7 @@ const faixasCompletasJSON = temFaixasCompletas ? JSON.stringify(passeioFaixasCom
   </div>
 
   <form class="space-y-4 form-reserva-form mb-4" onsubmit={`return window.__enviarReservaGeneric(event, String.raw\`${passeioNome}\`)`}>
-    <h3 class="font-bold text-lg text-gray-900">Formulário de Reserva</h3>
+    <h3 class="font-bold text-lg text-gray-900">Complete sua Reserva:</h3>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Nome:</label>
