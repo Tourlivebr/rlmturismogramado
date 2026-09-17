@@ -22,19 +22,19 @@ const passeio = {
   duracao: "Dia inteiro",
   horarios: ["Consulte horários de funcionamento"],
   galeria: [
-    "/images/monica/monica.jpg",
-    "/images/monica/monica01.jpg",
-    "/images/monica/monica02.jpg",
-    "/images/monica/monica03.jpg",
-    "/images/monica/monica04.jpg",
-    "/images/monica/monica05.jpg",
-    "/images/monica/monica06.jpg",
-    "/images/monica/monica07.jpg",
-    "/images/monica/monica08.jpg",
-    "/images/monica/monica09.jpg",
-    "/images/monica/monica10.jpg",
-    "/images/monica/monica11.jpg",
-    "/images/monica/monica12.jpg"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Brazilian%20family%20amusement%20park%20colorful%20themed%20area%20with%20Monica%20cartoon%20characters%2C%20fun%20playground%2C%20Gramado%20Brazil%20happy%20children&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Monica%20cartoon%20character%20meet%20and%20greet%20brazilian%20amusement%20park%20mascot%20children%20taking%20photos%20happy%20family&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Colorful%20childrens%20carousel%20merry%20go%20round%20spinning%20ride%20with%20horses%2C%20park%20playground%20joyful%20kids%20playing&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bumper%20cars%20playground%20at%20indoor%20amusement%20park%20for%20family%20fun%20day%20children%20driving%20colorful%20cars&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kids%20playground%20colorful%20ball%20pit%20indoor%20soft%20play%20area%20happy%20toddlers%20playing%20family%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Turma%20da%20Monica%20themed%20brazilian%20comic%20character%20themed%20area%20facade%20colorful%20buildings%20park%20entrance&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Ferris%20wheel%20colorful%20lights%20amusement%20park%20panoramic%20view%20family%20fun%20attraction%20blue%20sky&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Limoeiro%20neighborhood%20themed%20cartoon%20houses%20colorful%20street%20Mauricio%20de%20Sousa%20characters%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Science%20laboratory%20kids%20interactive%20exhibit%20Franjinha%20lab%20themed%20children%20learning%20activities%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Childrens%20fire%20station%20themed%20play%20area%20firefighter%20costumes%20kids%20pretend%20play%20park%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Small%20town%20miniature%20cars%20traffic%20school%20kids%20driving%20toy%20vehicles%20learning%20road%20safety%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Veterinary%20clinic%20pet%20hospital%20kids%20role%20play%20area%20stuffed%20animals%20children%20learning%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Art%20craft%20workshop%20children%20painting%20colorful%20activities%20creative%20Atelie%20Marina%20themed%20park%20area&image_size=landscape_16_9"
   ],
   tags: ["Diversão familiar", "Personagens famosos", "Ambiente seguro"]
 };
@@ -69,12 +69,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
     <div class="container mx-auto px-4 py-12">
       <div class="grid lg:grid-cols-3 gap-12">
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">

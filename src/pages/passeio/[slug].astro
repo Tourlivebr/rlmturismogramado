@@ -336,35 +336,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
     <div class="container mx-auto px-4 py-12">
       <div class="grid lg:grid-cols-3 gap-12">
         <div class="lg:col-span-2">
-          <!-- Preço com Seletor de Pessoas -->
-          <div
-            class="mb-8 p-6 bg-gray-50 rounded-xl"
-            data-price-selector
-            data-price1={passeio.price1}
-            data-price2={passeio.price2}
-            data-label1={passeio.label1}
-            data-label2={passeio.label2}
-            data-tem-faixas={passeio.temFaixas ? 'true' : 'false'}
-          >
-            {passeio.temFaixas ? (
-              <div class="grid grid-cols-2 gap-4">
-                <button type="button" data-faixa="1" class="faixa-pessoas-btn border-2 border-primary-500 bg-white rounded-2xl p-4 text-center shadow-sm transition-all hover:shadow-md active ring-2 ring-primary-500">
-                  <div class="text-gray-600 text-sm md:text-base font-medium mb-2">{passeio.label1}</div>
-                  <div class="text-3xl font-bold text-primary-600">R$ {passeio.price1.toFixed(2).replace('.', ',')}</div>
-                </button>
-                <button type="button" data-faixa="2" class="faixa-pessoas-btn border-2 border-gray-200 bg-white rounded-2xl p-4 text-center shadow-sm transition-all hover:shadow-md">
-                  <div class="text-gray-600 text-sm md:text-base font-medium mb-2">{passeio.label2}</div>
-                  <div class="text-3xl font-bold text-primary-600">R$ {passeio.price2.toFixed(2).replace('.', ',')}</div>
-                </button>
-              </div>
-            ) : (
-              <div class="text-center">
-                <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-                <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-              </div>
-            )}
-          </div>
-
           <!-- Descrição -->
           <div class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Sobre este passeio</h2>

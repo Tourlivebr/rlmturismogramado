@@ -24,12 +24,12 @@ const passeio = {
   duracao: "2 horas",
   horarios: ["09:00", "14:00", "16:00"],
   galeria: [
-    "/images/cristais/cristais_de_gramado_o_inquestionavel.jpg",
-    "/images/cristais/cristais01.png",
-    "/images/cristais/cristais02.jpg",
-    "/images/cristais/cristais03.png",
-    "/images/cristais/cristais04.png",
-    "/images/cristais/cristais05.jpg"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Glass%20crystal%20factory%20exhibition%20interior%20with%20glowing%20murano%20chandeliers%20and%20artisan%20glass%20blowing%20demonstration%2C%20Gramado%20Brazil%20Serra%20Gaucha%20tourist%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Murano%20crystal%20glass%20blowing%20artisan%20workshop%20factory%20tour%20interior%2C%20Gramado%20craftsman%20working%20with%20molten%20glass&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Elegant%20glowing%20crystal%20chandelier%20showroom%20luxury%20glass%20art%20exhibition%20sparkling%20reflections&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=The%20voice%20of%20crystal%20live%20musical%20performance%20with%20crystal%20glass%20instruments%2C%20Gramado%20stage%20show%20lights&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Luxury%20crystal%20glassware%20display%20store%20shop%20beautiful%20handmade%20vases%20bowls%20artisan%20products&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Glass%20art%20sculpture%20exhibition%20colorful%20murano%20crystal%20pieces%20museum%20display%20lighting%20effects&image_size=landscape_16_9"
   ],
   tags: ["Fábrica de cristal Murano", "Tour ao vivo da produção artística", "Espetáculo 'A Voz do Cristal'"]
 };
@@ -65,12 +65,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
       <div class="grid lg:grid-cols-3 gap-12">
         <!-- Conteúdo Principal -->
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">

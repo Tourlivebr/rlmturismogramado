@@ -24,22 +24,22 @@ const passeio = {
   duracao: "3 horas",
   horarios: ["08:30", "13:30", "15:00"],
   galeria: [
-    "/images/parqueflorybal/florybal01.jpg",
-    "/images/parqueflorybal/Caverna-do-Tigre_Parque-Terra-Magica-Forybal-2.jpg",
-    "/images/parqueflorybal/teatro_dos_sonhos.jpg",
-    "/images/parqueflorybal/atracoes_dinomovel.webp",
-    "/images/parqueflorybal/atracoes_fabricachocolate.webp",
-    "/images/parqueflorybal/atracoes2_cinema7d3.webp",
-    "/images/parqueflorybal/atracoes2_aerobike.webp",
-    "/images/parqueflorybal/atracoes2_batebate1.webp",
-    "/images/parqueflorybal/atracoes2_minaduendes.webp",
-    "/images/parqueflorybal/atracoes2_voopterodactolo.webp",
-    "/images/parqueflorybal/atracoes_dentucos.webp",
-    "/images/parqueflorybal/atracoes_djangogan.webp",
-    "/images/parqueflorybal/atracoes_fosseis.webp",
-    "/images/parqueflorybal/atracoes_indios.webp",
-    "/images/parqueflorybal/atracoes_mina.webp",
-    "/images/parqueflorybal/atracoes_misterio.webp"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Magical%20family%20theme%20park%20entrance%20with%20giant%20realistic%20roaring%20dinosaur%20sculpture%20and%20lush%20green%20forest%2C%20Serra%20Gaucha%20Brazil%20tourist%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiger%20cavern%20theme%20cave%20interior%20magical%20kingdom%20Florybal%20park%20decoration%20mystical%20atmosphere&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Outdoor%20theater%20facade%20with%20fantasy%20medieval%20style%20design%2C%20Florybal%20magical%20park%20dream%20theater&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kids%20riding%20dinosaur%20movable%20carousel%20ride%20with%20colorful%20decoration%20family%20amusement%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Chocolate%20factory%20interactive%20tour%20exhibit%2C%20sweet%20themed%20attraction%20for%20children%20delicious%20display&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cinema%207D%20motion%20theater%20building%20exterior%20family%20park%20immersive%20movie%20experience%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Aerobike%20sky%20bike%20ride%20cable%20rail%20amusement%20park%20attraction%20above%20trees%20adventure%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bumper%20cars%20arena%20colorful%20amusement%20park%20ride%20for%20kids%20and%20family%20fun&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mine%20of%20elves%20fairy%20tale%20house%20miniature%20village%20children%20theme%20area%20magical%20forest&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pterodactyl%20flying%20simulator%20swinging%20roller%20coaster%20ride%20amusement%20park%20thrill%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dinosaur%20teeth%20themed%20kids%20playground%20colorful%20attraction%20children%20fun%20area%20Florybal%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Django%20Gan%20African%20themed%20area%20traditional%20huts%20village%20decoration%20cultural%20exhibit%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fossil%20excavation%20dig%20site%20children%20educational%20paleontology%20attraction%20dinosaur%20bones%20exhibit&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Native%20Brazilian%20indigenous%20themed%20village%20hut%20traditional%20culture%20exhibit%20Florybal%20park%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Gold%20mine%20themed%20adventure%20attraction%20wooden%20railway%20cart%20tunnel%20entrance%20family%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Magic%20cave%20misterio%20interior%20mystical%20fantasy%20decorations%20mysterious%20lights%20crystals%20Brazil%20tour&image_size=landscape_16_9"
   ],
   tags: ["Dinossauros realistas e sonoros", "Cachoeiras e natureza preservada", "Trilhas mágicas e temáticas"]
 };
@@ -75,12 +75,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
       <div class="grid lg:grid-cols-3 gap-8">
         <!-- Conteúdo Principal -->
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">
@@ -222,22 +216,22 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
 
 <script>
   const galeria = [
-    "/images/parqueflorybal/florybal01.jpg",
-    "/images/parqueflorybal/Caverna-do-Tigre_Parque-Terra-Magica-Forybal-2.jpg",
-    "/images/parqueflorybal/teatro_dos_sonhos.jpg",
-    "/images/parqueflorybal/atracoes_dinomovel.webp",
-    "/images/parqueflorybal/atracoes_fabricachocolate.webp",
-    "/images/parqueflorybal/atracoes2_cinema7d3.webp",
-    "/images/parqueflorybal/atracoes2_aerobike.webp",
-    "/images/parqueflorybal/atracoes2_batebate1.webp",
-    "/images/parqueflorybal/atracoes2_minaduendes.webp",
-    "/images/parqueflorybal/atracoes2_voopterodactolo.webp",
-    "/images/parqueflorybal/atracoes_dentucos.webp",
-    "/images/parqueflorybal/atracoes_djangogan.webp",
-    "/images/parqueflorybal/atracoes_fosseis.webp",
-    "/images/parqueflorybal/atracoes_indios.webp",
-    "/images/parqueflorybal/atracoes_mina.webp",
-    "/images/parqueflorybal/atracoes_misterio.webp"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Magical%20family%20theme%20park%20entrance%20with%20giant%20realistic%20roaring%20dinosaur%20sculpture%20and%20lush%20green%20forest%2C%20Serra%20Gaucha%20Brazil%20tourist%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiger%20cavern%20theme%20cave%20interior%20magical%20kingdom%20Florybal%20park%20decoration%20mystical%20atmosphere&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Outdoor%20theater%20facade%20with%20fantasy%20medieval%20style%20design%2C%20Florybal%20magical%20park%20dream%20theater&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kids%20riding%20dinosaur%20movable%20carousel%20ride%20with%20colorful%20decoration%20family%20amusement%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Chocolate%20factory%20interactive%20tour%20exhibit%2C%20sweet%20themed%20attraction%20for%20children%20delicious%20display&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cinema%207D%20motion%20theater%20building%20exterior%20family%20park%20immersive%20movie%20experience%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Aerobike%20sky%20bike%20ride%20cable%20rail%20amusement%20park%20attraction%20above%20trees%20adventure%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bumper%20cars%20arena%20colorful%20amusement%20park%20ride%20for%20kids%20and%20family%20fun&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mine%20of%20elves%20fairy%20tale%20house%20miniature%20village%20children%20theme%20area%20magical%20forest&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pterodactyl%20flying%20simulator%20swinging%20roller%20coaster%20ride%20amusement%20park%20thrill%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dinosaur%20teeth%20themed%20kids%20playground%20colorful%20attraction%20children%20fun%20area%20Florybal%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Django%20Gan%20African%20themed%20area%20traditional%20huts%20village%20decoration%20cultural%20exhibit%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fossil%20excavation%20dig%20site%20children%20educational%20paleontology%20attraction%20dinosaur%20bones%20exhibit&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Native%20Brazilian%20indigenous%20themed%20village%20hut%20traditional%20culture%20exhibit%20Florybal%20park%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Gold%20mine%20themed%20adventure%20attraction%20wooden%20railway%20cart%20tunnel%20entrance%20family%20park&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Magic%20cave%20misterio%20interior%20mystical%20fantasy%20decorations%20mysterious%20lights%20crystals%20Brazil%20tour&image_size=landscape_16_9"
   ];
   
   function openModal(index) {

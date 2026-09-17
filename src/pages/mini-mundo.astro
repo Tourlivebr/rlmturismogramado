@@ -22,10 +22,10 @@ const passeio = {
   duracao: "2 horas",
   horarios: ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"],
   galeria: [
-    "/images/Mini-Mundo/minimundo.png",
-    "/images/Mini-Mundo/minimundo01.png",
-    "/images/Mini-Mundo/minimundo02.png",
-    "/images/Mini-Mundo/minimundo03.png"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Outdoor%20miniature%20city%20park%20with%20realistic%20scale%20model%20replicas%20of%20brazilian%20famous%20buildings%20and%20tiny%20streets%2C%20Gramado%20Mini%20Mundo%20tour&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Miniature%20city%20park%20scale%20model%20brazilian%20landmarks%20detailed%20tiny%20houses%20mini%20trees%20walkway%20outdoor%20exhibition&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20scale%20model%20train%20set%20moving%20through%20miniature%20city%20landscape%20railway%20tracks%20Mini%20Mundo%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Replica%20of%20famous%20baroque%20church%20building%20in%20small%20scale%2C%20Mini%20Mundo%20Gramado%20detailed%20architecture%20model%20park&image_size=landscape_16_9"
   ],
   tags: ["Cidade em miniatura", "Réplicas fiéis de obras brasileiras", "Parque ao ar livre"]
 };
@@ -61,12 +61,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
       <div class="grid lg:grid-cols-3 gap-8">
         <!-- Conteúdo Principal -->
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">A partir de:</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">
@@ -222,10 +216,10 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
 
 <script>
   const galeria = [
-    "/images/Mini-Mundo/minimundo.png",
-    "/images/Mini-Mundo/minimundo01.png",
-    "/images/Mini-Mundo/minimundo02.png",
-    "/images/Mini-Mundo/minimundo03.png"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Outdoor%20miniature%20city%20park%20with%20realistic%20scale%20model%20replicas%20of%20brazilian%20famous%20buildings%20and%20tiny%20streets%2C%20Gramado%20Mini%20Mundo%20tour&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Miniature%20city%20park%20scale%20model%20brazilian%20landmarks%20detailed%20tiny%20houses%20mini%20trees%20walkway%20outdoor%20exhibition&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20scale%20model%20train%20set%20moving%20through%20miniature%20city%20landscape%20railway%20tracks%20Mini%20Mundo%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Replica%20of%20famous%20baroque%20church%20building%20in%20small%20scale%2C%20Mini%20Mundo%20Gramado%20detailed%20architecture%20model%20park&image_size=landscape_16_9"
   ];
   
   function openModal(index) {

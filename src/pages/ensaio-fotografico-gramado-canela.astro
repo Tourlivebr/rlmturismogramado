@@ -27,12 +27,12 @@ const passeio = {
   duracao: "Aproximadamente 04 a 05 horas",
   horarios: ["Saída às 09h - Retorno às 14h"],
   galeria: [
-    "/images/ensaios-fotograficos/ensaios.jpeg",
-    "/images/ensaios-fotograficos/ensaios.jpeg",
-    "/images/ensaios-fotograficos/ensaios.jpeg",
-    "/images/ensaios-fotograficos/ensaios.jpeg",
-    "/images/ensaios-fotograficos/ensaios.jpeg",
-    "/images/ensaios-fotograficos/ensaios.jpeg"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Romantic%20couple%20professional%20photo%20shoot%20at%20cobblestone%20German%20style%20street%20with%20hydrangea%20flowers%2C%20Gramado%20Canela%20Serra%20Gaucha%20romantic%20tourism&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Romantic%20couple%20photo%20session%20in%20front%20of%20beautiful%20church%2C%20German%20style%20architecture%20Gramado%20Brazil%20wedding%20photography&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Professional%20wedding%20couple%20portrait%20at%20public%20park%20with%20hydrangeas%20garden%2C%20Canela%20Brazil%20golden%20hour%20sunset&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Couple%20walking%20down%20flower%20cobblestone%20lane%20at%20golden%20hour%2C%20Serra%20Gaucha%20romantic%20getaway%20photography&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Girl%20in%20red%20dress%20smiling%20at%20Rua%20Coberta%20covered%20street%2C%20Gramado%20Brazil%20tourist%20attraction%20portrait&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Happy%20couple%20embracing%20at%20Lago%20Negro%20Black%20Lake%20Gramado%20with%20swan%20pedal%20boats%2C%20romantic%20travel%20photography&image_size=landscape_16_9"
   ],
   tags: [
     "Com charme e romantismo",
@@ -91,12 +91,6 @@ const whatsappUrl = `https://wa.me/5554981354672?text=${encodeURIComponent(whats
     <div class="container mx-auto px-4 py-12">
       <div class="grid lg:grid-cols-3 gap-12">
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">

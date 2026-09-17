@@ -24,14 +24,14 @@ const passeio = {
   duracao: "1 hora por atração",
   horarios: ["Diariamente - horários variados"],
   galeria: [
-    "/images/dreams/thumb_loja_passaporte.png",
-    "/images/dreams/dreamland-museu-de-cera-gramado-rs-1.jpg",
-    "/images/dreams/hollywood.png",
-    "/images/dreams/super_Carros.png",
-    "/images/dreams/motor_show.png",
-    "/images/dreams/jardim_amor.png",
-    "/images/dreams/SELFIE.png",
-    "/images/dreams/vale_dinossauros.png"
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Interactive%20selfie%20museum%20with%20dreamy%20neon%20light%20themed%20rooms%2C%20wax%20museum%20exhibition%2C%20Instagrammable%20fantasy%20spaces%2C%20Gramado%20tourism&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dreamland%20wax%20museum%20celebrity%20figures%20realistic%20exhibition%20hall%20interior%20Gramado%20Brazil&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Illuminated%20neon%20art%20installation%20colorful%20room%20selfie%20museum%20immersive%20experience%20tourist%20attraction&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Romantic%20heart%20themed%20photo%20room%20with%20flowers%20and%20lights%20for%20couples%2C%20Gramado%20attraction%20love%20garden&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Classic%20vintage%20luxury%20cars%20exhibition%20hall%20museum%20Hollywood%20style%20Cadillac%20collection&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Super%20sports%20cars%20showroom%20exhibition%20Porsche%20Ferrari%20luxury%20automotive%20museum%20interior&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Vintage%20motorcycles%20collection%20exhibition%20classic%20bikes%20Las%20Vegas%20bar%20style%20motorshow%20museum&image_size=landscape_16_9",
+    "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dinosaur%20animatronic%20valley%20jungle%20theme%20park%20realistic%20Trex%20moving%20statue%20family%20attraction%20Brazil&image_size=landscape_16_9"
   ],
   tags: ["7 atrações imperdíveis", "Validade de 1 ano", "Passeio de Porsche Cayman incluso"]
 };
@@ -126,12 +126,6 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
       <div class="grid lg:grid-cols-3 gap-12">
         <!-- Conteúdo Principal -->
         <div class="lg:col-span-2">
-          <div class="mb-8 p-6 bg-gray-50 rounded-xl">
-            <div class="text-center">
-              <div class="text-gray-600 text-sm mb-1">{passeio.parcelas}</div>
-              <div class="text-3xl font-bold text-primary-600">R$ {passeio.preco.toFixed(2).replace('.', ',')}</div>
-            </div>
-          </div>
 
           <!-- Descrição -->
           <div class="mb-8">
