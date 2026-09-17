@@ -60,7 +60,7 @@ const passeios = [
     titulo: "Gatzz Fondue & Show",
     subtitulo: "Dinner show de Broadway na Serra Gaúcha",
     categoria: "DINNER SHOW",
-    imagem: "https://assets.planne.com.br/apps/BFLD7MVQ9EF/images/_/FiURitvFeW2jrXHxNm9hzKD39CVdmSGUtXnMawJK.jpg",
+    imagem: "https://www.lacadordeofertas.com.br/oferta/gramado-canela/gatzz-gramado/jantar-especial-com-arte-diversao-e-musica?srsltid=AU7gw4Xl7SjAeJIcbeIXLx_V46mqsJaicqM21IRAfLAJXKRSs_cko3mJ",
     avaliacao: 4.8,
     totalAvaliacoes: 380,
     slug: "gatzz",
@@ -120,24 +120,24 @@ const passeios = [
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div class="absolute top-3 left-3">
-                  <span class="bg-primary-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
                     {passeio.categoria}
                   </span>
                 </div>
-                <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-2 py-1 text-[11px] font-semibold text-gray-700 dark:text-gray-200 shadow">
+                <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
                   ⭐ {passeio.avaliacao}
                 </div>
               </div>
-              <div class="p-4 flex flex-col flex-1 gap-2">
-                <h3 class="font-bold text-lg text-gray-900 dark:text-white leading-tight line-clamp-2">
+              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+                <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2">
                   {passeio.titulo}
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2 flex-1">
+                <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
                   {passeio.subtitulo}
                 </p>
-                <div class="flex flex-wrap gap-1 mt-1 mb-2">
+                <div class="flex flex-wrap gap-2 mt-2 mb-2">
                   {passeio.tags.slice(0, 2).map(tag => (
-                    <span class="px-2 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-[10px] line-clamp-1">
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
                       {tag}
                     </span>
                   ))}
@@ -147,17 +147,17 @@ const passeios = [
                     href={passeio.linkOficial}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors duration-200 block text-center text-sm shadow-md"
+                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
                   >
-                    <span class="flex items-center justify-center gap-1.5">
+                    <span class="flex items-center justify-center gap-2">
                       🎟️ RESERVE AGORA
                     </span>
                   </a>
                   <a
                     href={`/${passeio.slug}`}
-                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-2 px-4 rounded-xl transition-colors duration-200 block text-center text-sm"
+                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
                   >
-                    <span class="flex items-center justify-center gap-1.5">
+                    <span class="flex items-center justify-center gap-2">
                       ℹ️ SAIBA MAIS
                     </span>
                   </a>
@@ -259,7 +259,7 @@ const passeios = [
       titulo: "Gatzz Fondue & Show",
       subtitulo: "Dinner show de Broadway na Serra Gaúcha",
       categoria: "DINNER SHOW",
-      imagem: "https://assets.planne.com.br/apps/BFLD7MVQ9EF/images/_/FiURitvFeW2jrXHxNm9hzKD39CVdmSGUtXnMawJK.jpg",
+      imagem: "https://www.lacadordeofertas.com.br/oferta/gramado-canela/gatzz-gramado/jantar-especial-com-arte-diversao-e-musica?srsltid=AU7gw4Xl7SjAeJIcbeIXLx_V46mqsJaicqM21IRAfLAJXKRSs_cko3mJ",
       avaliacao: 4.8,
       totalAvaliacoes: 380,
       slug: "gatzz",
@@ -287,7 +287,7 @@ const passeios = [
   // Função para criar HTML do card (dinamico / busca)
   function createCardHTML(passeio) {
     const tags = (passeio.tags || []).slice(0, 2).map(t =>
-      `<span class="px-2 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-[10px] line-clamp-1">\${t}</span>`
+      `<span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">\${t}</span>`
     ).join('');
     return `
       <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3" data-id="\${passeio.id}">
@@ -299,22 +299,22 @@ const passeios = [
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div class="absolute top-3 left-3">
-              <span class="bg-primary-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+              <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
                 \${passeio.categoria}
               </span>
             </div>
-            <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-2 py-1 text-[11px] font-semibold text-gray-700 dark:text-gray-200 shadow">
+            <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
               ⭐ \${passeio.avaliacao}
             </div>
           </div>
-          <div class="p-4 flex flex-col flex-1 gap-2">
-            <h3 class="font-bold text-lg text-gray-900 dark:text-white leading-tight line-clamp-2">
+          <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+            <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2">
               \${passeio.titulo}
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2 flex-1">
+            <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
               \${passeio.subtitulo}
             </p>
-            <div class="flex flex-wrap gap-1 mt-1 mb-2">
+            <div class="flex flex-wrap gap-2 mt-2 mb-2">
               \${tags}
             </div>
             <div class="flex flex-col gap-2 mt-auto">
@@ -322,17 +322,17 @@ const passeios = [
                 href="\${passeio.linkOficial || '/'}"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors duration-200 block text-center text-sm shadow-md"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
               >
-                <span class="flex items-center justify-center gap-1.5">
+                <span class="flex items-center justify-center gap-2">
                   🎟️ RESERVE AGORA
                 </span>
               </a>
               <a
                 href="/\${passeio.slug}"
-                class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-2 px-4 rounded-xl transition-colors duration-200 block text-center text-sm"
+                class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
               >
-                <span class="flex items-center justify-center gap-1.5">
+                <span class="flex items-center justify-center gap-2">
                   ℹ️ SAIBA MAIS
                 </span>
               </a>
