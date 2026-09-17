@@ -94,23 +94,23 @@ const passeios = [
   <div class="relative container mx-auto px-4 text-center">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">Translados e Passeios</h1>
-      <p class="text-xl lg:text-2xl text-green-100 mb-8 leading-relaxed">
+      <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
         Experiências autênticas e inesquecíveis na região colonial
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <div class="flex items-center text-green-100">
+        <div class="flex items-center text-white/90">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
           Guia especializado
         </div>
-        <div class="flex items-center text-green-100">
+        <div class="flex items-center text-white/90">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
           Transporte incluso
         </div>
-        <div class="flex items-center text-green-100">
+        <div class="flex items-center text-white/90">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
@@ -139,63 +139,87 @@ const passeios = [
       </div>
     </section>
 
-    <!-- Grid de Passeios -->
+    <!-- Grid de Passeios (estrutura IDENTICA aos cards da home) -->
     <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div class="container mx-auto px-4">
         <div id="passeios-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {passeios.map((passeio) => (
-            <div class="passeio-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700" data-category={passeio.categoria.toLowerCase().replace(' ', '-').replace('passeios-privativos', 'privativos')}>
-              <div class="relative overflow-hidden">
+            <div class="passeio-card h-full group" data-category={passeio.categoria.toLowerCase().replace(' ', '-').replace('passeios-privativos', 'privativos')}>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col">
+              <div class="relative h-52 lg:h-56 overflow-hidden">
                 <img 
                   src={passeio.imagem} 
                   alt={passeio.titulo}
-                  class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-4 left-4">
-                  <span class="bg-green-600 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
+                <div class="absolute top-3 left-3">
+                  <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full shadow backdrop-blur-sm">
                     {passeio.categoria}
                   </span>
                 </div>
-                <div class="absolute top-4 right-4">
-                  <div class="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
-                    <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                    </svg>
-                  </div>
+                <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
+                  ⭐ {passeio.avaliacao}
                 </div>
               </div>
               
-              <div class="p-6 h-full flex flex-col">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-green-600 transition-colors duration-300">
+              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1">
+                    <StarRating rating={passeio.avaliacao} />
+                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-1 font-medium">({passeio.totalAvaliacoes})</span>
+                  </div>
+                  <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                    ⏱ {passeio.duracao}
+                  </span>
+                </div>
+                
+                <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
                   {passeio.titulo}
                 </h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
                   {passeio.subtitulo}
                 </p>
                 
-                <div class="border-t border-gray-100 dark:border-gray-700 pt-6 mt-auto">
-                  <div class="flex items-center justify-between mb-6">
-                    <div>
-                      <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">A partir de</p>
-                      <p class="text-3xl font-bold text-green-600 dark:text-green-400">
-                        R$ {passeio.preco.toFixed(2).replace('.', ',')}
-                      </p>
-                    </div>
+                <div class="flex flex-wrap gap-2 mt-2 mb-2">
+                  {passeio.tags && passeio.tags.slice(0, 2).map(tag => (
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div class="border-t border-gray-100 dark:border-gray-700 pt-4 flex items-center justify-between">
+                  <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">A partir de</p>
+                    <p class="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                      R$ {passeio.preco.toFixed(2).replace('.', ',')}
+                    </p>
                   </div>
-                  <a 
-                    href={`/${passeio.slug}`}
-                    class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 block text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                </div>
+
+                <div class="flex flex-col gap-2 mt-auto">
+                  <a
+                    href={`https://wa.me/5554993220552?text=${encodeURIComponent(`Olá! Gostaria de reservar o passeio: ${passeio.titulo}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
                   >
                     <span class="flex items-center justify-center gap-2">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                      </svg>
-                      RESERVE AGORA
+                      💬 RESERVE PELO WHATSAPP
+                    </span>
+                  </a>
+                  
+                  <a
+                    href={`/${passeio.slug}`}
+                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                  >
+                    <span class="flex items-center justify-center gap-2">
+                      ℹ️ SAIBA MAIS
                     </span>
                   </a>
                 </div>
               </div>
+            </div>
             </div>
           ))}
         </div>
@@ -212,13 +236,13 @@ const passeios = [
     btn.addEventListener('click', () => {
       // Remove active de todos os botões
       document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('bg-green-600', 'text-white');
+        b.classList.remove('bg-primary-600', 'text-white');
         b.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
       });
       
       // Adiciona active ao botão clicado
       btn.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
-      btn.classList.add('bg-green-600', 'text-white');
+      btn.classList.add('bg-primary-600', 'text-white');
       
       const filter = btn.dataset.filter;
       const cards = document.querySelectorAll('.passeio-card');
