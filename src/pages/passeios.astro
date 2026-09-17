@@ -4,58 +4,74 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StarRating from '../components/StarRating.astro';
 
-// Dados dos passeios (categoria "PASSEIOS PRIVATIVOS" e "RECEPTIVO")
+// Dados dos passeios (RECEPTIVO / PASSEIOS PRIVATIVOS) — IGUAL ao CarrosselPasseiosReceptivo.astro na home
 const passeios = [
   {
     id: 1,
-    titulo: "Transfer Ida e Volta (POA ou Caxias/ Gramado ou Canela)",
-    subtitulo: "Transporte Privativo",
-    categoria: "RECEPTIVO",
-    imagem: "/images/Transfer/Transfer.jpg",
-    avaliacao: 4.95,
-    totalAvaliacoes: 127,
-    preco: 700.00,
-    slug: "transfer-privativo",
-    duracao: "4-5 horas",
-    tags: ["Sem espera no embarque/desembarque", "Embarque imediato", "Privacidade total"]
+    titulo: "City Tour Privativo",
+    subtitulo: "Roteiro personalizado com motorista/guia",
+    categoria: "CITY TOUR",
+    imagem: "/images/transfer11.jpg",
+    avaliacao: 5.0,
+    totalAvaliacoes: 64,
+    slug: "city-tour-privativo",
+    duracao: "Flexível",
+    price1: 380,
+    label1: "1 a 4 pessoas",
+    price2: 480,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o City Tour Privativo.",
+    tags: ["Roteiro personalizado", "Motorista / Guia", "Gramado e Canela"]
   },
   {
     id: 2,
-    titulo: "Tour Uva e Vinho + Passeio de Maria Fumaça + Epopeia + Almoço (Coletivo)",
-    subtitulo: "Com Trem Maria Fumaça e Épopeia",
-    categoria: "PASSEIOS PRIVATIVOS",
-    imagem: "/images/maria-fumaca/fumaca01.jpg",
-    avaliacao: 4.93,
-    totalAvaliacoes: 218,
-    preco: 550.00,
-    slug: "tour-trem-vinho-maria-fumaca",
-    duracao: "8 horas",
-    tags: ["Passeio de Trem Maria Fumaça", "Degustação de vinhos e sucos", "Epopeia Italiana"]
+    titulo: "Transporte Olivas",
+    subtitulo: "Translado para as Olivas de Gramado",
+    categoria: "TRANSFER",
+    imagem: "/images/olivas/olivas_card.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 42,
+    slug: "transporte-olivas",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para as Olivas.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
   },
   {
     id: 3,
-    titulo: "Translado Hotel - Olivas - Hotel",
-    subtitulo: "Transporte Executivo com Ar Condicionado",
-    categoria: "RECEPTIVO",
-    imagem: "/images/Transfer/Transfer.jpg",
-    avaliacao: 5.0,
-    totalAvaliacoes: 12,
-    preco: 160.00,
-    slug: "translados",
+    titulo: "Transporte Jolimont",
+    subtitulo: "Translado para a Vinícola Jolimont",
+    categoria: "TRANSFER",
+    imagem: "/images/jolimont/jolimont.jpg",
+    avaliacao: 4.95,
+    totalAvaliacoes: 58,
+    slug: "transporte-jolimont",
     duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para a Jolimont.",
     tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
   },
   {
     id: 4,
-    titulo: "Translado Hotel - Skyglass - Hotel",
-    subtitulo: "Transporte Executivo com Ar Condicionado",
-    categoria: "RECEPTIVO",
+    titulo: "Transporte Sky Glass",
+    subtitulo: "Translado para a Skyglass Canela",
+    categoria: "TRANSFER",
     imagem: "/images/skyglass/skyglass.jpg",
-    avaliacao: 5.0,
-    totalAvaliacoes: 8,
-    preco: 160.00,
-    slug: "translado-skyglass",
+    avaliacao: 4.9,
+    totalAvaliacoes: 37,
+    slug: "transporte-sky-glass",
     duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para Sky Glass.",
     tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
   }
 ];
@@ -175,33 +191,44 @@ const passeios = [
                   ))}
                 </div>
                 
-                <div class="border-t border-gray-100 dark:border-gray-700 pt-4 flex items-center justify-between">
-                  <div>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">A partir de</p>
-                    <p class="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                      R$ {passeio.preco.toFixed(2).replace('.', ',')}
-                    </p>
+                <div class="border-t border-gray-100 dark:border-gray-700 pt-4 space-y-3">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
+                      <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
+                      <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                        R$ {passeio.price1.toFixed(2).replace('.', ',')}
+                      </p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
+                      <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label2}</p>
+                      <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                        R$ {passeio.price2.toFixed(2).replace('.', ',')}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 <div class="flex flex-col gap-2 mt-auto">
                   <a
-                    href={`https://wa.me/5554993220552?text=${encodeURIComponent(`Olá! Gostaria de reservar o passeio: ${passeio.titulo}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+                    href={`/passeio/${passeio.slug}`}
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
                   >
                     <span class="flex items-center justify-center gap-2">
-                      💬 RESERVE PELO WHATSAPP
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                      </svg>
+                      RESERVE AGORA
                     </span>
                   </a>
                   
                   <a
-                    href={`/${passeio.slug}`}
-                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                    href={`https://wa.me/5554993220552?text=${encodeURIComponent(passeio.whatsappText || `Olá! Gostaria de reservar o passeio: ${passeio.titulo}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full border-2 border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
                   >
                     <span class="flex items-center justify-center gap-2">
-                      ℹ️ SAIBA MAIS
+                      💬 Fale no WhatsApp
                     </span>
                   </a>
                 </div>
