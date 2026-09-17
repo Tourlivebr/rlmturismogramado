@@ -6,14 +6,7 @@
   <!-- Background Video YouTube (cover total em mobile e desktop) -->
   <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
     <div class="absolute top-1/2 left-1/2 w-[250vw] max-w-none" style="aspect-ratio: 16 / 9; transform: translate(-50%, -50%);">
-      <iframe
-        src="https://www.youtube.com/embed/-38D8mSztg0?autoplay=1&mute=1&loop=1&playlist=-38D8mSztg0&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3"
-        title="Serra Gaúcha"
-        frameborder="0"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen
-        class="absolute inset-0 w-full h-full border-0"
-      ></iframe>
+      <div id="youtube-bg-player" class="absolute inset-0 w-full h-full border-0"></div>
     </div>
     <!-- Fallback image caso iframe bloqueie autoplay -->
     <div
@@ -24,6 +17,17 @@
 
   <!-- Overlay escuro para melhor legibilidade -->
   <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-black/45 to-black/30"></div>
+
+  <!-- Botão Ativar Som (flutuante) -->
+  <button
+    id="toggle-sound-btn"
+    type="button"
+    class="absolute top-24 right-4 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-gray-900 text-sm font-semibold shadow-lg backdrop-blur-sm transition-all hover:scale-105 animate-pulse"
+    aria-label="Ativar som do vídeo"
+  >
+    <span id="toggle-sound-icon">🔇</span>
+    <span id="toggle-sound-label">Ativar som</span>
+  </button>
 
   <!-- Conteúdo -->
   <div class="relative z-20 container mx-auto px-4 pb-2 lg:pb-4">
@@ -62,6 +66,110 @@
     </svg>
   </div>
 </section>
+
+<script is:inline>
+  (function() {
+    const VIDEO_ID = '-38D8mSztg0';
+    let player = null;
+    let isMuted = true;
+
+    // Carrega API do YouTube IFrame
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('youtube-bg-player', {
+        videoId: VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: VIDEO_ID,
+          controls: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3
+        },
+        events: {
+          onReady: function(e) {
+            // Tenta ativar som imediatamente (provavelmente bloqueado)
+            try {
+              e.target.unMute();
+              e.target.setVolume(80);
+              isMuted = e.target.isMuted();
+              updateSoundButton();
+            } catch (err) { /* bloqueado pelo navegador */ }
+
+            // Se ainda estiver mutado, ativa no primeiro clique/toque na página
+            if (isMuted) {
+              const firstInteract = function() {
+                try {
+                  e.target.unMute();
+                  e.target.setVolume(80);
+                  e.target.playVideo();
+                  isMuted = e.target.isMuted();
+                  updateSoundButton();
+                } catch (err) { /* ignora */ }
+                document.removeEventListener('click', firstInteract);
+                document.removeEventListener('touchstart', firstInteract);
+                document.removeEventListener('keydown', firstInteract);
+              };
+              document.addEventListener('click', firstInteract, { once: true, passive: true });
+              document.addEventListener('touchstart', firstInteract, { once: true, passive: true });
+              document.addEventListener('keydown', firstInteract, { once: true, passive: true });
+            }
+          },
+          onStateChange: function(e) {
+            // Garante loop em playback 1 (end)
+            if (e.data === 0) {
+              e.target.playVideo();
+            }
+          }
+        }
+      });
+    };
+
+    // Atualiza botão flutuante
+    function updateSoundButton() {
+      const btn = document.getElementById('toggle-sound-btn');
+      const icon = document.getElementById('toggle-sound-icon');
+      const label = document.getElementById('toggle-sound-label');
+      if (!btn || !icon || !label) return;
+
+      if (isMuted) {
+        icon.textContent = '🔇';
+        label.textContent = 'Ativar som';
+        btn.classList.remove('animate-pulse');
+      } else {
+        icon.textContent = '🔊';
+        label.textContent = 'Som ativo';
+        btn.classList.remove('animate-pulse');
+      }
+    }
+
+    // Botão toggle manual
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('toggle-sound-btn');
+      btn?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!player) return;
+        if (isMuted) {
+          player.unMute();
+          player.setVolume(80);
+          player.playVideo();
+        } else {
+          player.mute();
+        }
+        isMuted = player.isMuted();
+        updateSoundButton();
+      });
+    });
+  })();
+</script>
 
 <style>
   @keyframes zoom-in {
