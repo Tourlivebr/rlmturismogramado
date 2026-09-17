@@ -29,8 +29,14 @@ const isJpg = image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWi
 const isPng = image.toLowerCase().endsWith('.png');
 const ogType = isJpg ? 'image/jpeg' : isPng ? 'image/png' : 'image/jpeg';
 // Dimensões conhecidas dos nossos assets (WhatsApp prefere >= 300px, recomendado 1200x630)
-const ogWidth = image.includes('link_passeios1') ? 1600 : (image.includes('logo') ? 512 : 1200);
-const ogHeight = image.includes('link_passeios1') ? 900 : (image.includes('logo') ? 512 : 630);
+const ogWidth =
+  image.includes('og-default-1200x630') ? 1200 :
+  image.includes('link_passeios1') ? 1600 :
+  image.includes('logo') ? 512 : 1200;
+const ogHeight =
+  image.includes('og-default-1200x630') ? 630 :
+  image.includes('link_passeios1') ? 900 :
+  image.includes('logo') ? 512 : 630;
 ---
 
 <!DOCTYPE html>
