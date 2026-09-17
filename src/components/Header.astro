@@ -396,11 +396,11 @@
     isMobileSearchOpen = !isMobileSearchOpen;
     
     if (isMobileSearchOpen) {
-      mobileSearch?.classList.remove('hidden');
-      mobileSearchInput?.focus();
+      header?.classList.add('mobile-search-active');
+      mobileScrolledSearchInput?.focus();
     } else {
-      mobileSearch?.classList.add('hidden');
-      mobileSearchResults?.classList.add('hidden');
+      header?.classList.remove('mobile-search-active');
+      mobileScrolledSearchResults?.classList.add('hidden');
     }
   });
 
@@ -409,8 +409,8 @@
     if (!mobileLandscapeMq.matches) return;
     if (isMobileSearchOpen) {
       isMobileSearchOpen = false;
-      mobileSearch?.classList.add('hidden');
-      mobileSearchResults?.classList.add('hidden');
+      header?.classList.remove('mobile-search-active');
+      mobileScrolledSearchResults?.classList.add('hidden');
     }
   };
   syncLandscapeSearch();
@@ -508,17 +508,26 @@
   }
 
   @media (max-width: 767px) {
-    #header.scrolled .header-logo {
+    #header.scrolled .header-logo,
+    #header.mobile-search-active .header-logo {
       display: none !important;
     }
-    #header.scrolled .header-mobile-search-btn {
-      display: none !important;
+    #header.scrolled .header-mobile-search-btn,
+    #header.mobile-search-active .header-mobile-search-btn {
+      display: flex !important;
     }
-    #header.scrolled .header-scrolled-search {
+    #header.scrolled .header-scrolled-search,
+    #header.mobile-search-active .header-scrolled-search {
       display: flex !important;
     }
     #header.scrolled .header-nav {
       height: 3.5rem !important;
+    }
+    #header.mobile-search-active .header-nav {
+      height: 5rem !important;
+    }
+    #mobile-search {
+      display: none !important;
     }
   }
 
