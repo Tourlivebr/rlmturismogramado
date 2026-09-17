@@ -16,7 +16,8 @@ export async function getStaticPaths() {
     { params: { slug: 'transporte-sky-glass' } },
     { params: { slug: 'bondinhos-transporte' } },
     { params: { slug: 'city-tour-nova-petropolis' } },
-    { params: { slug: 'lumni-transporte' } }
+    { params: { slug: 'lumni-transporte' } },
+    { params: { slug: 'maria-fumaca' } }
   ];
 }
 
@@ -291,6 +292,46 @@ const passeiosData = {
       "/images/maria-fumaca/fumaca01.jpg"
     ],
     tags: ["Ida e Volta", "Experiência Imersiva", "Família", "Executivo"]
+  },
+  'maria-fumaca': {
+    id: 10,
+    titulo: "Trem Maria Fumaça",
+    subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+    categoria: "TREM",
+    preco: 1300,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 e 2 pessoas:",
+    price1: 1300,
+    price2: 2999.9,
+    label1: "1 e 2 pessoas",
+    label2: "6 pessoas",
+    temFaixas: true,
+    temTabelaCompleta: true,
+    faixasCompletas: [
+      { label: "1 e 2 pessoas", preco: 1300 },
+      { label: "3 pessoas", preco: 1500 },
+      { label: "4 pessoas", preco: 1999.9 },
+      { label: "5 pessoas", preco: 2499.9 },
+      { label: "6 pessoas", preco: 2999.9 }
+    ],
+    descricao: "Embarque em uma viagem inesquecível a bordo do clássico Trem Maria Fumaça pela Serra Gaúcha! Sinta a nostalgia das ferrovias antigas enquanto admira paisagens exuberantes, vales verdejantes e vilarejos encantadores. Um passeio imperdível para amantes de história, natureza e experiências autênticas na região mais charmosa do Rio Grande do Sul.",
+    inclusos: [
+      "Passagem no Trem Maria Fumaça (ida e volta)",
+      "Guia embarcado com explicações históricas",
+      "Parada para fotos nos pontos turísticos",
+      "Seguro de passageiros",
+      "Conforto e segurança durante todo o trajeto"
+    ],
+    duracao: "4 a 6 horas (depende do roteiro)",
+    horarios: ["09:00", "14:30"],
+    galeria: [
+      "/images/maria-fumaca/fumaca01.jpg",
+      "/images/maria-fumaca/maria-fumaca02.webp",
+      "/images/maria-fumaca/maria-fumaca03.webp",
+      "/images/maria-fumaca/maria-fumaca04.webp"
+    ],
+    tags: ["Trem a vapor", "História ferroviária", "Paisagens da Serra Gaúcha", "Família", "Fotografia"]
   }
 };
 
@@ -336,6 +377,35 @@ const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whats
     <div class="container mx-auto px-4 py-12">
       <div class="grid lg:grid-cols-3 gap-12">
         <div class="lg:col-span-2">
+          {passeio.temTabelaCompleta && passeio.faixasCompletas && (
+            <div class="mb-10 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 lg:p-8 border border-gray-200">
+              <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center gap-2">
+                <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Tarifário
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {passeio.faixasCompletas.map(faixa => (
+                  <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-700">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                        </svg>
+                      </div>
+                      <p class="text-sm font-semibold text-gray-700">{faixa.label}</p>
+                    </div>
+                    <p class="text-3xl font-extrabold text-primary-600">
+                      R$ {faixa.preco.toFixed(2).replace('.', ',')}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p class="text-xs text-gray-500 mt-5">*Valores para transporte + passeio. Consulte disponibilidade de datas e horários.</p>
+            </div>
+          )}
+
           <!-- Descrição -->
           <div class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Sobre este passeio</h2>
