@@ -3,38 +3,25 @@
 ---
 
 <section id="quem-sou" class="relative min-h-[50vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden pt-20 lg:pt-24">
-  <!-- Background Video YouTube -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 w-full h-full pointer-events-none overflow-hidden">
-    <div class="relative w-full h-full" style="padding-top: 56.25%; transform: scale(1.35); transform-origin: center;">
-      <iframe
-        src="https://www.youtube.com/embed/-38D8mSztg0?autoplay=1&mute=1&loop=1&playlist=-38D8mSztg0&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3"
-        title="Serra Gaúcha"
-        frameborder="0"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover border-0"
-      ></iframe>
-    </div>
-    <!-- Fallback image caso iframe bloqueie -->
-    <div 
-      class="absolute inset-0 bg-cover bg-center -z-10"
-      style="background-image: url('/images/imgfundo.png');"
-    ></div>
+  <!-- Background Image -->
+  <div 
+    class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-cover bg-center animate-zoom-in"
+    style="background-image: url('/images/imgfundo.png'); background-attachment: fixed;"
+  >
+    <!-- Overlay escuro para melhor legibilidade -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
   </div>
-
-  <!-- Overlay escuro para melhor legibilidade -->
-  <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
   
   <!-- Conteúdo -->
   <div class="relative z-20 container mx-auto px-4 pb-2 lg:pb-4">
     <div class="max-w-4xl mx-auto text-center text-white">
       <!-- Título Principal -->
       <div class="space-y-4 lg:space-y-6 mb-6 lg:mb-8">
-        <h1 class="text-3xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-zoom-in">
+        <h1 class="text-3xl lg:text-6xl xl:text-7xl font-bold leading-tight">
           Viva a Serra Gaúcha do seu jeito
         </h1>
         
-        <p class="text-lg lg:text-2xl leading-relaxed max-w-3xl mx-auto text-gray-100 animate-zoom-in" style="animation-delay: 0.3s;">
+        <p class="text-lg lg:text-2xl leading-relaxed max-w-3xl mx-auto text-gray-100">
           Personalize seu roteiro de acordo com seu estilo, tempo e preferências.
           Conheça Gramado, Canela, Bento Gonçalves, Nova Petrópolis e outros destinos com conforto, segurança e pontualidade.
         </p>
@@ -43,7 +30,7 @@
   </div>
   
   <!-- Seta para baixo -->
-  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
+  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
     <a href="#passeios" class="text-white hover:text-primary-400 transition-colors animate-bounce">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -52,7 +39,7 @@
   </div>
 
   <!-- Divisor Boleado Suave -->
-  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10">
     <svg 
       viewBox="0 0 1200 120" 
       preserveAspectRatio="none" 
@@ -77,6 +64,5 @@
   
   .animate-zoom-in {
     animation: zoom-in 2s ease-out forwards;
-    opacity: 0;
   }
 </style>
