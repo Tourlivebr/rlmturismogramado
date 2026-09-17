@@ -105,8 +105,8 @@ const ingressos = [
   <main class="pt-20 lg:pt-24">
     <!-- Hero Section -->
     <section class="relative text-white py-8 lg:py-20">
-      <!-- Background Image with Fixed Position -->
-      <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('/images/link_ingressos.jpg'); background-attachment: fixed;">
+      <!-- Background Image com scroll default (mobile) + local (desktop, evita bug bg-fixed iOS) -->
+      <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-local" style="background-image: url('/images/link_ingressos.jpg');">
         <div class="absolute inset-0 bg-black/30"></div>
       </div>
       <div class="container relative z-10 mx-auto px-4 text-center">
@@ -153,7 +153,7 @@ const ingressos = [
     <!-- Grid de Ingressos -->
     <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div class="container mx-auto px-4">
-        <div id="ingressos-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="ingressos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ingressos.map((ingresso) => (
             <div class="ingresso-card h-full group" data-category={ingresso.titulo.toLowerCase().includes('parque') ? 'parques' : 'museus'}>
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 h-full flex flex-col">

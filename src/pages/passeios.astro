@@ -72,7 +72,7 @@ const passeios = [
   <main class="pt-20 lg:pt-24">
 <!-- Hero Section -->
 <section 
-  class="relative text-white py-8 lg:py-20 bg-fixed bg-center bg-cover"
+  class="relative text-white py-8 lg:py-20 bg-center bg-cover bg-no-repeat bg-scroll lg:bg-local"
   style="background-image: url('/images/link_passeios1.jpg'); filter: brightness(1.05) contrast(1.1) saturate(1.2);"
 >
   <!-- Overlay branco bem leve só pra não perder legibilidade -->
@@ -129,7 +129,7 @@ const passeios = [
     <!-- Grid de Passeios (estrutura IDENTICA aos cards da home) -->
     <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div class="container mx-auto px-4">
-        <div id="passeios-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="passeios-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {passeios.map((passeio) => (
             <div class="passeio-card h-full group" data-category={passeio.categoria.toLowerCase().replace(' ', '-').replace('passeios-privativos', 'privativos')}>
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col">
