@@ -1,0 +1,68 @@
+---
+// Nenhuma lógica do servidor necessária
+---
+
+<section id="quem-sou" class="relative min-h-[50vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden pt-20 lg:pt-24">
+  <!-- Background Image -->
+  <div 
+    class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-cover bg-center animate-zoom-in"
+    style="background-image: url('/images/imgfundo.png'); background-attachment: fixed;"
+  >
+    <!-- Overlay escuro para melhor legibilidade -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+  </div>
+  
+  <!-- Conteúdo -->
+  <div class="relative z-20 container mx-auto px-4 pb-2 lg:pb-4">
+    <div class="max-w-4xl mx-auto text-center text-white">
+      <!-- Título Principal -->
+      <div class="space-y-4 lg:space-y-6 mb-6 lg:mb-8">
+        <h1 class="text-3xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+          Olá, bem vindo à <span class="text-black" style="color: #ffffff;">Serra Gaúcha</span>
+        </h1>
+        
+        <p class="text-lg lg:text-2xl leading-relaxed max-w-3xl mx-auto text-gray-100">
+          Em muitos trajetos, o sinal de celular falha — e aplicativos deixam você na mão.
+          Com a TourLive, seu transporte é garantido, do início ao fim..
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Seta para baixo -->
+  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
+    <a href="#passeios" class="text-white hover:text-primary-400 transition-colors animate-bounce">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Divisor Boleado Suave -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10">
+    <svg 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none" 
+      class="relative block w-[calc(100%+1.3px)] h-[40px] lg:h-[60px]"
+    >
+      <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-gray-50 dark:fill-gray-900"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  @keyframes zoom-in {
+    0% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .animate-zoom-in {
+    animation: zoom-in 2s ease-out forwards;
+  }
+</style>

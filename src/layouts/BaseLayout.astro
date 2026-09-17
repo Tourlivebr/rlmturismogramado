@@ -1,0 +1,119 @@
+---
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  keywords?: string[];
+}
+
+const {
+  title,
+  description,
+  image = '/images/serratransfer.png',
+  canonical,
+  noindex = false,
+  keywords = ['Gramado', 'Canela', 'Serra Gaúcha', 'turismo', 'translado', 'passeios', 'ingressos', 'Serra Transfer'],
+} = Astro.props;
+
+// Criar URLs de forma segura
+const baseUrl = Astro.site?.toString() || 'https://serratransfer.com.br';
+const canonicalURL = canonical || new URL(Astro.url.pathname, baseUrl).toString();
+const socialImage = new URL(image, baseUrl).toString();
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content="Serra Transfer" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Serra Transfer" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:site" content="@SerraTransfer" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/images/mascote_tourlive_apontando_direita.png" as="image" type="image/png" />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Serra Transfer",
+      "alternateName": "Guia Turismo Serra Gaúcha",
+      "description": description,
+      "url": canonicalURL,
+      "image": socialImage,
+      "telephone": "+5554993220552",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gramado",
+        "addressRegion": "Rio Grande do Sul",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -29.3655,
+        "longitude": -50.8243
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "priceRange": "R$",
+      "sameAs": [
+        "https://www.instagram.com/serratransfer/",
+        "https://www.facebook.com/serratransfer"
+      ]
+    })} />
+
+    
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 font-sans antialiased">
+    <slot />
+    <WhatsAppButton />
+  </body>
+</html>
