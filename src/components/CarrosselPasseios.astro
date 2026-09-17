@@ -194,14 +194,6 @@ const passeios = [
                   {passeio.subtitulo}
                 </p>
                 <div class="border-t pt-2 mt-2">
-                  <div class="flex items-center justify-between mb-2">
-                    <div>
-                      <p class="text-xs text-gray-500 dark:text-gray-400">A partir de</p>
-                      <p class="text-xl font-bold text-gray-900 dark:text-white">
-                        {`R$ ${passeio.preco.toFixed(2).replace('.', ',')}`}
-                      </p>
-                    </div>
-                  </div>
                   <a 
                     href={`/${passeio.slug}`}
                     class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 block text-center text-sm"
@@ -381,14 +373,6 @@ const passeios = [
                 \${passeio.subtitulo}
               </p>
               <div class="border-t pt-2 mt-2">
-              <div class="flex items-center justify-between mb-2">
-                <div>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">A partir de</p>
-                  <p class="text-xl font-bold text-gray-900 dark:text-white">
-                    R$ \${passeio.preco.toFixed(2).replace('.', ',')}
-                  </p>
-                </div>
-              </div>
               <a 
                 href="/\${passeio.slug}"
                 class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 block text-center text-sm"

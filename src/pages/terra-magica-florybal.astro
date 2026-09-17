@@ -8,10 +8,8 @@ const passeio = {
   titulo: "Parque Terra Mágica Florybal",
   subtitulo: "Ingresso",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 25.00,
   avaliacao: 4.57,
   totalAvaliacoes: 7,
-  parcelas: "A partir de:",
   descricao: "Mergulhe em uma aventura jurássica no Parque Terra Mágica Florybal! Um parque temático único que combina dinossauros animatrônicos realistas com a beleza natural preservada da região. Caminhe por trilhas mágicas cercado por cachoeiras naturais e descubra criaturas pré-históricas que se movimentam e emitem sons, proporcionando uma experiência educativa e emocionante para toda a família.",
   inclusos: [
     "Ingresso para o parque",
@@ -43,7 +41,7 @@ const passeio = {
   tags: ["Dinossauros realistas e sonoros", "Cachoeiras e natureza preservada", "Trilhas mágicas e temáticas"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 

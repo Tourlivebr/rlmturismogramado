@@ -8,10 +8,8 @@ const passeio = {
   titulo: "Space Adventure",
   subtitulo: "A experiência oficial da NASA na Serra Gaúcha",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 39.90,
   avaliacao: 4.00,
   totalAvaliacoes: 6,
-  parcelas: "6x sem juros",
   descricao: "Prepare-se para uma viagem inesquecível ao espaço sem sair da Terra! O Space Adventure é a primeira exposição oficial da NASA no Brasil, reunindo mais de 270 itens originais utilizados em missões espaciais. Localizada em Canela, a atração é imperdível para curiosos, apaixonados por ciência e fãs da exploração espacial de todas as idades.",
   inclusos: [
     "Entrada no Parque Space Adventure",
@@ -42,7 +40,7 @@ const passeio = {
   tags: ["NASA Oficial", "Exposição Espacial", "Planetário 4K", "Simuladores"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 

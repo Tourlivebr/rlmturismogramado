@@ -8,10 +8,8 @@ const passeio = {
   titulo: "Cristais de Gramado",
   subtitulo: "Ingresso",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 39.00,
   avaliacao: 4.67,
   totalAvaliacoes: 6,
-  parcelas: "A partir de:",
   descricao: "Descubra a magia dos cristais na mais artística fábrica de cristal Murano da América do Sul. Uma experiência única onde você pode acompanhar ao vivo todo o processo de produção artística dos cristais, desde o derretimento até a criação de peças únicas. O tour inclui o espetáculo 'A Voz do Cristal', uma apresentação emocionante que combina música, luz e a beleza dos cristais em uma experiência sensorial inesquecível.",
   inclusos: [
     "Ingresso para a fábrica",
@@ -33,7 +31,7 @@ const passeio = {
   tags: ["Fábrica de cristal Murano", "Tour ao vivo da produção artística", "Espetáculo 'A Voz do Cristal'"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 

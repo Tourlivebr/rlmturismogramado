@@ -8,10 +8,8 @@ const passeio = {
   titulo: "Alpen Park",
   subtitulo: "Ingresso",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 32.00,
   avaliacao: 4.75,
   totalAvaliacoes: 8,
-  parcelas: "A partir de:",
   descricao: "Vai passar o dia no Alpen Park? Nós te ajudamos a otimizar sua programação. O parque abre às 9h e em alta temporada (meses de janeiro, julho e dezembro) é nesse horário que te recomendamos chegar para evitar filas.",
   inclusos: [
     "Ingresso para o parque",
@@ -46,7 +44,7 @@ const passeio = {
   tags: ["Montanha-russa Fogo do Dragão", "Trenó com velocidade de 40km/h", "Arvorismo e tirolesas"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 

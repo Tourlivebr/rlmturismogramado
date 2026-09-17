@@ -8,10 +8,8 @@ const passeio = {
   titulo: "Parque Vila da Mônica",
   subtitulo: "Ingresso",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 21.50,
   avaliacao: 4.14,
   totalAvaliacoes: 7,
-  parcelas: "6x sem juros",
   descricao: "Diversão garantida para toda a família no Parque Vila da Mônica! Um mundo mágico com personagens famosos, brinquedos incríveis e muita aventura esperando por você.",
   inclusos: [
     "Diversão para toda a família",
@@ -38,7 +36,7 @@ const passeio = {
   tags: ["Diversão familiar", "Personagens famosos", "Ambiente seguro"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 

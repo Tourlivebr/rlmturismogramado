@@ -147,7 +147,7 @@ const ingressos = [
         <div class="max-w-4xl mx-auto">
           <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">Ingressos e Atrações</h1>
           <p class="text-xl lg:text-2xl text-primary-100 mb-8 leading-relaxed">
-            Descubra as melhores atrações de Gramado e Canela com preços especiais
+            Descubra as melhores atrações de Gramado e Canela
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <div class="flex items-center text-primary-100">
@@ -155,12 +155,6 @@ const ingressos = [
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               Ingressos garantidos
-            </div>
-            <div class="flex items-center text-primary-100">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              Melhor preço
             </div>
             <div class="flex items-center text-primary-100">
               <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -226,14 +220,6 @@ const ingressos = [
                 </p>
                 
                 <div class="border-t border-gray-100 dark:border-gray-700 pt-6 mt-auto">
-                  <div class="flex items-center justify-between mb-6">
-                    <div>
-                      <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">A partir de</p>
-                      <p class="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                        R$ {ingresso.preco.toFixed(2).replace('.', ',')}
-                      </p>
-                    </div>
-                  </div>
                   <a 
                     href={`/${ingresso.slug}`}
                     class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 block text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"

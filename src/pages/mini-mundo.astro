@@ -8,7 +8,6 @@ const passeio = {
   titulo: "Mini Mundo",
   subtitulo: "Ingresso",
   categoria: "INGRESSOS E ATRAÇÕES",
-  preco: 58.00,
   avaliacao: 4.80,
   totalAvaliacoes: 8,
   descricao: "O Mini Mundo é um parque ao ar livre, formado por réplicas fiéis de obras brasileiras e internacionais. As construções são ricas em detalhes e únicas. Juntas elas compõem nossa cidade 24 vezes menor que o mundo real, animada por milhares de pequenos moradores com suas vidas agitadas.",
@@ -29,7 +28,7 @@ const passeio = {
   tags: ["Cidade em miniatura", "Réplicas fiéis de obras brasileiras", "Parque ao ar livre"]
 };
 
-const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')}.`;
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
 const whatsappUrl = `https://wa.me/5554993220552?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
