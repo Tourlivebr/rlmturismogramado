@@ -8,7 +8,14 @@ import StarRating from '../../components/StarRating.astro';
 export async function getStaticPaths() {
   return [
     { params: { slug: 'tour-o-quatrilho' } },
-    { params: { slug: 'tour-trem-vinho' } }
+    { params: { slug: 'tour-trem-vinho' } },
+    { params: { slug: 'city-tour-privativo' } },
+    { params: { slug: 'transporte-olivas' } },
+    { params: { slug: 'transporte-jolimont' } },
+    { params: { slug: 'transporte-sky-glass' } },
+    { params: { slug: 'bondinhos-transporte' } },
+    { params: { slug: 'city-tour-nova-petropolis' } },
+    { params: { slug: 'lumni-transporte' } }
   ];
 }
 
@@ -35,7 +42,6 @@ const passeiosData = {
     horarios: ["08:00", "14:00"],
     galeria: [
       "/images/cristais_de_gramado_o_inquestionavel.jpg",
-      "/images/gramado_selfie_.webp",
       "/images/terra-magica-florybal.webp"
     ],
     tags: ["Almoço típico com receitas locais", "História do filme 'O Quatrilho'", "Tour por vilas históricas"]
@@ -61,11 +67,184 @@ const passeiosData = {
     horarios: ["09:00", "15:00"],
     galeria: [
       "/images/grupo-dreams-passaporte.jpg",
-      "/images/cristais_de_gramado_o_inquestionavel.jpg",
-      "/images/terra-magica-florybal.webp",
-      "/images/gramado_selfie_.webp"
+      "/images/terra-magica-florybal.webp"
     ],
     tags: ["Caminhada pelo Parque Epopéia", "Degustação de vinhos e sucos", "Apresentações culturais"]
+  },
+  'city-tour-privativo': {
+    id: 3,
+    titulo: "City Tour Privativo",
+    subtitulo: "Roteiro personalizado com motorista/guia",
+    categoria: "CITY TOUR",
+    preco: 380,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Explore Gramado e Canela com exclusividade! Nosso City Tour Privativo oferece um roteiro totalmente personalizado de acordo com seu estilo, tempo e preferências. Conte com motorista/guia experiente para conhecer os melhores pontos turísticos, lojas, restaurantes e paisagens deslumbrantes da Serra Gaúcha com todo conforto e segurança.",
+    inclusos: [
+      "Veículo privativo com ar condicionado",
+      "Motorista/guia experiente",
+      "Busca e retorno no hotel",
+      "Roteiro personalizado",
+      "Água mineral disponível"
+    ],
+    duracao: "9 horas",
+    horarios: ["09:00"],
+    galeria: [
+      "/images/grupo-dreams-passaporte.jpg",
+      "/images/link_passeios1.jpg"
+    ],
+    tags: ["Roteiro flexível", "Privacidade total", "Motorista/guia incluso", "Busca no hotel"]
+  },
+  'transporte-olivas': {
+    id: 4,
+    titulo: "Transporte Olivas",
+    subtitulo: "Translado para as Olivas de Gramado",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Aproveite a comodidade do transporte executivo para visitar as Olivas de Gramado, um dos locais mais charmosos da Serra Gaúcha. Nossa equipe garante um trajeto seguro e confortável para que você aproveite ao máximo essa experiência única, sem preocupações com estacionamento ou trajeto.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Olivas - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/olivas/olivas_card.jpg",
+      "/images/olivas/olivas_card.jpg"
+    ],
+    tags: ["Ida e Volta", "Executivo", "Ar Condicionado", "Busca no hotel"]
+  },
+  'transporte-jolimont': {
+    id: 5,
+    titulo: "Transporte Jolimont",
+    subtitulo: "Translado para a Vinícola Jolimont",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Visite a tradicional Vinícola Jolimont com toda comodidade! Conhecida por seus vinhos premiados e arquitetura encantadora, a Jolimont oferece degustações, visitação aos vinhedos e uma experiência inesquecível para os amantes da enogastronomia. Garantimos transporte seguro e confortável em todas as etapas.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Jolimont - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/jolimont/jolimont.jpg",
+      "/images/jolimont/jolimont.jpg"
+    ],
+    tags: ["Ida e Volta", "Vinícola", "Degustação de vinhos", "Executivo"]
+  },
+  'transporte-sky-glass': {
+    id: 6,
+    titulo: "Transporte Sky Glass",
+    subtitulo: "Translado para a Skyglass Canela",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Viva a adrenalina da Skyglass Canela, a primeira plataforma de aço e vidro da América Latina! Com vistas espetaculares do Vale da Ferradura, essa é uma experiência única para os amantes de aventura e paisagens de tirar o fôlego. Nosso transporte executivo garante que você chegue e volte com segurança e conforto.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Skyglass - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/skyglass/skyglass.jpg",
+      "/images/skyglass/skyglass.jpg"
+    ],
+    tags: ["Ida e Volta", "Aventura", "Vale da Ferradura", "Executivo"]
+  },
+  'bondinhos-transporte': {
+    id: 7,
+    titulo: "Bondinhos Transporte",
+    subtitulo: "Translado para os Bondinhos Aéreos",
+    categoria: "TRANSFER",
+    preco: 180,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Conheça os Bondinhos Aéreos de Canela e tenha uma vista panorâmica incrível de toda a Serra Gaúcha! Passeie pelas alturas e contemple paisagens deslumbrantes do Parque da Serra e da região. Nossa equipe de transporte garante um trajeto tranquilo para você focar apenas em aproveitar a experiência.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Bondinhos - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/link_passeios1.jpg",
+      "/images/link_passeios1.jpg"
+    ],
+    tags: ["Ida e Volta", "Bondinhos Aéreos", "Vista Panorâmica", "Executivo"]
+  },
+  'city-tour-nova-petropolis': {
+    id: 8,
+    titulo: "City Tour Nova Petrópolis",
+    subtitulo: "Roteiro completo por Nova Petrópolis",
+    categoria: "CITY TOUR",
+    preco: 320,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Descubra a charmosa Nova Petrópolis, cidade da imigração alemã conhecida como a terra do Ninho das Águias. Visite a Rua Coberta, a Aldeia do Imigrante, o Parque Aldeia do Imigrante e desfrute da deliciosa culinária germânica. Tudo isso com um roteiro completo e conforto garantido.",
+    inclusos: [
+      "Veículo privativo com ar condicionado",
+      "Motorista/guia experiente",
+      "Busca e retorno no hotel",
+      "Roteiro completo pelos principais pontos",
+      "Água mineral disponível"
+    ],
+    duracao: "8 horas",
+    horarios: ["08:30"],
+    galeria: [
+      "/images/link_ingressos.jpg",
+      "/images/link_ingressos.jpg"
+    ],
+    tags: ["Nova Petrópolis", "Rua Coberta", "Imigração Alemã", "Culinária Germânica"]
+  },
+  'lumni-transporte': {
+    id: 9,
+    titulo: "Lumni Transporte",
+    subtitulo: "Translado para a experiência Lumni",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    descricao: "Viva a experiência única e imersiva do Lumni! Uma atração interativa que combina arte, tecnologia e storytelling para criar memórias inesquecíveis. Garantimos transporte confortável e seguro para que você e sua família aproveitem ao máximo cada momento dessa aventura.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Lumni - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/maria-fumaca/fumaca01.jpg",
+      "/images/maria-fumaca/fumaca01.jpg"
+    ],
+    tags: ["Ida e Volta", "Experiência Imersiva", "Família", "Executivo"]
   }
 };
 
