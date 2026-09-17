@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StarRating from '../components/StarRating.astro';
 
-// Dados dos passeios (RECEPTIVO / PASSEIOS PRIVATIVOS) — IGUAL ao CarrosselPasseiosReceptivo.astro na home
+// Dados dos passeios (RECEPTIVO / PASSEIOS PRIVATIVOS) — TODOS os 8 cards do CarrosselPasseiosReceptivo.astro na home (mesma ordem)
 const passeios = [
   {
     id: 1,
@@ -73,6 +73,74 @@ const passeios = [
     label2: "5 a 6 pessoas",
     whatsappText: "Olá! Quero reservar o Transporte para Sky Glass.",
     tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
+  },
+  {
+    id: 5,
+    titulo: "Bondinhos Transporte",
+    subtitulo: "Translado para os Bondinhos Aéreos",
+    categoria: "TRANSFER",
+    imagem: "/images/bondinhos.avif",
+    avaliacao: 4.85,
+    totalAvaliacoes: 29,
+    slug: "bondinhos-transporte",
+    duracao: "Flexível",
+    price1: 180,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte dos Bondinhos.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Bondinhos Aéreos"]
+  },
+  {
+    id: 6,
+    titulo: "City Tour Nova Petrópolis",
+    subtitulo: "Roteiro completo por Nova Petrópolis",
+    categoria: "CITY TOUR",
+    imagem: "/images/Nova_Petropolis.jpg",
+    avaliacao: 4.92,
+    totalAvaliacoes: 51,
+    slug: "city-tour-nova-petropolis",
+    duracao: "Flexível",
+    price1: 320,
+    label1: "1 a 4 pessoas",
+    price2: 400,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o City Tour de Nova Petrópolis.",
+    tags: ["Roteiro completo", "Nova Petrópolis", "Motorista / Guia"]
+  },
+  {
+    id: 7,
+    titulo: "Lumni Transporte",
+    subtitulo: "Translado para a experiência Lumni",
+    categoria: "TRANSFER",
+    imagem: "/images/lumini.webp",
+    avaliacao: 4.8,
+    totalAvaliacoes: 18,
+    slug: "lumni-transporte",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 300,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte Lumni.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Experiência Lumni"]
+  },
+  {
+    id: 8,
+    titulo: "Trem Maria Fumaça",
+    subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+    categoria: "TREM",
+    imagem: "/images/maria-fumaca/fumaca01.jpg",
+    avaliacao: 4.96,
+    totalAvaliacoes: 128,
+    slug: "maria-fumaca",
+    duracao: "Flexível",
+    price1: 1300,
+    label1: "1 e 2 pessoas",
+    price2: 2999.9,
+    label2: "6 pessoas",
+    whatsappText: "Olá! Quero reservar o passeio de Trem Maria Fumaça.",
+    tags: ["Trem Maria Fumaça", "Serra Gaúcha", "Roteiro Turístico"]
   }
 ];
 ---
