@@ -15,11 +15,8 @@ const socialLinks = [
   {
     name: 'WhatsApp',
     url: 'https://wa.me/5554992460547',
-    icon: 'whatsapp',
-    url: 'https://wa.me/5554992460547',
     icon: 'whatsapp'
-  },
-
+  }
 ];
 
 const quickLinks = [
@@ -165,6 +162,17 @@ const passeiosPopulares = [
               <p class="text-gray-400 text-xs">8h às 20h</p>
             </div>
           </div>
+
+          <div class="flex items-start space-x-3">
+            <svg class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <div>
+              <p class="text-gray-300 text-sm">Rua Alvim Martins de Oliveira, 160</p>
+              <p class="text-gray-400 text-xs">São Luís, Canela - RS</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -173,8 +181,8 @@ const passeiosPopulares = [
   <!-- Rodapé Final -->
   <div class="border-t border-gray-800 bg-gray-950">
     <div class="container mx-auto px-4 py-6">
-      <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-        <div class="text-center md:text-left">
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 gap-4">
+        <div class="text-center md:text-left order-2 md:order-1">
           <p class="text-sm text-gray-400">
             © {currentYear} Serra Transfer - Passeios e Receptivo. Todos os direitos reservados.
           </p>
@@ -182,11 +190,27 @@ const passeiosPopulares = [
             Desenvolvido pela <a href="https://www.tourlive.com.br/" target="_blank" class="text-primary-400">TourLive - Turismo Interativo</a>  com ❤️ para proporcionar as melhores experiências na Serra Gaúcha
           </p>
         </div>
-        
-        <div class="flex items-center space-x-6 text-xs text-gray-400">
-          <a href="#" class="hover:text-primary-400 transition-colors">Política de Privacidade</a>
-          <a href="#" class="hover:text-primary-400 transition-colors">Termos de Uso</a>
-          <a href="#contato" class="hover:text-primary-400 transition-colors">Suporte</a>
+
+        <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 order-1 md:order-2">
+          <a 
+            href="https://cadastur.turismo.gov.br/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Cadastur - Ministério do Turismo"
+            class="flex items-center justify-center"
+          >
+            <img 
+              src="/images/cadastur.png" 
+              alt="Cadastur - Ministério do Turismo" 
+              class="h-8 md:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
+          </a>
+
+          <div class="flex items-center space-x-4 md:space-x-6 text-xs text-gray-400">
+            <a href="#" class="hover:text-primary-400 transition-colors">Política de Privacidade</a>
+            <a href="#" class="hover:text-primary-400 transition-colors">Termos de Uso</a>
+            <a href="#contato" class="hover:text-primary-400 transition-colors">Suporte</a>
+          </div>
         </div>
       </div>
     </div>
