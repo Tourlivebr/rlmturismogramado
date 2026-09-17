@@ -13,7 +13,7 @@ export interface Props {
 const {
   title,
   description,
-  image = '/images/logo_p_rlmtur.png',
+  image = '/images/link_passeios1.jpg',
   canonical,
   noindex = false,
   keywords = ['Gramado', 'Canela', 'Serra Gaúcha', 'turismo', 'translado', 'passeios', 'ingressos', 'RLM Turismo Gramado'],
@@ -23,6 +23,14 @@ const {
 const baseUrl = Astro.site?.toString() || 'https://rlmturismogramado.vercel.app/';
 const canonicalURL = canonical || new URL(Astro.url.pathname, baseUrl).toString();
 const socialImage = new URL(image, baseUrl).toString();
+
+// Detecta tipo MIME e dimensões conhecidas do og:image (WhatsApp/Facebook usam isso)
+const isJpg = image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWith('.jpeg');
+const isPng = image.toLowerCase().endsWith('.png');
+const ogType = isJpg ? 'image/jpeg' : isPng ? 'image/png' : 'image/jpeg';
+// Dimensões conhecidas dos nossos assets (WhatsApp prefere >= 300px, recomendado 1200x630)
+const ogWidth = image.includes('link_passeios1') ? 1600 : (image.includes('logo') ? 512 : 1200);
+const ogHeight = image.includes('link_passeios1') ? 900 : (image.includes('logo') ? 512 : 630);
 ---
 
 <!DOCTYPE html>
@@ -41,24 +49,37 @@ const socialImage = new URL(image, baseUrl).toString();
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <link rel="canonical" href={canonicalURL} />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / WhatsApp (WhatsApp respeita OG) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImage} />
-    <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="RLM Turismo Gramado" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    
+    <!-- Imagem OG (obrigatória para WhatsApp) + sub-propriedades -->
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content={ogType} />
+    <meta property="og:image:width" content={ogWidth.toString()} />
+    <meta property="og:image:height" content={ogHeight.toString()} />
+    <meta property="og:image:alt" content={title} />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rlmturismogramado" />
+    <meta name="twitter:creator" content="@rlmturismogramado" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:site" content="@rlmturismogramado" />
+    <meta name="twitter:image:alt" content={title} />
     
-    <!-- Preload critical resources -->
+    <!-- WhatsApp específico: pré-carrega og:image no body (força cache) -->
+    <link rel="preload" as="image" href={socialImage} imagesrcset="" imagesizes="" fetchpriority="high" />
+    <link rel="image_src" href={socialImage} />
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
