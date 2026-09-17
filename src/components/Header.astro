@@ -211,13 +211,13 @@
 </header>
 
 <script>
-  // Dados dos passeios para busca (agora definido diretamente no JavaScript)
+  // Dados COMPLETOS dos passeios e ingressos para busca (18 itens)
   const todosPasseios = [
-    // Ingressos e Atrações (4)
+    // Ingressos e Atrações (11)
     {
       id: 1,
       titulo: "Era do Fogo Fondue Temático",
-      subtitulo: "Gastronomia Temática",
+      subtitulo: "Fondue na Caverna Pré-Histórica",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
       slug: "era-do-fogo"
@@ -225,30 +225,94 @@
     {
       id: 2,
       titulo: "Ferrovia Secreta Hector",
-      subtitulo: "Experiência Rodoviária",
+      subtitulo: "Trem Mágico com Comida Americana",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
       slug: "ferrovia-secreta"
     },
     {
       id: 3,
+      titulo: "Hector Pizzaria",
+      subtitulo: "Rodízio de Pizza na Escola Ônyra",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "hector-pizzaria"
+    },
+    {
+      id: 4,
       titulo: "Gatzz Fondue & Show",
-      subtitulo: "Dinner Show",
+      subtitulo: "Dinner Show de Broadway",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
       slug: "gatzz"
     },
     {
-      id: 4,
+      id: 5,
       titulo: "ParksNet Passaporte",
-      subtitulo: "Multi Atrações",
+      subtitulo: "Parques e Atrações da Serra Gaúcha",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
       slug: "parksnet"
     },
-    // Passeios e Receptivo (4)
     {
-      id: 5,
+      id: 6,
+      titulo: "Passaporte Grupo Dreams",
+      subtitulo: "7 Atrações em 1 Passaporte",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "grupo-dreams"
+    },
+    {
+      id: 7,
+      titulo: "Alpen Park",
+      subtitulo: "Parque de Aventuras em Canela",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "alpen-park"
+    },
+    {
+      id: 8,
+      titulo: "Cristais de Gramado",
+      subtitulo: "Museu de Cristais e Pedras",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "cristais-de-gramado"
+    },
+    {
+      id: 9,
+      titulo: "Mini Mundo",
+      subtitulo: "Cidade em Miniatura em Gramado",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "mini-mundo"
+    },
+    {
+      id: 10,
+      titulo: "Parque Terra Mágica Florybal",
+      subtitulo: "Parque Temático da Mata Atlântica",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "terra-magica-florybal"
+    },
+    {
+      id: 11,
+      titulo: "Parque Vila da Mônica",
+      subtitulo: "Parque da Turma da Mônica em Gramado",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "parque-vila-da-monica"
+    },
+    {
+      id: 12,
+      titulo: "Parque Space Adventure",
+      subtitulo: "Experiência Espacial NASA em Canela",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      slug: "parque-space-adventure"
+    },
+    // Passeios e Receptivo (7)
+    {
+      id: 13,
       titulo: "Transfer Privativo POA/Caxias",
       subtitulo: "Gramado e Canela - Ida e Volta",
       categoria: "RECEPTIVO",
@@ -256,28 +320,44 @@
       slug: "transfer-privativo"
     },
     {
-      id: 6,
+      id: 14,
       titulo: "Tour Maria Fumaça + Vinhos + Épopeia + Almoço",
-      subtitulo: "Roteiro Vinícola Coletivo",
+      subtitulo: "Roteiro Vinícola Coletivo Completo",
       categoria: "PASSEIOS",
       tipo: "passeios",
       slug: "tour-trem-vinho-maria-fumaca"
     },
     {
-      id: 7,
+      id: 15,
       titulo: "Translado Olivas de Gramado",
-      subtitulo: "Roteiro Vinícola",
+      subtitulo: "Roteiro Vinícola Privativo",
       categoria: "PASSEIOS",
       tipo: "passeios",
       slug: "translados"
     },
     {
-      id: 8,
+      id: 16,
       titulo: "Skyglass Canela",
-      subtitulo: "Bondinho Aéreo",
+      subtitulo: "Bondinho Aéreo e Mirante de Vidro",
       categoria: "PASSEIOS",
       tipo: "passeios",
       slug: "translado-skyglass"
+    },
+    {
+      id: 17,
+      titulo: "Translado Jolimont Winery",
+      subtitulo: "Vinícola Premium em Bento Gonçalves",
+      categoria: "PASSEIOS",
+      tipo: "passeios",
+      slug: "translados"
+    },
+    {
+      id: 18,
+      titulo: "Ensaio Fotográfico Gramado e Canela",
+      subtitulo: "Fotos Profissionais Casal/Família",
+      categoria: "PASSEIOS PRIVATIVOS",
+      tipo: "passeios",
+      slug: "ensaio-fotografico-gramado-canela"
     }
   ];
 
