@@ -453,6 +453,28 @@ const passeiosReceptivo = [
       }
     });
 
+    // ============== DESKTOP: SCROLL WHEEL no CARROSSEL (nunca mais trava a rolagem) ==============
+    let lastWheelSlide2 = 0;
+    function onWheelReceptivo(evt) {
+      if (isAnimating) return;
+      const dx = Math.abs(evt.deltaX);
+      const dy = Math.abs(evt.deltaY);
+      const isHorizontal = (dx > dy) || (evt.shiftKey && dy > 0);
+      if (isHorizontal) {
+        if (Date.now() - lastWheelSlide2 < 450) return;
+        lastWheelSlide2 = Date.now();
+        if (evt.deltaX > 1 || evt.deltaY > 1) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      // Vertical SEM PREVENT DEFAULT => rola pagina normal!
+    }
+    if (viewport) {
+      viewport.addEventListener('wheel', onWheelReceptivo, { passive: true });
+    }
+
     let resizeTimer = null;
     window.addEventListener('resize', () => {
       if (resizeTimer) clearTimeout(resizeTimer);

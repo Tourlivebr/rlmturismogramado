@@ -558,6 +558,38 @@ const passeios = [
     viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
     viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
 
+    // ============== DESKTOP: SCROLL WHEEL no CARROSSEL (nunca mais trava a rolagem) ==============
+    // Antes: passar o mouse sobre o carrossel com overflow-hidden + transition longa
+    // capturava o evento "wheel" e ficava travado. Agora:
+    //  - Shift + Scroll (ou trackpad horizontal / Magic Mouse) avança/retrocede slide
+    //  - Scroll vertical SEMPRE propaga para o body (nunca trava tela)
+    let lastWheelSlide = 0;
+    function onWheelDesktop(evt) {
+      // Não fazer nada durante animação (evita double trigger e nao previne rolagem)
+      if (isAnimating) return;
+      const dx = Math.abs(evt.deltaX);
+      const dy = Math.abs(evt.deltaY);
+      // Scroll HORIZONTAL (shift + wheel, trackpad, Magic Mouse) => troca slide
+      const isHorizontal = (dx > dy) || (evt.shiftKey && dy > 0);
+      if (isHorizontal) {
+        if (Date.now() - lastWheelSlide < 450) return; // throttle
+        const isAnimating = true;
+        lastWheelSlide = Date.now();
+        if (evt.deltaX > 1 || evt.deltaY > 1) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        setTimeout(() => { isAnimating = false; }, 900);
+      }
+      // Qualquer wheel VERTICAL (sem shift) => deixa PROPAGAR PARA O BODY, rola a página normalmente)
+      // NÃO USE evt.preventDefault()! = principal fix do "não consigo rolar"
+    }
+
+    if (viewport) {
+      viewport.addEventListener('wheel', onWheelDesktop, { passive: true });
+    }
+
     let resizeTimer = null;
     window.addEventListener('resize', () => {
       if (resizeTimer) clearTimeout(resizeTimer);

@@ -174,8 +174,10 @@ const passeios = [
 <!-- Hero Section -->
 <section 
   class="relative text-white py-8 lg:py-20 bg-center bg-cover bg-no-repeat bg-scroll lg:bg-local"
-  style="background-image: url('/images/link_passeios1.jpg'); filter: brightness(1.05) contrast(1.1) saturate(1.2);"
+  style="background-image: url('/images/link_passeios1.jpg');"
 >
+  <!-- Filtro de cor aplicado em div filha (não trava scroll no Chrome PC) -->
+  <div class="absolute inset-0 pointer-events-none" style="filter: brightness(1.05) contrast(1.1) saturate(1.2); mix-blend-mode: multiply;"></div>
   <!-- Overlay branco bem leve só pra não perder legibilidade -->
   <div class="absolute inset-0 bg-white/10"></div>
 
