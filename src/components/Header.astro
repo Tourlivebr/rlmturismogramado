@@ -217,16 +217,16 @@
 </header>
 
 <script>
-  // Dados COMPLETOS dos passeios e ingressos para busca (11 itens)
+  // Dados COMPLETOS dos passeios e ingressos para busca (15 itens = 5 ingressos + 10 receptivo)
   const todosPasseios = [
-    // Ingressos e Atrações (6)
+    // Ingressos e Atrações (5) — CarrosselPasseios.astro
     {
       id: 1,
       titulo: "Era do Fogo Fondue Temático",
       subtitulo: "Fondue na Caverna Pré-Histórica",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
-      slug: "era-do-fogo"
+      href: "/era-do-fogo"
     },
     {
       id: 2,
@@ -234,7 +234,7 @@
       subtitulo: "Trem Mágico com Comida Americana",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
-      slug: "ferrovia-secreta"
+      href: "/ferrovia-secreta"
     },
     {
       id: 3,
@@ -242,15 +242,15 @@
       subtitulo: "Rodízio de Pizza na Escola Ônyra",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
-      slug: "hector-pizzaria"
+      href: "/hector-pizzaria"
     },
     {
       id: 4,
       titulo: "Gatzz Fondue & Show",
-      subtitulo: "Dinner Show de Broadway",
+      subtitulo: "Dinner Show de Broadway na Serra Gaúcha",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
-      slug: "gatzz"
+      href: "/gatzz"
     },
     {
       id: 5,
@@ -258,64 +258,88 @@
       subtitulo: "Parques e Atrações da Serra Gaúcha",
       categoria: "INGRESSOS E ATRAÇÕES",
       tipo: "ingressos",
-      slug: "parksnet"
+      href: "/parksnet"
     },
+    // Passeios e Receptivo (10) — CarrosselPasseiosReceptivo.astro
     {
       id: 6,
-      titulo: "Passaporte Grupo Dreams",
-      subtitulo: "7 Atrações em 1 Passaporte",
-      categoria: "INGRESSOS E ATRAÇÕES",
-      tipo: "ingressos",
-      slug: "grupo-dreams"
+      titulo: "City Tour Privativo",
+      subtitulo: "Roteiro personalizado com motorista/guia",
+      categoria: "CITY TOUR",
+      tipo: "passeios",
+      href: "/passeio/city-tour-privativo"
     },
-    // Passeios e Receptivo (5)
     {
       id: 7,
-      titulo: "Transfer Privativo POA/Caxias",
-      subtitulo: "Gramado e Canela - Ida e Volta",
-      categoria: "RECEPTIVO",
+      titulo: "Transporte Olivas",
+      subtitulo: "Translado para as Olivas de Gramado",
+      categoria: "TRANSFER",
       tipo: "passeios",
-      slug: "transfer-privativo"
+      href: "/passeio/transporte-olivas"
     },
     {
       id: 8,
-      titulo: "Tour Maria Fumaça + Vinhos + Épopeia + Almoço",
-      subtitulo: "Roteiro Vinícola Coletivo Completo",
-      categoria: "PASSEIOS",
+      titulo: "Transporte Jolimont",
+      subtitulo: "Translado para a Vinícola Jolimont",
+      categoria: "TRANSFER",
       tipo: "passeios",
-      slug: "tour-trem-vinho-maria-fumaca"
+      href: "/passeio/transporte-jolimont"
     },
     {
       id: 9,
-      titulo: "Translado Olivas de Gramado",
-      subtitulo: "Roteiro Vinícola Privativo",
-      categoria: "PASSEIOS",
+      titulo: "Transporte Sky Glass",
+      subtitulo: "Translado para a Skyglass Canela",
+      categoria: "TRANSFER",
       tipo: "passeios",
-      slug: "translados"
+      href: "/passeio/transporte-sky-glass"
     },
     {
       id: 10,
-      titulo: "Skyglass Canela",
-      subtitulo: "Bondinho Aéreo e Mirante de Vidro",
-      categoria: "PASSEIOS",
+      titulo: "Bondinhos Transporte",
+      subtitulo: "Translado para os Bondinhos Aéreos",
+      categoria: "TRANSFER",
       tipo: "passeios",
-      slug: "translado-skyglass"
+      href: "/passeio/bondinhos-transporte"
     },
     {
       id: 11,
-      titulo: "Translado Jolimont Winery",
-      subtitulo: "Vinícola Premium em Bento Gonçalves",
-      categoria: "PASSEIOS",
+      titulo: "City Tour Nova Petrópolis",
+      subtitulo: "Roteiro completo por Nova Petrópolis",
+      categoria: "CITY TOUR",
       tipo: "passeios",
-      slug: "translados"
+      href: "/passeio/city-tour-nova-petropolis"
     },
     {
       id: 12,
-      titulo: "Tour Linha Bella",
-      subtitulo: "História, Cultura e Almoço Italiano na Cantina",
-      categoria: "PASSEIOS",
+      titulo: "Lumni Transporte",
+      subtitulo: "Translado para a experiência Lumni",
+      categoria: "TRANSFER",
       tipo: "passeios",
-      slug: "tour-linha-bella"
+      href: "/passeio/lumni-transporte"
+    },
+    {
+      id: 13,
+      titulo: "Trem Maria Fumaça",
+      subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+      categoria: "TREM",
+      tipo: "passeios",
+      href: "/passeio/maria-fumaca"
+    },
+    {
+      id: 14,
+      titulo: "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela",
+      subtitulo: "Transporte privativo executivo com motorista/guia",
+      categoria: "RECEPTIVO",
+      tipo: "passeios",
+      href: "/transfer-privativo"
+    },
+    {
+      id: 15,
+      titulo: "Tour Linha Bella",
+      subtitulo: "História, cultura e sabores da Serra Gaúcha",
+      categoria: "CULTURA",
+      tipo: "passeios",
+      href: "/passeio/tour-linha-bella"
     }
   ];
 
@@ -365,7 +389,7 @@
       `;
     } else {
       resultsContainer.innerHTML = filteredPasseios.map(passeio => {
-        const href = `/${passeio.slug}`;
+        const href = passeio.href || `/${passeio.slug || ''}`;
         return `
           <a href="${href}" class="block p-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0">
             <div class="font-medium text-gray-800">${passeio.titulo}</div>

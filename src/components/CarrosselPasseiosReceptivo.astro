@@ -11,7 +11,13 @@ const passeiosReceptivo = [
     price2: 480,
     label2: "5 a 6 pessoas",
     slug: "city-tour-privativo",
-    whatsappText: "Olá! Quero reservar o City Tour Privativo."
+    whatsappText: "Olá! Quero reservar o City Tour Privativo.",
+    rating: 4.9,
+    tags: [
+      "Roteiro 100% personalizado",
+      "Busca e retorno no hotel",
+      "Veículo com ar condicionado"
+    ]
   },
   {
     id: 2,
@@ -24,7 +30,13 @@ const passeiosReceptivo = [
     price2: 350,
     label2: "5 a 6 pessoas",
     slug: "transporte-olivas",
-    whatsappText: "Olá! Quero reservar o Transporte para as Olivas."
+    whatsappText: "Olá! Quero reservar o Transporte para as Olivas.",
+    rating: 4.8,
+    tags: [
+      "Ida e volta executivo",
+      "Veículo com ar condicionado",
+      "Sem stress com estacionamento"
+    ]
   },
   {
     id: 3,
@@ -37,7 +49,13 @@ const passeiosReceptivo = [
     price2: 350,
     label2: "5 a 6 pessoas",
     slug: "transporte-jolimont",
-    whatsappText: "Olá! Quero reservar o Transporte para a Jolimont."
+    whatsappText: "Olá! Quero reservar o Transporte para a Jolimont.",
+    rating: 4.9,
+    tags: [
+      "Vinícola premiada",
+      "Bento Gonçalves com conforto",
+      "Motorista experiente"
+    ]
   },
   {
     id: 4,
@@ -50,7 +68,13 @@ const passeiosReceptivo = [
     price2: 320,
     label2: "5 a 6 pessoas",
     slug: "transporte-sky-glass",
-    whatsappText: "Olá! Quero reservar o Transporte para Sky Glass."
+    whatsappText: "Olá! Quero reservar o Transporte para Sky Glass.",
+    rating: 4.8,
+    tags: [
+      "Mirante de vidro 360°",
+      "Vale da Ferradura",
+      "Sem preocupação com trajeto"
+    ]
   },
   {
     id: 5,
@@ -63,7 +87,13 @@ const passeiosReceptivo = [
     price2: 320,
     label2: "5 a 6 pessoas",
     slug: "bondinhos-transporte",
-    whatsappText: "Olá! Quero reservar o Transporte dos Bondinhos."
+    whatsappText: "Olá! Quero reservar o Transporte dos Bondinhos.",
+    rating: 4.7,
+    tags: [
+      "Vista panorâmica aérea",
+      "Parque da Serra",
+      "Ida e volta segura"
+    ]
   },
   {
     id: 6,
@@ -76,7 +106,13 @@ const passeiosReceptivo = [
     price2: 400,
     label2: "5 a 6 pessoas",
     slug: "city-tour-nova-petropolis",
-    whatsappText: "Olá! Quero reservar o City Tour de Nova Petrópolis."
+    whatsappText: "Olá! Quero reservar o City Tour de Nova Petrópolis.",
+    rating: 4.9,
+    tags: [
+      "Rua Coberta de NP",
+      "Aldéia do Imigrante",
+      "Culinária germânica"
+    ]
   },
   {
     id: 7,
@@ -89,7 +125,13 @@ const passeiosReceptivo = [
     price2: 300,
     label2: "5 a 6 pessoas",
     slug: "lumni-transporte",
-    whatsappText: "Olá! Quero reservar o Transporte Lumni."
+    whatsappText: "Olá! Quero reservar o Transporte Lumni.",
+    rating: 4.8,
+    tags: [
+      "Experiência imersiva única",
+      "Arte + tecnologia",
+      "Família e diversão"
+    ]
   },
   {
     id: 8,
@@ -102,7 +144,13 @@ const passeiosReceptivo = [
     price2: 2999.9,
     label2: "6 pessoas",
     slug: "maria-fumaca",
-    whatsappText: "Olá! Quero reservar o passeio de Trem Maria Fumaça."
+    whatsappText: "Olá! Quero reservar o passeio de Trem Maria Fumaça.",
+    rating: 5.0,
+    tags: [
+      "Trem a vapor nostálgico",
+      "Paisagens da Serra Gaúcha",
+      "Guia embarcado incluso"
+    ]
   },
   {
     id: 9,
@@ -115,7 +163,13 @@ const passeiosReceptivo = [
     price2: 550,
     label2: "Ida e Volta",
     slug: "transfer-privativo",
-    whatsappText: "Olá! Quero reservar o Transfer Ida e Volta Porto Alegre / Gramado ou Canela."
+    whatsappText: "Olá! Quero reservar o Transfer Ida e Volta Porto Alegre / Gramado ou Canela.",
+    rating: 5.0,
+    tags: [
+      "Aeroporto POA direto",
+      "Caxias do Sul também",
+      "Motorista credenciado"
+    ]
   },
   {
     id: 10,
@@ -133,8 +187,7 @@ const passeiosReceptivo = [
     tags: [
       "Vinícola + degustação",
       "Casarão centenário",
-      "Almoço italiano Cantina",
-      "História e cultura"
+      "Almoço italiano Cantina"
     ]
   }
 ];
@@ -175,16 +228,16 @@ const passeiosReceptivo = [
                   </div>
                 </div>
 
-                <div class="p-4 lg:p-5 flex-1 flex flex-col gap-3">
+                <div class="p-4 lg:p-5 flex-1 flex flex-col gap-2">
                   <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors">
                     {passeio.title}
                   </h3>
-                  <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
+                  <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2">
                     {passeio.subtitle}
                   </p>
 
                   {passeio.tags && (
-                    <div class="flex flex-wrap gap-2 mt-2 mb-2">
+                    <div class="flex flex-wrap gap-2 mt-1">
                       {passeio.tags.slice(0, 2).map(tag => (
                         <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
                           {tag}
@@ -193,7 +246,7 @@ const passeiosReceptivo = [
                     </div>
                   )}
 
-                  <div class="border-t border-gray-100 dark:border-gray-700 pt-4 space-y-3">
+                  <div class="border-t border-gray-100 dark:border-gray-700 pt-3 mt-auto space-y-3">
                     <div class="grid grid-cols-2 gap-3">
                       <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
                         <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
