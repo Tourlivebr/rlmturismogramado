@@ -8,7 +8,7 @@ const passeio = {
   titulo: "Transfer Ida e Volta - Porto Alegre / Gramado ou Canela",
   subtitulo: "Transporte privativo executivo",
   categoria: "RECEPTIVO",
-  price1: 350.00,
+  price1: 380.00,
   label1: "1 trecho (so ida ou so volta)",
   price2: 700.00,
   label2: "Ida e Volta",
@@ -41,7 +41,7 @@ const passeio = {
   ]
 };
 
-const whatsappAgencia = "5554993220552";
+const whatsappAgencia = "5554996474071";
 const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo}. Valor 1 trecho R$ ${passeio.price1.toFixed(2).replace('.', ',')} / Ida e Volta R$ ${passeio.price2.toFixed(2).replace('.', ',')}.`;
 const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(whatsappMessage)}`;
 ---
@@ -158,11 +158,11 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
               <div class="border-2 border-gray-200 dark:border-gray-700/60 rounded-xl p-5 text-center hover:border-primary-300 dark:hover:border-primary-700 transition">
                 <p class="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">1 trecho (so ida ou so volta)</p>
                 <p class="mt-2 text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white">
-                  R$ 350,00
+                  R$ 380,00
                 </p>
                 <p class="mt-1 text-xs text-gray-400">por veiculo · 1 a 4 passageiros</p>
                 <p class="mt-2 text-xs font-bold text-gray-600 dark:text-gray-300">
-                  R$ 450,00 · 5 a 6 passageiros
+                  R$ 480,00 · 5 a 6 passageiros
                 </p>
                 <p class="mt-1.5 text-[11px] text-primary-700 dark:text-primary-400 font-semibold">
                   Mais de 7 pessoas: consultar no WhatsApp
@@ -258,7 +258,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                         </span>
                       </div>
                       <p id="tf_dica_preco" class="mt-1.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                        * Valor por veiculo - 1 a 4 passageiros: R$ 350,00 por trecho · 5 a 6 passageiros: R$ 450,00 por trecho · Mais de 7 pessoas: consultar no WhatsApp
+                        * Valor por veiculo - 1 a 4 passageiros: R$ 380,00 por trecho · 5 a 6 passageiros: R$ 480,00 por trecho · Mais de 7 pessoas: consultar no WhatsApp
                       </p>
                     </div>
 
@@ -500,7 +500,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                   Enviar reserva
                 </button>
 
-                <a href="https://wa.me/5554993220552" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/5554996474071" target="_blank" rel="noopener noreferrer"
                   class="mt-2 flex items-center justify-center gap-2 w-full text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 font-semibold py-2 transition-colors">
                   Contato direto
                 </a>
@@ -521,13 +521,13 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
 
   <script is:inline>
     (function () {
-      const AGENCIA_WHATSAPP = "5554993220552";
+      const AGENCIA_WHATSAPP = "5554996474071";
       const TITULO_PASSEIO = "Transfer Ida e Volta - Porto Alegre / Gramado ou Canela";
 
       function precoPorTrechoPorPax(qtd) {
         if (qtd >= 7) return null;
-        if (qtd >= 5) return 450.00;
-        return 350.00;
+        if (qtd >= 5) return 480.00;
+        return 380.00;
       }
 
       const $ = (id) => document.getElementById(id);
@@ -702,8 +702,8 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         const qtdN = parseInt(qtd, 10) || 1;
         let obsPax = "";
         if (qtdN >= 7) obsPax = " - VALOR A CONSULTAR (grupo com mais de 6 passageiros)";
-        else if (qtdN >= 5) obsPax = ` (faixa 5 a 6 passageiros - ${formatarMoeda(450)} por trecho)`;
-        else obsPax = ` (faixa 1 a 4 passageiros - ${formatarMoeda(350)} por trecho)`;
+        else if (qtdN >= 5) obsPax = ` (faixa 5 a 6 passageiros - ${formatarMoeda(480)} por trecho)`;
+        else obsPax = ` (faixa 1 a 4 passageiros - ${formatarMoeda(380)} por trecho)`;
 
         let msg = `Nova solicitacao de Transfer\n\n`;
         msg += `Servico: ${TITULO_PASSEIO}\n`;
