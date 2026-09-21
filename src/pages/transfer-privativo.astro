@@ -156,19 +156,31 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
             </h3>
             <div class="grid md:grid-cols-2 gap-4">
               <div class="border-2 border-gray-200 dark:border-gray-700/60 rounded-xl p-5 text-center hover:border-primary-300 dark:hover:border-primary-700 transition">
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">{passeio.label1}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">1 trecho (so ida ou so volta)</p>
                 <p class="mt-2 text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white">
-                  R$ {passeio.price1.toFixed(2).replace('.', ',')}
+                  R$ 350,00
                 </p>
-                <p class="mt-1 text-xs text-gray-400">por veículo · até 6 passageiros</p>
+                <p class="mt-1 text-xs text-gray-400">por veiculo · 1 a 4 passageiros</p>
+                <p class="mt-2 text-xs font-bold text-gray-600 dark:text-gray-300">
+                  R$ 450,00 · 5 a 6 passageiros
+                </p>
+                <p class="mt-1.5 text-[11px] text-primary-700 dark:text-primary-400 font-semibold">
+                  Mais de 7 pessoas: consultar no WhatsApp
+                </p>
               </div>
               <div class="border-2 border-primary-300 dark:border-primary-600 bg-primary-50/50 dark:bg-primary-900/20 rounded-xl p-5 text-center relative overflow-hidden">
                 <span class="absolute top-2 right-2 inline-block bg-primary-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider">MAIS ESCOLHIDO</span>
-                <p class="text-sm text-primary-700 dark:text-primary-300 font-semibold uppercase tracking-wide">{passeio.label2}</p>
+                <p class="text-sm text-primary-700 dark:text-primary-300 font-semibold uppercase tracking-wide">Ida e Volta</p>
                 <p class="mt-2 text-3xl lg:text-4xl font-extrabold text-primary-700 dark:text-primary-300">
-                  R$ {passeio.price2.toFixed(2).replace('.', ',')}
+                  R$ 700,00
                 </p>
-                <p class="mt-1 text-xs text-primary-600/70 dark:text-primary-400/80">por veículo · até 6 passageiros</p>
+                <p class="mt-1 text-xs text-primary-600/70 dark:text-primary-400/80">por veiculo · 1 a 4 passageiros</p>
+                <p class="mt-2 text-xs font-bold text-primary-800 dark:text-primary-300">
+                  R$ 900,00 · 5 a 6 passageiros
+                </p>
+                <p class="mt-1.5 text-[11px] text-primary-700 dark:text-primary-400 font-semibold">
+                  Mais de 7 pessoas: consultar no WhatsApp
+                </p>
               </div>
             </div>
           </div>
@@ -246,7 +258,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                         </span>
                       </div>
                       <p id="tf_dica_preco" class="mt-1.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                        * Valor por veiculo - 1-2 passageiros: R$ 350,00 por trecho - Acima de 2 passageiros: consultar (valor base)
+                        * Valor por veiculo - 1 a 4 passageiros: R$ 350,00 por trecho · 5 a 6 passageiros: R$ 450,00 por trecho · Mais de 7 pessoas: consultar no WhatsApp
                       </p>
                     </div>
 
@@ -511,7 +523,12 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
     (function () {
       const AGENCIA_WHATSAPP = "5554993220552";
       const TITULO_PASSEIO = "Transfer Ida e Volta - Porto Alegre / Gramado ou Canela";
-      const PRECO_POR_TRECHO_BASE = 350.00;
+
+      function precoPorTrechoPorPax(qtd) {
+        if (qtd >= 7) return null;
+        if (qtd >= 5) return 450.00;
+        return 350.00;
+      }
 
       const $ = (id) => document.getElementById(id);
 
@@ -536,9 +553,9 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
       function calcularValor() {
         const qtd = Math.max(1, parseInt(qtdInput.value || "1", 10));
         const qtdTrechos = tipoSelecionado === "ida-volta" ? 2 : 1;
-        let valor = qtdTrechos * PRECO_POR_TRECHO_BASE;
-        if (qtd > 2) valor = qtdTrechos * (PRECO_POR_TRECHO_BASE + ((qtd - 2) * 50.00));
-        return { valor, qtdTrechos, qtd };
+        const porTrecho = precoPorTrechoPorPax(qtd);
+        const valor = porTrecho === null ? 0 : qtdTrechos * porTrecho;
+        return { valor, qtdTrechos, qtd, porTrecho };
       }
 
       function formatarMoeda(v) {
@@ -546,17 +563,23 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
       }
 
       function atualizarValor() {
-        const { valor, qtdTrechos, qtd } = calcularValor();
-        valorTotalEl.textContent = formatarMoeda(valor);
-
+        const { valor, qtdTrechos, qtd, porTrecho } = calcularValor();
         const dica = $("tf_dica_preco");
-        if (dica) {
-          if (qtd <= 2) {
-            dica.innerHTML = `* Valor por veiculo - 1-2 passageiros: <b class="text-primary-700 dark:text-primary-400">R$ 350,00 / trecho</b> - Total = ${qtdTrechos} trecho(s) x R$ 350,00`;
-          } else {
-            const extra = qtd - 2;
-            const porTrecho = PRECO_POR_TRECHO_BASE + extra * 50;
-            dica.innerHTML = `* Valor por veiculo - ${qtd} passageiros: <b class="text-primary-700 dark:text-primary-400">R$ ${porTrecho.toFixed(2).replace(".",",")} / trecho</b> (+ R$ 50 por passageiro acima do 2) - ${qtdTrechos} trecho(s)`;
+
+        if (porTrecho === null) {
+          valorTotalEl.textContent = "Consultar WhatsApp";
+          valorTotalEl.classList.add("text-red-600", "dark:text-red-400");
+          valorTotalEl.classList.remove("text-primary-600", "dark:text-primary-400");
+          if (dica) {
+            dica.innerHTML = `* <b class="text-red-600 dark:text-red-400">Grupo com ${qtd} passageiros:</b> valor nao disponivel automaticamente. Clique em "Enviar reserva" para consultar diretamente no WhatsApp.`;
+          }
+        } else {
+          valorTotalEl.textContent = formatarMoeda(valor);
+          valorTotalEl.classList.remove("text-red-600", "dark:text-red-400");
+          valorTotalEl.classList.add("text-primary-600", "dark:text-primary-400");
+          if (dica) {
+            const faixa = qtd <= 4 ? "1 a 4 passageiros" : "5 a 6 passageiros";
+            dica.innerHTML = `* Valor por veiculo - ${faixa}: <b class="text-primary-700 dark:text-primary-400">${formatarMoeda(porTrecho)} / trecho</b> - Total = ${qtdTrechos} trecho(s) x ${formatarMoeda(porTrecho)}`;
           }
         }
       }
@@ -667,8 +690,8 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         const fone = v("tf_telefone") || "(não informado)";
         const obs = v("tf_obs");
 
-        const { valor } = calcularValor();
-        const valorStr = formatarMoeda(valor);
+        const { valor, porTrecho } = calcularValor();
+        const valorStr = porTrecho === null ? "CONSULTAR - GRANDE GRUPO" : formatarMoeda(valor);
 
         const tl = tipoLabel(tipoSelecionado);
         const tipoLabelMsg =
@@ -677,7 +700,10 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
           : "IDA E VOLTA (Aeroporto / Gramado / Canela)";
 
         const qtdN = parseInt(qtd, 10) || 1;
-        const obsPax = qtdN > 2 ? ` (${qtdN} passageiros: valor dinamico, confirmar final)` : "";
+        let obsPax = "";
+        if (qtdN >= 7) obsPax = " - VALOR A CONSULTAR (grupo com mais de 6 passageiros)";
+        else if (qtdN >= 5) obsPax = ` (faixa 5 a 6 passageiros - ${formatarMoeda(450)} por trecho)`;
+        else obsPax = ` (faixa 1 a 4 passageiros - ${formatarMoeda(350)} por trecho)`;
 
         let msg = `Nova solicitacao de Transfer\n\n`;
         msg += `Servico: ${TITULO_PASSEIO}\n`;
