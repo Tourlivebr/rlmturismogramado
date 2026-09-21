@@ -346,6 +346,8 @@ const passeiosData = {
     label1: "Por pessoa",
     label2: "Crianças / grupos consulte",
     temFaixas: false,
+    temQuantidadePorPessoa: true,
+    valorPorPessoa: 319.00,
     descricao: "Tour Linha Bella - Uma viagem pela história, cultura e sabores da Serra Gaúcha! Na Cantina Linha Bella é impossível resistir ao pecado da gula. O restaurante é inspirado nos antigos porões Italianos onde as famílias reuniam-se para festejar e se fartar. Nosso Buffet conta com uma vasta variedade de saladas, 4 tipos de massas, 3 tipos de molhos, galeto assado, galinha caipira, costela suína, polenta mole, arroz, feijão, lasanha, além de deliciosas sobremesas que trazem lembranças dos sabores da nona. A antecedência mínima da compra deve ser de 48 hora(s) em relação ao horário da reserva.",
     inclusos: [
       "Transporte ida e volta ao seu local de hospedagem",
@@ -531,6 +533,8 @@ if (!isTransferRedirect) {
                   passeioCategoria={passeio.categoria}
                   passeioFaixasCompletas={(passeio as any).faixasCompletas}
                   passeioTemTabelaCompleta={(passeio as any).temTabelaCompleta}
+                  passeioTemQuantidadePorPessoa={(passeio as any).temQuantidadePorPessoa}
+                  passeioValorPorPessoa={(passeio as any).valorPorPessoa}
                 />
               </div>
             </div>
