@@ -132,7 +132,7 @@ const passeiosReceptivo = [
       </div>
     </div>
 
-    <div class="relative z-20">
+    <div class="relative z-20 group/carousel">
       <div class="overflow-hidden" id="carousel-viewport-passeios-receptivo">
         <div id="carousel-track-passeios-receptivo" class="flex transition-transform duration-[850ms] ease-out will-change-transform [backface-visibility:hidden] [transform:translateZ(0)]">
           {passeiosReceptivo.map((passeio) => (
@@ -197,20 +197,36 @@ const passeiosReceptivo = [
 
       <button 
         id="prev-btn-passeios-receptivo"
-        class="sm:hidden sm:block absolute left-[-4px] sm:left-0 top-1/2 -translate-y-1/2 -translate-x-0 sm:-translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
+        class="absolute left-0 sm:left-2 lg:-left-2 top-1/2 -translate-y-1/2 -translate-x-0 sm:translate-x-0 lg:-translate-x-1/2 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full flex items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-200 z-30
+
+               w-[54px] h-[54px] p-3
+               sm:w-11 sm:h-11 sm:p-2
+               lg:w-12 lg:h-12
+
+               opacity-90 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-within:opacity-100 sm:data-open:opacity-100
+               translate-z-0 will-change-transform"
         aria-label="Anterior"
+        type="button"
       >
-        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
         </svg>
       </button>
       
       <button 
         id="next-btn-passeios-receptivo"
-        class="sm:hidden sm:block absolute right-[-4px] sm:right-0 top-1/2 -translate-y-1/2 translate-x-0 sm:translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
+        class="absolute right-0 sm:right-2 lg:-right-2 top-1/2 -translate-y-1/2 translate-x-0 sm:translate-x-0 lg:translate-x-1/2 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full flex items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-200 z-30
+
+               w-[54px] h-[54px] p-3
+               sm:w-11 sm:h-11 sm:p-2
+               lg:w-12 lg:h-12
+
+               opacity-90 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-within:opacity-100 sm:data-open:opacity-100
+               translate-z-0 will-change-transform"
         aria-label="Próximo"
+        type="button"
       >
-        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
         </svg>
       </button>
