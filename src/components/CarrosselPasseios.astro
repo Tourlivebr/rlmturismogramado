@@ -108,8 +108,8 @@ const passeios = [
 
   <!-- Container do carrossel -->
   <div class="relative z-20">
-    <div class="overflow-hidden">
-      <div id="carousel-container" class="flex transition-transform duration-500 ease-in-out pb-4 will-change-transform">
+    <div class="overflow-hidden" id="carousel-viewport-ingressos">
+      <div id="carousel-container" class="flex transition-transform duration-[850ms] ease-out pb-4 will-change-transform [backface-visibility:hidden] [transform:translateZ(0)] touch-manipulation">
         {passeios.map((passeio) => (
           <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3" data-id={passeio.id}>
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
@@ -171,29 +171,29 @@ const passeios = [
 
     <button 
       id="prev-btn"
-      class="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-10"
+      class="sm:hidden sm:block absolute left-[-4px] sm:left-0 top-1/2 -translate-y-1/2 -translate-x-0 sm:-translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
       aria-label="Anterior"
       type="button"
     >
-      <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      <svg class="w-6 h-6 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     
     <button 
       id="next-btn"
-      class="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-10"
+      class="sm:hidden sm:block absolute right-[-4px] sm:right-0 top-1/2 -translate-y-1/2 translate-x-0 sm:translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
       aria-label="Próximo"
       type="button"
     >
-      <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      <svg class="w-6 h-6 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
       </svg>
     </button>
   </div>
 
   <!-- Indicadores -->
-  <div id="indicators" class="flex justify-center mt-2 pb-6 gap-2 relative z-20">
+  <div id="indicators" class="flex items-center justify-center mt-4 mb-2 gap-2.5 relative z-20 touch-manipulation">
     <!-- Indicadores serão gerados dinamicamente pelo JavaScript -->
   </div>
 
@@ -346,11 +346,17 @@ const passeios = [
   function initCarouselIngressos() {
     let currentSlide = 0;
     const container = document.getElementById('carousel-container');
+    const viewport = document.getElementById('carousel-viewport-ingressos');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const indicatorsContainer = document.getElementById('indicators');
 
     if (!container || !indicatorsContainer) return;
+    let isAnimating = false;
+
+    function isMobile() {
+      return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    }
 
     function getSlidesPerView() {
       if (window.innerWidth >= 1280) return 4;
@@ -366,36 +372,27 @@ const passeios = [
     }
 
     function updateIndicators() {
-      const indicators = indicatorsContainer.children;
-      for (let i = 0; i < indicators.length; i++) {
-        indicators[i].className = `w-2 h-2 rounded-full transition-colors ${
-          i === currentSlide ? 'bg-primary-600' : 'bg-gray-300'
-        }`;
-      }
-    }
-    
-    function updateCarousel() {
-      const firstItem = container.children[0];
-      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 0;
-      container.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
-
       const totalSlides = getTotalSlides();
-      if (prevBtn) prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
-      if (nextBtn) nextBtn.style.opacity = currentSlide >= totalSlides - 1 ? '0.5' : '1';
-
-      updateIndicators();
-    }
-    
-    function createIndicators() {
-      const totalSlides = getTotalSlides();
+      const mobile = isMobile();
       indicatorsContainer.innerHTML = '';
       
       for (let i = 0; i < totalSlides; i++) {
         const indicator = document.createElement('button');
-        indicator.className = `w-2 h-2 rounded-full transition-colors ${
-          i === currentSlide ? 'bg-primary-600' : 'bg-gray-300'
-        }`;
+        const active = i === currentSlide;
+        if (mobile) {
+          indicator.className = `h-1.5 rounded-full transition-all duration-300 ease-out touch-manipulation ${
+            active
+              ? 'w-8 bg-primary-600 shadow-sm shadow-primary-600/40'
+              : 'w-2 bg-gray-300 dark:bg-gray-600'
+          }`;
+        } else {
+          indicator.className = `h-2 w-2 rounded-full transition-colors duration-200 touch-manipulation ${
+            active ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'
+          }`;
+        }
+        indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
         indicator.addEventListener('click', () => {
+          if (isAnimating) return;
           currentSlide = i;
           updateCarousel();
         });
@@ -403,96 +400,171 @@ const passeios = [
       }
     }
     
+    function updateCarousel() {
+      isAnimating = true;
+      const firstItem = container.children[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 0;
+      container.style.transform = `translate3d(-${currentSlide * itemWidth}px, 0, 0)`;
+
+      const totalSlides = getTotalSlides();
+      if (prevBtn) prevBtn.style.opacity = currentSlide === 0 ? '0.6' : '1';
+      if (nextBtn) nextBtn.style.opacity = currentSlide >= totalSlides - 1 ? '0.6' : '1';
+
+      updateIndicators();
+      setTimeout(() => { isAnimating = false; }, 900);
+    }
+    
+    function createIndicators() {
+      updateIndicators();
+    }
+    
     function initCarousel() {
       createIndicators();
       updateCarousel();
     }
 
+    function nextSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+      updateCarousel();
+    }
+
     let autoPlayInterval;
     function startAutoPlay() {
+      stopAutoPlay();
+      const mobile = isMobile();
+      const interval = mobile ? 11000 : 8000; // <=== MOBILE MAIS LENTO: 11s vs desktop 8s
       autoPlayInterval = setInterval(() => {
-        const totalSlides = getTotalSlides();
-        currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
-        updateCarousel();
-      }, 8000);
+        if (document.hidden || document.visibilityState === 'hidden') return;
+        nextSlide();
+      }, interval);
     }
     
     function stopAutoPlay() {
-      clearInterval(autoPlayInterval);
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = undefined;
+      }
     }
 
-    prevBtn?.addEventListener('click', () => {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateCarousel();
-      }
-    });
-    
-    nextBtn?.addEventListener('click', () => {
-      const totalSlides = getTotalSlides();
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-        updateCarousel();
-      }
-    });
+    prevBtn?.addEventListener('click', prevSlide);
+    nextBtn?.addEventListener('click', nextSlide);
 
     container.addEventListener('mouseenter', stopAutoPlay);
     container.addEventListener('mouseleave', startAutoPlay);
 
+    if (container) {
+      container.style.touchAction = 'pan-y';
+    }
+
+    // Swipe touch MELHORADO (eixo X vs Y + drag ao vivo)
     let startX = 0;
     let startY = 0;
     let isDragging = false;
+    let deltaX = 0;
+    let deltaY = 0;
     let startTime = 0;
-    
+    let axisLocked = false;
+    let isHorizontal = false;
+
     container.addEventListener('touchstart', (e) => {
+      if (!e.touches || e.touches.length === 0) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
+      deltaX = 0;
+      deltaY = 0;
       isDragging = true;
+      axisLocked = false;
+      isHorizontal = false;
       startTime = Date.now();
       stopAutoPlay();
     }, { passive: true });
-    
+
     container.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = Math.abs(currentX - startX);
-      const diffY = Math.abs(currentY - startY);
-      
-      if (diffX > diffY) {
-        e.preventDefault();
+      if (!isDragging || !e.touches || e.touches.length === 0) return;
+      const cx = e.touches[0].clientX;
+      const cy = e.touches[0].clientY;
+      deltaX = startX - cx;
+      deltaY = Math.abs(startY - cy);
+
+      if (!axisLocked) {
+        const dxAbs = Math.abs(deltaX);
+        if (dxAbs > 10 || deltaY > 10) {
+          axisLocked = true;
+          isHorizontal = dxAbs >= deltaY;
+        }
       }
-    }, { passive: false });
+      // Nao interrompa scroll vertical
+      if (axisLocked && !isHorizontal) {
+        isDragging = false;
+        return;
+      }
+      // Feedback visual do drag no mobile
+      if (axisLocked && isHorizontal && isMobile()) {
+        const firstItem = container.children[0];
+        const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+        const base = currentSlide * itemWidth;
+        const overflow = Math.abs(deltaX) > itemWidth ? (deltaX > 0 ? 1 : -1) * itemWidth * 0.2 : 0;
+        container.style.transform = `translate3d(-${base + deltaX - overflow}px, 0, 0)`;
+      }
+    }, { passive: true });
     
     container.addEventListener('touchend', (e) => {
       if (!isDragging) return;
-      
-      const endX = e.changedTouches[0].clientX;
-      const diffX = startX - endX;
-      const diffTime = Date.now() - startTime;
-      
-      isDragging = false;
-      
-      if (Math.abs(diffX) > 50 && diffTime < 500) {
-        const totalSlides = getTotalSlides();
-        if (diffX > 0 && currentSlide < totalSlides - 1) {
-          currentSlide++;
-          updateCarousel();
-        } else if (diffX < 0 && currentSlide > 0) {
-          currentSlide--;
-          updateCarousel();
+      const elapsed = Date.now() - startTime;
+      const absDx = Math.abs(deltaX);
+      const firstItem = container.children[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+
+      const triggerSwipe = axisLocked && isHorizontal && (
+        absDx >= itemWidth * 0.2 || (elapsed < 280 && absDx >= 30)
+      );
+
+      if (triggerSwipe && absDx > 0) {
+        if (deltaX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
         }
+      } else if (isMobile()) {
+        updateCarousel();
       }
+      
+      deltaX = 0;
+      isDragging = false;
+      axisLocked = false;
+      isHorizontal = false;
       
       setTimeout(() => {
         startAutoPlay();
-      }, 1000);
+      }, isMobile() ? 6000 : 1500);
     }, { passive: true });
-    
+
+    // Pausa AUTOMATICAMENTE quando aba esta oculta (economia bateria)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoPlay();
+      else startAutoPlay();
+    });
+
+    // Pausa em qualquer toque do usuario mobile
+    viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
+
+    let resizeTimer = null;
     window.addEventListener('resize', () => {
-      currentSlide = 0;
-      initCarousel();
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        currentSlide = 0;
+        initCarousel();
+      }, 180);
     });
 
     initCarousel();

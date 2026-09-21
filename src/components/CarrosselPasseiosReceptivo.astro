@@ -133,8 +133,8 @@ const passeiosReceptivo = [
     </div>
 
     <div class="relative z-20">
-      <div class="overflow-hidden">
-        <div id="carousel-track-passeios-receptivo" class="flex transition-transform duration-500 ease-in-out">
+      <div class="overflow-hidden" id="carousel-viewport-passeios-receptivo">
+        <div id="carousel-track-passeios-receptivo" class="flex transition-transform duration-[850ms] ease-out will-change-transform [backface-visibility:hidden] [transform:translateZ(0)]">
           {passeiosReceptivo.map((passeio) => (
             <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3">
               <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
@@ -197,26 +197,26 @@ const passeiosReceptivo = [
 
       <button 
         id="prev-btn-passeios-receptivo"
-        class="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-10"
+        class="sm:hidden sm:block absolute left-[-4px] sm:left-0 top-1/2 -translate-y-1/2 -translate-x-0 sm:-translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
         aria-label="Anterior"
       >
-        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
         </svg>
       </button>
       
       <button 
         id="next-btn-passeios-receptivo"
-        class="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-10"
+        class="sm:hidden sm:block absolute right-[-4px] sm:right-0 top-1/2 -translate-y-1/2 translate-x-0 sm:translate-x-4 bg-white dark:bg-gray-800 shadow-lg shadow-black/10 dark:shadow-black/40 rounded-full p-3 sm:p-3 w-[54px] h-[54px] sm:w-auto sm:h-auto flex items-center justify-center active:scale-95 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors z-20"
         aria-label="Próximo"
       >
-        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        <svg class="w-6 h-6 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
         </svg>
       </button>
     </div>
 
-    <div id="indicators-passeios-receptivo" class="flex justify-center mt-4 pb-4 gap-2 relative z-20">
+    <div id="indicators-passeios-receptivo" class="flex items-center justify-center mt-5 mb-2 gap-2.5 relative z-20 touch-manipulation">
     </div>
   </div>
 
@@ -235,6 +235,7 @@ const passeiosReceptivo = [
   function initCarouselPasseiosReceptivo() {
     let currentSlide = 0;
     const carouselTrack = document.getElementById('carousel-track-passeios-receptivo');
+    const viewport = document.getElementById('carousel-viewport-passeios-receptivo');
     const prevBtn = document.getElementById('prev-btn-passeios-receptivo');
     const nextBtn = document.getElementById('next-btn-passeios-receptivo');
     const indicatorsContainer = document.getElementById('indicators-passeios-receptivo');
@@ -242,6 +243,11 @@ const passeiosReceptivo = [
     if (!carouselTrack || !indicatorsContainer) return;
 
     const visibleItems = [...carouselTrack.children];
+    let isAnimating = false;
+
+    function isMobile() {
+      return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    }
 
     function getSlidesPerView() {
       const width = window.innerWidth;
@@ -258,14 +264,26 @@ const passeiosReceptivo = [
 
     function updateIndicators() {
       const totalSlides = getTotalSlides();
+      const mobile = isMobile();
       indicatorsContainer.innerHTML = '';
       
       for (let i = 0; i < totalSlides; i++) {
         const indicator = document.createElement('button');
-        indicator.className = `w-3 h-3 rounded-full transition-colors ${
-          i === currentSlide ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'
-        }`;
+        const active = i === currentSlide;
+        if (mobile) {
+          indicator.className = `h-1.5 rounded-full transition-all duration-300 ease-out touch-manipulation ${
+            active
+              ? 'w-8 bg-primary-600 shadow-sm shadow-primary-600/40'
+              : 'w-2 bg-gray-300 dark:bg-gray-600'
+          }`;
+        } else {
+          indicator.className = `h-3 w-3 rounded-full transition-colors duration-200 touch-manipulation ${
+            active ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'
+          }`;
+        }
+        indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
         indicator.addEventListener('click', () => {
+          if (isAnimating) return;
           currentSlide = i;
           updateCarousel();
         });
@@ -274,19 +292,24 @@ const passeiosReceptivo = [
     }
     
     function updateCarousel() {
-      const firstItem = carouselTrack.children[0];
-      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 0;
-      carouselTrack.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
+      if (!visibleItems || visibleItems.length === 0) return;
+      isAnimating = true;
+      const firstItem = visibleItems[0];
+      const itemWidth = firstItem.getBoundingClientRect().width;
+      carouselTrack.style.transform = `translate3d(-${currentSlide * itemWidth}px, 0, 0)`;
       updateIndicators();
+      setTimeout(() => { isAnimating = false; }, 900);
     }
 
     function nextSlide() {
+      if (isAnimating) return;
       const totalSlides = getTotalSlides();
       currentSlide = (currentSlide + 1) % totalSlides;
       updateCarousel();
     }
     
     function prevSlide() {
+      if (isAnimating) return;
       const totalSlides = getTotalSlides();
       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       updateCarousel();
@@ -296,49 +319,147 @@ const passeiosReceptivo = [
     prevBtn?.addEventListener('click', prevSlide);
 
     let startX = 0;
+    let startY = 0;
     let isDragging = false;
+    let deltaX = 0;
+    let deltaY = 0;
+    let startTime = 0;
+    let axisLocked = false;
+    let isHorizontal = false;
+
+    // Touch swipe MELHORADO (detecta eixo X vs Y + threshold progressivo)
+    if (carouselTrack) {
+      carouselTrack.style.touchAction = 'pan-y';
+    }
 
     carouselTrack.addEventListener('touchstart', (e) => {
+      if (!e.touches || e.touches.length === 0) return;
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      deltaX = 0;
+      deltaY = 0;
       isDragging = true;
+      axisLocked = false;
+      isHorizontal = false;
+      startTime = Date.now();
+      stopAutoPlay();
+    }, { passive: true });
+
+    carouselTrack.addEventListener('touchmove', (e) => {
+      if (!isDragging || !e.touches || e.touches.length === 0) return;
+      const cx = e.touches[0].clientX;
+      const cy = e.touches[0].clientY;
+      deltaX = startX - cx;
+      deltaY = Math.abs(startY - cy);
+
+      if (!axisLocked) {
+        const dxAbs = Math.abs(deltaX);
+        if (dxAbs > 10 || deltaY > 10) {
+          axisLocked = true;
+          isHorizontal = dxAbs >= deltaY;
+        }
+      }
+      // Se for movimento vertical, NÃO interrompa o scroll do navegador
+      if (axisLocked && !isHorizontal) {
+        isDragging = false;
+        return;
+      }
+      // Feedback visual enquanto arrasta (só no mobile)
+      if (axisLocked && isHorizontal && isMobile() && carouselTrack && visibleItems[0]) {
+        const itemWidth = visibleItems[0].getBoundingClientRect().width;
+        const base = currentSlide * itemWidth;
+        const overflow = Math.abs(deltaX) > itemWidth ? (deltaX > 0 ? 1 : -1) * itemWidth * 0.2 : 0;
+        carouselTrack.style.transform = `translate3d(-${base + deltaX - overflow}px, 0, 0)`;
+      }
     }, { passive: true });
     
     carouselTrack.addEventListener('touchend', (e) => {
       if (!isDragging) return;
-      
-      const endX = e.changedTouches[0].clientX;
-      const diffX = startX - endX;
-      
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
+      const elapsed = Date.now() - startTime;
+      const absDx = Math.abs(deltaX);
+      const firstItem = visibleItems[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+
+      // Só considera swipe em eixo HORIZONTAL (evita conflito scroll vertical da pagina)
+      const triggerSwipe = axisLocked && isHorizontal && (
+        absDx >= itemWidth * 0.2 || (elapsed < 280 && absDx >= 30)
+      );
+
+      if (triggerSwipe && absDx > 0) {
+        if (deltaX > 0) {
           nextSlide();
-        } else {
+        } else if (deltaX < 0) {
           prevSlide();
+        }
+      } else {
+        // Nenhum swipe valido: retorna suavemente para posicao original
+        if (isMobile()) {
+          updateCarousel();
         }
       }
       
+      deltaX = 0;
       isDragging = false;
+      axisLocked = false;
+      isHorizontal = false;
+      
+      setTimeout(() => {
+        startAutoPlay();
+      }, isMobile() ? 6000 : 2000);
     }, { passive: true });
+
+    // Evita clique acidental em card apos swipe longo
+    let lastSwipeTime = 0;
+    carouselTrack.addEventListener('click', (ev) => {
+      if (Date.now() - lastSwipeTime < 280 && Math.abs(deltaX) > 20) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
 
     let autoPlayInterval;
     function startAutoPlay() {
-      autoPlayInterval = setInterval(nextSlide, 5000);
+      stopAutoPlay();
+      const mobile = isMobile();
+      const interval = mobile ? 11000 : 5000; // <=== MOBILE MAIS LENTO: 11s vs desktop 5s
+      autoPlayInterval = setInterval(() => {
+        if (document.hidden || document.visibilityState === 'hidden') return;
+        nextSlide();
+      }, interval);
     }
     
     function stopAutoPlay() {
-      clearInterval(autoPlayInterval);
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = undefined;
+      }
     }
+
+    // Pausa em qualquer interacao do usuario mobile
+    viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchend', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
 
     carouselTrack.addEventListener('mouseenter', stopAutoPlay);
     carouselTrack.addEventListener('mouseleave', startAutoPlay);
-    carouselTrack.addEventListener('touchstart', stopAutoPlay, { passive: true });
-    carouselTrack.addEventListener('touchend', () => {
-      setTimeout(startAutoPlay, 3000);
-    }, { passive: true });
+    carouselTrack.addEventListener('touchstart', () => { lastSwipeTime = Date.now(); }, { passive: true });
 
+    // Pausa AUTOMATICAMENTE quando a aba nao estiver visivel (economia bateria mobile)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
+      }
+    });
+
+    let resizeTimer = null;
     window.addEventListener('resize', () => {
-      currentSlide = 0;
-      updateCarousel();
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        currentSlide = 0;
+        updateCarousel();
+      }, 180);
     });
 
     updateCarousel();
