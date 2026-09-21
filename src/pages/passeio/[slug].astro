@@ -18,7 +18,8 @@ export async function getStaticPaths() {
     { params: { slug: 'city-tour-nova-petropolis' } },
     { params: { slug: 'lumni-transporte' } },
     { params: { slug: 'maria-fumaca' } },
-    { params: { slug: 'transfer-privativo' } }
+    { params: { slug: 'transfer-privativo' } },
+    { params: { slug: 'tour-linha-bella' } }
   ];
 }
 
@@ -330,6 +331,40 @@ const passeiosData = {
       "/images/maria-fumaca/maria-fumaca04.webp"
     ],
     tags: ["Trem a vapor", "História ferroviária", "Paisagens da Serra Gaúcha", "Família", "Fotografia"]
+  },
+  'tour-linha-bella': {
+    id: 11,
+    titulo: "Tour Linha Bella",
+    subtitulo: "História, cultura e sabores da Serra Gaúcha",
+    categoria: "CULTURA",
+    preco: 319.00,
+    avaliacao: 4.9,
+    totalAvaliacoes: 187,
+    parcelas: "Por pessoa:",
+    price1: 319.00,
+    price2: 319.00,
+    label1: "Por pessoa",
+    label2: "Crianças / grupos consulte",
+    temFaixas: false,
+    descricao: "Tour Linha Bella - Uma viagem pela história, cultura e sabores da Serra Gaúcha! Na Cantina Linha Bella é impossível resistir ao pecado da gula. O restaurante é inspirado nos antigos porões Italianos onde as famílias reuniam-se para festejar e se fartar. Nosso Buffet conta com uma vasta variedade de saladas, 4 tipos de massas, 3 tipos de molhos, galeto assado, galinha caipira, costela suína, polenta mole, arroz, feijão, lasanha, além de deliciosas sobremesas que trazem lembranças dos sabores da nona. A antecedência mínima da compra deve ser de 48 hora(s) em relação ao horário da reserva.",
+    inclusos: [
+      "Transporte ida e volta ao seu local de hospedagem",
+      "Guia especializado compartilhando curiosidades e histórias da região",
+      "Visitação em uma vinícola com degustação de vinhos e sucos",
+      "Conheça o Casarão centenário da família Marcon com degustação de bolachas, geléias e doce de leite feito pela nona",
+      "Explore o Bodegão da Família Bof, marco zero de Gramado com degustação de salames, queijos e copas",
+      "Almoço típico italiano na Cantina Linha Bella, com música, dança e uma mesa farta de delícias"
+    ],
+    duracao: "Das 07:30 às 15:00 (aprox. 7h30)",
+    horarios: ["07:30 (saída)"],
+    galeria: [
+      "https://site-assets.planne.com.br/clients/linhabella/home-prevideo.jpg",
+      "https://site-assets.planne.com.br/clients/linhabella/noiteitaliana.jpg",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=vinicola%20familia%20italiana%20serra%20gaucha%20gramado%20canela%20barris%20de%20vinho%20madeira%20rustico%20luz%20quente%20fotografia%20realista&image_size=landscape_16_9",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=mesa%20farta%20almoço%20italiano%20cantina%20gramado%20galeto%20massas%20saladas%20lasanha%20polenta%20decoracao%20rustica%20italiana%20pessoas%20felizes%20fotografia&image_size=landscape_16_9",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=casa%20antiga%20colonial%20italiana%20casarao%20madeira%20centenario%20gramado%20serra%20gaucha%20jardim%20flores%20dia%20ensolarado&image_size=landscape_16_9"
+    ],
+    tags: ["Vinícola + degustação", "Casarão centenário", "Cantina Italiana", "História cultura", "Reserva antecipada 48h"]
   }
 };
 
