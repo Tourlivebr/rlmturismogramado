@@ -192,129 +192,303 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         <div class="lg:col-span-1">
           <div id="sidebar-form-transfer" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 rounded-2xl p-6 lg:p-7 sticky top-24 shadow-lg max-h-[calc(100vh-7rem)] overflow-y-auto pr-5 scroll-smooth [scrollbar-gutter:stable]">
 
-            <h3 class="text-xl font-extrabold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
-              📅 Solicitar Transfer
-            </h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-5">
-              Preencha os campos abaixo e envie direto para o WhatsApp da RLM.
-            </p>
+            <!-- ======== Faça sua Reserva ======== -->
+            <div class="mb-5">
+              <h3 class="text-xl font-extrabold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                📅 Faça sua Reserva
+              </h3>
+              <ul class="space-y-2.5 text-sm">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-gray-500 dark:text-gray-400 font-semibold w-24 shrink-0">Duração:</span>
+                  <span class="text-gray-700 dark:text-gray-200">Aproximadamente 2 horas cada trecho</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-gray-500 dark:text-gray-400 font-semibold w-24 shrink-0">Horários:</span>
+                  <span class="text-gray-700 dark:text-gray-200">Conforme horário do voo</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-gray-500 dark:text-gray-400 font-semibold w-24 shrink-0">Categoria:</span>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-primary-600 text-white tracking-wide">
+                    TRANSFER
+                  </span>
+                </li>
+              </ul>
+            </div>
 
-            <!-- TIPO: so ida / so volta / ida e volta -->
-            <div class="mb-6">
-              <label class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2.5">
-                Selecione o tipo de transfer <span class="text-red-500">*</span>
-              </label>
-              <div id="tipo-transfer-group" class="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1 bg-gray-100 dark:bg-gray-900/60 rounded-xl">
-                <button type="button" data-tipo-transfer="ida"
-                  class="tipo-transfer-btn px-3 py-3 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-gray-400 hover:text-gray-900">
-                  ✈️ Só IDA
-                </button>
-                <button type="button" data-tipo-transfer="volta"
-                  class="tipo-transfer-btn px-3 py-3 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-gray-400 hover:text-gray-900">
-                  🏨 Só VOLTA
-                </button>
-                <button type="button" data-tipo-transfer="ida-volta"
-                  class="tipo-transfer-btn active bg-white dark:bg-gray-700 text-primary-700 dark:text-primary-300 shadow-sm px-3 py-3 rounded-lg text-sm font-bold transition-all duration-200 ring-2 ring-primary-500/30">
-                  🔁 IDA &amp; VOLTA
-                </button>
+            <div class="border-t border-gray-100 dark:border-gray-700/60 my-5"></div>
+
+            <!-- ======== Complete sua Reserva (resumo + calculo dinamico) ======== -->
+            <div class="mb-5">
+              <h3 class="text-lg font-extrabold text-gray-900 dark:text-white mb-4">
+                ✅ Complete sua Reserva
+              </h3>
+
+              <!-- Tipo de transfer (cima) -->
+              <div class="mb-4">
+                <label class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">
+                  Tipo de transfer <span class="text-red-500">*</span>
+                </label>
+                <div id="tipo-transfer-group" class="grid grid-cols-1 gap-2 p-1 bg-gray-100 dark:bg-gray-900/60 rounded-xl">
+                  <button type="button" data-tipo-transfer="ida"
+                    class="tipo-transfer-btn px-3 py-3 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-gray-400 hover:text-gray-900">
+                    Somente IDA
+                  </button>
+                  <button type="button" data-tipo-transfer="volta"
+                    class="tipo-transfer-btn px-3 py-3 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-gray-400 hover:text-gray-900">
+                    Somente VOLTA
+                  </button>
+                  <button type="button" data-tipo-transfer="ida-volta"
+                    class="tipo-transfer-btn active bg-white dark:bg-gray-700 text-primary-700 dark:text-primary-300 shadow-sm px-3 py-3 rounded-lg text-sm font-bold transition-all duration-200 ring-2 ring-primary-500/30">
+                    IDA e VOLTA
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quantidade + Valor total (resumo) -->
+              <div class="bg-gray-50 dark:bg-gray-900/40 rounded-xl p-4 border border-gray-200 dark:border-gray-700/60 mb-1">
+                <div class="space-y-3">
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-1.5">
+                      Quantidade:
+                    </label>
+                    <div class="flex items-center gap-3">
+                      <input type="number" id="tf_passageiros" value="1" min="1" max="20"
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm font-semibold text-gray-900 dark:text-white">
+                      <span class="text-sm text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">
+                        passageiro(s)
+                      </span>
+                    </div>
+                    <p id="tf_dica_preco" class="mt-1.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                      * Valor por veículo • 1-2 passageiros: R$ 350,00 por trecho • Acima de 2 passageiros: consultar (valor base)
+                    </p>
+                  </div>
+
+                  <div class="pt-3 border-t border-gray-200 dark:border-gray-700/60 flex items-center justify-between">
+                    <span class="text-sm font-bold text-gray-700 dark:text-gray-200">
+                      Valor total:
+                    </span>
+                    <span id="tf_valor_total" class="text-2xl font-extrabold text-primary-600 dark:text-primary-400 tracking-tight">
+                      R$ 700,00
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <form id="form-transfer" onsubmit="return false;" class="space-y-4.5">
 
-              <!-- ⚠️ DADOS GERAIS -->
+              <!-- ======== 📋 DADOS PESSOAIS ======== -->
               <div class="pt-3 border-t border-gray-100 dark:border-gray-700/60">
                 <h4 class="text-xs font-black tracking-widest uppercase text-primary-700 dark:text-primary-400 mb-3">
-                  📋 DADOS GERAIS
+                  📋 DADOS PESSOAIS
                 </h4>
 
                 <div class="space-y-3.5">
                   <div>
-                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nome <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Nome completo <span class="text-red-500">*</span>
+                    </label>
                     <input type="text" id="tf_nome" value="GEZICA APARECIDA NUNES" required
-                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Nome completo">
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Seu nome completo">
                   </div>
-                  <div class="grid grid-cols-2 gap-3">
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Passageiros <span class="text-red-500">*</span></label>
-                      <input type="number" id="tf_passageiros" value="3" min="1" max="20" required
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Número de passageiros:
+                      </label>
+                      <div class="flex items-center gap-2">
+                        <input type="number" id="tf_passageiros_espelho" value="1" min="1" max="20"
+                          class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm font-semibold">
+                        <span class="text-xs text-gray-500 whitespace-nowrap">pessoas</span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Telefone / WhatsApp <span class="text-red-500">*</span>
+                      </label>
+                      <input type="tel" id="tf_telefone" value="(19) 19 97101-0990" required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="(00) 00000-0000">
+                    </div>
+                  </div>
+
+                  <!-- Tipo de transfer (repetido no DADOS PESSOAIS como radio em telas grandes? Manter: oculto pois ja esta no topo, mas usuario pediu. Mostro como resumo readonly pill) -->
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
+                      Tipo de transfer selecionado:
+                    </label>
+                    <div id="tf_tipo_pill" class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-bold bg-primary-100 dark:bg-primary-900/40 text-primary-800 dark:text-primary-300 ring-1 ring-primary-200 dark:ring-primary-700/40">
+                      IDA e VOLTA
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ======== 📍 DADOS DA IDA ======== -->
+              <div id="dados-ida" class="pt-3 border-t border-gray-100 dark:border-gray-700/60">
+                <h4 class="text-xs font-black tracking-widest uppercase text-blue-700 dark:text-blue-400 mb-3">
+                  📍 DADOS DA IDA — AEROPORTO DE PORTO ALEGRE → GRAMADO/CANELA
+                </h4>
+
+                <div class="space-y-3.5">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Data de chegada <span class="text-red-500">*</span>
+                      </label>
+                      <input type="date" id="tf_ida_data" value="2026-09-12" required
                         class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm">
                     </div>
                     <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Telefone <span class="text-red-500">*</span></label>
-                      <input type="tel" id="tf_telefone" value="(19) 19 97101-0990" required
-                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="(00) 0 0000-0000">
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Horário previsto de chegada <span class="text-red-500">*</span>
+                      </label>
+                      <input type="time" id="tf_ida_horario" value="08:00" required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm">
                     </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Número do voo <span class="text-red-500">*</span>
+                      </label>
+                      <input type="text" id="tf_ida_voo" value="AD 2603" required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex: AD 2603">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Companhia aérea
+                      </label>
+                      <input type="text" id="tf_ida_cia" value="AZUL"
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex: AZUL">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Destino em Gramado ou Canela <span class="text-red-500">*</span>
+                    </label>
+                    <select id="tf_ida_destino" required
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm">
+                      <option value="">Selecione</option>
+                      <optgroup label="🏨 Gramado - Principais Hotéis">
+                        <option>Hotel Laghetto Pedras Brancas - Gramado</option>
+                        <option>Hotel Laghetto Resort Golden Gramado</option>
+                        <option>Wish Serrano Resort Gramado</option>
+                        <option>Hotel Ritta Höppner - Gramado</option>
+                        <option>Pousada do Serrano Gramado</option>
+                        <option>Hotel Plaza Gramado</option>
+                        <option>Buona Vitta Gramado Resort</option>
+                        <option>Sky Palace Hotel Gramado</option>
+                      </optgroup>
+                      <optgroup label="🏨 Canela - Principais Hotéis">
+                        <option selected>Hotel Laghetto Vivace - Canela</option>
+                        <option>Spaço Fazenda Morro Pelado - Canela</option>
+                        <option>Hotel Renascença - Canela</option>
+                        <option>Pousada Verdes Canela</option>
+                        <option>Villa Bella Hotel e SPA - Canela</option>
+                        <option>Hotel Cassino Tower - Canela</option>
+                      </optgroup>
+                      <option value="outro_gramado">📍 Outro endereço em Gramado (informar abaixo)</option>
+                      <option value="outro_canela">📍 Outro endereço em Canela (informar abaixo)</option>
+                      <option value="fora_regiao">📍 Outra cidade / região da Serra Gaúcha</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Hotel/pousada ou endereço de destino <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="tf_ida_endereco" rows="2" required
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+                      placeholder="Nome e endereço (ex: Hotel Laghetto Vivace, Av Julio De Castilhos, 602 - Centro, Canela/RS)">Hotel Laghetto Vivace, Av Julio De Castilhos, 602 - Centro, Canela / RS</textarea>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Observação adicional:
+                    </label>
+                    <textarea id="tf_ida_obs" rows="2"
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+                      placeholder="Informações extras (opcional)"></textarea>
                   </div>
                 </div>
               </div>
 
-              <!-- 🛬 DADOS DA IDA -->
-              <div id="dados-ida" class="pt-3 border-t border-gray-100 dark:border-gray-700/60">
-                <h4 class="text-xs font-black tracking-widest uppercase text-blue-700 dark:text-blue-400 mb-3">
-                  🛬 DADOS DA IDA
-                </h4>
-
-                <div class="space-y-3.5">
-                  <div class="grid grid-cols-2 gap-3">
-                    <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Data de chegada <span class="text-red-500">*</span></label>
-                      <input type="text" id="tf_ida_data" value="12/09/2026" required
-                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="dd/mm/aaaa">
-                    </div>
-                    <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Horário <span class="text-red-500">*</span></label>
-                      <input type="text" id="tf_ida_horario" value="08:00" required
-                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="HH:MM">
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Número do voo <span class="text-red-500">*</span></label>
-                    <input type="text" id="tf_ida_voo" value="AD 2603 - AZUL" required
-                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex.: AD 1234 - AZUL">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Local de hospedagem <span class="text-red-500">*</span></label>
-                    <input type="text" id="tf_ida_hotel" value="Hotel Laghetto Vivace" required
-                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Nome do hotel / pousada">
-                    <textarea id="tf_ida_hotel_endereco" rows="2"
-                      class="w-full mt-2 px-3.5 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-xs" placeholder="Endereço completo (opcional)">Av Julio De Castilhos, 602 - Centro, Canela - Rs, Rio Grande Do Sul, Brasil</textarea>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 🛫 DADOS DA VOLTA -->
+              <!-- ======== 📍 DADOS DA VOLTA ======== -->
               <div id="dados-volta" class="pt-3 border-t border-gray-100 dark:border-gray-700/60">
                 <h4 class="text-xs font-black tracking-widest uppercase text-green-700 dark:text-green-400 mb-3">
-                  🛫 DADOS DA VOLTA
+                  📍 DADOS DA VOLTA — GRAMADO/CANELA → AEROPORTO DE PORTO ALEGRE
                 </h4>
 
                 <div class="space-y-3.5">
-                  <div class="grid grid-cols-2 gap-3">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Dia <span class="text-red-500">*</span></label>
-                      <input type="text" id="tf_volta_dia" value="16/09/2026" required
-                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="dd/mm/aaaa">
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Data de saída <span class="text-red-500">*</span>
+                      </label>
+                      <input type="date" id="tf_volta_data" value="2026-09-16" required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm">
                     </div>
                     <div>
-                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Horário do voo <span class="text-red-500">*</span></label>
-                      <input type="text" id="tf_volta_horario_voo" value="18:00" required
-                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="HH:MM">
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Horário do voo <span class="text-red-500">*</span>
+                      </label>
+                      <input type="time" id="tf_volta_horario_voo" value="18:00" required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm">
                     </div>
                   </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Número do voo
+                      </label>
+                      <input type="text" id="tf_volta_voo"
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex: AD 2604">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                        Companhia aérea
+                      </label>
+                      <input type="text" id="tf_volta_cia"
+                        class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex: AZUL">
+                    </div>
+                  </div>
+
                   <div>
-                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Local de embarque</label>
-                    <input type="text" id="tf_volta_hotel" value="Hotel Laghetto Vivace"
-                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Mesmo da ida? deixe igual">
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Endereço de embarque (coleta)
+                    </label>
+                    <div class="flex items-start gap-2 mb-1.5">
+                      <label class="inline-flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 cursor-pointer select-none">
+                        <input type="checkbox" id="tf_volta_mesmo_endereco" checked class="w-3.5 h-3.5 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                        Mesmo endereço da IDA (desmarque se for diferente)
+                      </label>
+                    </div>
+                    <textarea id="tf_volta_endereco" rows="2"
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+                      placeholder="Mesmo da IDA? Marque a opção acima"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Observação adicional:
+                    </label>
+                    <textarea id="tf_volta_obs" rows="2"
+                      class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+                      placeholder="Informações extras (opcional)"></textarea>
                   </div>
                 </div>
               </div>
 
-              <!-- Observacoes -->
+              <!-- Observacoes Gerais -->
               <div class="pt-3 border-t border-gray-100 dark:border-gray-700/60">
-                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Observações (opcional)</label>
-                <textarea id="tf_obs" rows="3"
-                  class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" placeholder="Ex.: Tem bagagens grandes, criança de colo, parada extra, etc..."></textarea>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Observações Gerais (opcional)</label>
+                <textarea id="tf_obs" rows="2"
+                  class="w-full px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-900/60 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+                  placeholder="Ex.: Tem bagagens grandes, criança de colo, parada extra, cadeirinha, pet no veículo, etc..."></textarea>
               </div>
 
               <!-- CTA WhatsApp -->
@@ -322,8 +496,13 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                 <button id="btn_enviar_whatsapp"
                   class="w-full inline-flex items-center justify-center gap-2.5 bg-green-500 hover:bg-green-600 text-white font-extrabold py-3.5 px-5 rounded-xl transition-all duration-200 shadow-lg shadow-green-500/25 text-base">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 01-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 01-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.243-.7.407-.999.058-.13.129-.258.237-.258a.63.63 0 01.228.043c.344.143 1.017.372 1.074.501.058.129.487 1.183.487 1.657 0 .516-.372.817-.86 1.115l-.101.057a2.077 2.077 0 01-.602.257z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.893.525 3.66 1.439 5.182L2 22l4.893-1.415A9.958 9.958 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-                  ENVIAR PARA O WHATSAPP
+                  Enviar reserva
                 </button>
+
+                <a href="https://wa.me/5554993220552" target="_blank" rel="noopener noreferrer"
+                  class="mt-2 flex items-center justify-center gap-2 w-full text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 font-semibold py-2 transition-colors">
+                  Contato direto
+                </a>
 
                 <div class="mt-3 text-center text-[11px] text-gray-400 dark:text-gray-500 leading-tight">
                   <p>Ao clicar você será redirecionado para o WhatsApp</p>
@@ -343,15 +522,62 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
     (function () {
       const AGENCIA_WHATSAPP = "5554993220552";
       const TITULO_PASSEIO = "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela";
-      const PRECO_1 = "R$ 280,00";
-      const PRECO_2 = "R$ 550,00";
+      const PRECO_POR_TRECHO_BASE = 350.00;
 
       const $ = (id) => document.getElementById(id);
 
       const blocoIda = $("dados-ida");
       const blocoVolta = $("dados-volta");
       const botoesTipo = document.querySelectorAll(".tipo-transfer-btn");
+      const qtdInput = $("tf_passageiros");
+      const qtdEspelhoInput = $("tf_passageiros_espelho");
+      const valorTotalEl = $("tf_valor_total");
+      const tipoPillEl = $("tf_tipo_pill");
+      const voltaMesmoEnderecoCb = $("tf_volta_mesmo_endereco");
+      const voltaEnderecoTa = $("tf_volta_endereco");
+
       let tipoSelecionado = "ida-volta";
+
+      function tipoLabel(t) {
+        return t === "ida" ? "Somente IDA"
+          : t === "volta" ? "Somente VOLTA"
+          : "IDA e VOLTA";
+      }
+
+      function calcularValor() {
+        const qtd = Math.max(1, parseInt(qtdInput.value || "1", 10));
+        const qtdTrechos = tipoSelecionado === "ida-volta" ? 2 : 1;
+        let valor = qtdTrechos * PRECO_POR_TRECHO_BASE;
+        if (qtd > 2) valor = qtdTrechos * (PRECO_POR_TRECHO_BASE + ((qtd - 2) * 50.00));
+        return { valor, qtdTrechos, qtd };
+      }
+
+      function formatarMoeda(v) {
+        return "R$ " + v.toFixed(2).replace(".", ",");
+      }
+
+      function atualizarValor() {
+        const { valor, qtdTrechos, qtd } = calcularValor();
+        valorTotalEl.textContent = formatarMoeda(valor);
+
+        const dica = $("tf_dica_preco");
+        if (dica) {
+          if (qtd <= 2) {
+            dica.innerHTML = `* Valor por veículo • 1-2 passageiros: <b class="text-primary-700 dark:text-primary-400">R$ 350,00 / trecho</b> • Total = ${qtdTrechos} trecho(s) × R$ 350,00`;
+          } else {
+            const extra = qtd - 2;
+            const porTrecho = PRECO_POR_TRECHO_BASE + extra * 50;
+            dica.innerHTML = `* Valor por veículo • ${qtd} passageiros: <b class="text-primary-700 dark:text-primary-400">R$ ${porTrecho.toFixed(2).replace(".",",")} / trecho</b> (+ R$ 50 por passageiro acima do 2º) • ${qtdTrechos} trecho(s)`;
+          }
+        }
+      }
+
+      function sincronizarQtd(origem) {
+        const val = Math.max(1, parseInt(origem.value || "1", 10));
+        if (origem !== qtdInput) qtdInput.value = val;
+        if (origem !== qtdEspelhoInput) qtdEspelhoInput.value = val;
+        atualizarValor();
+      }
 
       function aplicarVisibilidade() {
         botoesTipo.forEach(b => {
@@ -371,18 +597,38 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         if (tipoSelecionado === "ida") {
           blocoIda.style.display = "";
           blocoVolta.style.display = "none";
-          blocoVolta.querySelectorAll("input, textarea").forEach(el => el.disabled = true);
-          blocoIda.querySelectorAll("input, textarea").forEach(el => el.disabled = false);
+          blocoVolta.querySelectorAll("input, textarea, select").forEach(el => el.disabled = true);
+          blocoIda.querySelectorAll("input, textarea, select").forEach(el => el.disabled = false);
         } else if (tipoSelecionado === "volta") {
           blocoIda.style.display = "none";
           blocoVolta.style.display = "";
-          blocoIda.querySelectorAll("input, textarea").forEach(el => el.disabled = true);
-          blocoVolta.querySelectorAll("input, textarea").forEach(el => el.disabled = false);
+          blocoIda.querySelectorAll("input, textarea, select").forEach(el => el.disabled = true);
+          blocoVolta.querySelectorAll("input, textarea, select").forEach(el => { if (el.id !== "tf_volta_endereco") el.disabled = false; });
+          aplicarVoltaMesmoEndereco();
         } else {
           blocoIda.style.display = "";
           blocoVolta.style.display = "";
-          blocoIda.querySelectorAll("input, textarea").forEach(el => el.disabled = false);
-          blocoVolta.querySelectorAll("input, textarea").forEach(el => el.disabled = false);
+          blocoIda.querySelectorAll("input, textarea, select").forEach(el => el.disabled = false);
+          blocoVolta.querySelectorAll("input, textarea, select").forEach(el => { if (el.id !== "tf_volta_endereco") el.disabled = false; });
+          aplicarVoltaMesmoEndereco();
+        }
+
+        if (tipoPillEl) tipoPillEl.textContent = tipoLabel(tipoSelecionado);
+        atualizarValor();
+      }
+
+      function aplicarVoltaMesmoEndereco() {
+        if (!voltaMesmoEnderecoCb || !voltaEnderecoTa) return;
+        const mesmo = voltaMesmoEnderecoCb.checked;
+        if (mesmo) {
+          voltaEnderecoTa.disabled = true;
+          voltaEnderecoTa.value = "";
+          voltaEnderecoTa.classList.add("bg-gray-100", "dark:bg-gray-800/40", "cursor-not-allowed", "opacity-70");
+          voltaEnderecoTa.placeholder = "✅ Mesmo endereço da IDA (informado acima)";
+        } else {
+          voltaEnderecoTa.disabled = false;
+          voltaEnderecoTa.classList.remove("bg-gray-100", "dark:bg-gray-800/40", "cursor-not-allowed", "opacity-70");
+          voltaEnderecoTa.placeholder = "Nome e endereço (ex: Hotel Laghetto Vivace, Av Julio De Castilhos, 602 - Centro, Canela/RS)";
         }
       }
 
@@ -393,6 +639,32 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         });
       });
 
+      qtdInput.addEventListener("input", () => sincronizarQtd(qtdInput));
+      qtdEspelhoInput.addEventListener("input", () => sincronizarQtd(qtdEspelhoInput));
+      if (voltaMesmoEnderecoCb) {
+        voltaMesmoEnderecoCb.addEventListener("change", aplicarVoltaMesmoEndereco);
+      }
+
+      // Campo de destino (dropdown) se escolher um hotel do option, preenche automaticamente no textarea (apenas se estiver vazio)
+      const destinoSel = $("tf_ida_destino");
+      const destinoTa = $("tf_ida_endereco");
+      if (destinoSel && destinoTa) {
+        destinoSel.addEventListener("change", () => {
+          const v = destinoSel.value;
+          if (!v) return;
+          if (v.startsWith("outro_") || v === "fora_regiao") {
+            destinoTa.value = "";
+            destinoTa.focus();
+            return;
+          }
+          if (destinoTa.value.trim().length === 0 || destinoTa.value.includes("Laghetto Vivace")) {
+            const opt = destinoSel.options[destinoSel.selectedIndex];
+            const txt = opt ? opt.textContent.trim() : v;
+            destinoTa.value = txt;
+          }
+        });
+      }
+
       aplicarVisibilidade();
 
       function v(id) {
@@ -402,46 +674,67 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
 
       function montarMensagem() {
         const nome = v("tf_nome") || "(não informado)";
-        const qtd = v("tf_passageiros") || "(não informado)";
+        const qtd = v("tf_passageiros") || v("tf_passageiros_espelho") || "1";
         const fone = v("tf_telefone") || "(não informado)";
         const obs = v("tf_obs");
 
-        const tipoLabel =
-          tipoSelecionado === "ida" ? "👉 SOMENTE IDA (Aeroporto → Hotel)"
-          : tipoSelecionado === "volta" ? "👉 SOMENTE VOLTA (Hotel → Aeroporto)"
-          : "👉 IDA E VOLTA (Aeroporto ↔ Hotel)";
+        const { valor } = calcularValor();
+        const valorStr = formatarMoeda(valor);
 
-        const valorEstimado =
-          tipoSelecionado === "ida" || tipoSelecionado === "volta" ? PRECO_1 : PRECO_2;
+        const tl = tipoLabel(tipoSelecionado);
+        const tipoLabelMsg =
+          tipoSelecionado === "ida" ? "👉 SOMENTE IDA (Aeroporto → Gramado / Canela)"
+          : tipoSelecionado === "volta" ? "👉 SOMENTE VOLTA (Gramado / Canela → Aeroporto)"
+          : "👉 IDA E VOLTA (Aeroporto ↔ Gramado / Canela)";
+
+        const qtdN = parseInt(qtd, 10) || 1;
+        const obsPax = qtdN > 2 ? ` *(${qtdN} passageiros: valor dinâmico, confirmar final)*` : "";
 
         let msg = `*📅 Nova solicitação de Transfer*\n\n`;
         msg += `*Serviço:* ${TITULO_PASSEIO}\n`;
-        msg += `${tipoLabel}\n`;
-        msg += `*Valor estimado (por veículo):* ${valorEstimado}\n\n`;
-        msg += `📋 *DADOS GERAIS*\n`;
-        msg += `• Nome: ${nome}\n`;
-        msg += `• Nº de passageiros: ${qtd}\n`;
-        msg += `• Telefone: ${fone}\n`;
+        msg += `*Tipo:* ${tl}\n`;
+        msg += `${tipoLabelMsg}\n`;
+        msg += `*Passageiros:* ${qtd} pessoa(s)\n`;
+        msg += `*VALOR TOTAL ESTIMADO:* ${valorStr}${obsPax}\n\n`;
+
+        msg += `📋 *DADOS PESSOAIS*\n`;
+        msg += `• Nome completo: ${nome}\n`;
+        msg += `• Telefone / WhatsApp: ${fone}\n`;
 
         if (tipoSelecionado !== "volta") {
-          msg += `\n🛬 *DADOS DA IDA*\n`;
+          msg += `\n📍 *DADOS DA IDA (POA → Gramado/Canela)*\n`;
           msg += `• Data de chegada: ${v("tf_ida_data") || "(não informado)"}\n`;
-          msg += `• Horário: ${v("tf_ida_horario") || "(não informado)"}\n`;
-          msg += `• Número do voo: ${v("tf_ida_voo") || "(não informado)"}\n`;
-          msg += `• Hospedagem: ${v("tf_ida_hotel") || "(não informado)"}\n`;
-          const end = v("tf_ida_hotel_endereco");
-          if (end) msg += `• Endereço: ${end}\n`;
+          msg += `• Horário previsto de chegada: ${v("tf_ida_horario") || "(não informado)"}\n`;
+          const voo = v("tf_ida_voo"); const cia = v("tf_ida_cia");
+          if (voo || cia) msg += `• Voo: ${[voo, cia].filter(Boolean).join(" / ") || "(não informado)"}\n`;
+          const dest = v("tf_ida_destino");
+          if (dest) {
+            try {
+              const sel = $("tf_ida_destino"); const opt = sel.options[sel.selectedIndex];
+              msg += `• Destino selecionado: ${opt ? opt.textContent.trim() : dest}\n`;
+            } catch(e) {}
+          }
+          const end = v("tf_ida_endereco");
+          if (end) msg += `• Endereço / Hotel: ${end}\n`;
+          const obsIda = v("tf_ida_obs");
+          if (obsIda) msg += `• Observação IDA: ${obsIda}\n`;
         }
 
         if (tipoSelecionado !== "ida") {
-          msg += `\n🛫 *DADOS DA VOLTA*\n`;
-          msg += `• Dia: ${v("tf_volta_dia") || "(não informado)"}\n`;
+          msg += `\n📍 *DADOS DA VOLTA (Gramado/Canela → POA)*\n`;
+          msg += `• Data de saída: ${v("tf_volta_data") || "(não informado)"}\n`;
           msg += `• Horário do voo: ${v("tf_volta_horario_voo") || "(não informado)"}\n`;
-          const hotel = v("tf_volta_hotel");
-          if (hotel) msg += `• Local de embarque: ${hotel}\n`;
+          const vooV = v("tf_volta_voo"); const ciaV = v("tf_volta_cia");
+          if (vooV || ciaV) msg += `• Voo: ${[vooV, ciaV].filter(Boolean).join(" / ") || "(não informado)"}\n`;
+          const mesmo = voltaMesmoEnderecoCb && voltaMesmoEnderecoCb.checked;
+          const endV = v("tf_volta_endereco");
+          if (mesmo) msg += `• Endereço de coleta: MESMO ENDEREÇO DA IDA\n`;
+          else if (endV) msg += `• Endereço de coleta: ${endV}\n`;
+          const obsVolta = v("tf_volta_obs");
+          if (obsVolta) msg += `• Observação VOLTA: ${obsVolta}\n`;
         }
 
-        if (obs) msg += `\n📝 *Observações:* ${obs}\n`;
+        if (obs) msg += `\n📝 *Observações Gerais:* ${obs}\n`;
 
         msg += `\nPor favor, confirmar disponibilidade e valor final 🙏`;
         return msg;
