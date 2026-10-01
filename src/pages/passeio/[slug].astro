@@ -8,6 +8,7 @@ import FormReserva from '../../components/FormReserva.astro';
 // Função necessária para modo estático
 export async function getStaticPaths() {
   return [
+    { params: { slug: 'rota-sensorial' } },
     { params: { slug: 'tour-o-quatrilho' } },
     { params: { slug: 'tour-trem-vinho' } },
     { params: { slug: 'city-tour-privativo' } },
@@ -25,6 +26,40 @@ export async function getStaticPaths() {
 
 // Dados dos passeios (10 genéricos, SEM o transfer-privativo — esse vai para a rota plana)
 const passeiosData = {
+  'rota-sensorial': {
+  "id": 13,
+  "titulo": "Rota Sensorial",
+  "subtitulo": "Uma experiência para viver com todos os sentidos",
+  "categoria": "PASSEIOS",
+  "preco": 229,
+  "parcelas": "Por pessoa",
+  "price1": 229,
+  "price2": 229,
+  "label1": "Por pessoa",
+  "label2": "Por pessoa",
+  "temFaixas": false,
+  "temQuantidadePorPessoa": true,
+  "valorPorPessoa": 229,
+  "descricao": "Viva uma experiência de sabores, memórias e emoções na Serra Gaúcha! A Rota Sensorial reúne três experiências em um único roteiro: Vinícola Jolimont, Chalet Queijos e Salamarias e Fábrica de Chocolate. Conheça os sabores e aromas que fazem parte desse passeio e aproveite cada parada com transporte incluso. O valor é de R$ 229,00 por pessoa, com saídas programadas. Consulte as próximas datas e horários ao fazer sua reserva.",
+  "inclusos": [
+    "Transporte incluso",
+    "Roteiro com 3 experiências: Vinícola Jolimont, Chalet Queijos e Salamarias e Fábrica de Chocolate"
+  ],
+  "duracao": "A consultar",
+  "horarios": [
+    "Saídas programadas — consulte datas e horários"
+  ],
+  "galeria": [
+    "/images/rota-sensorial-rlm.png"
+  ],
+  "tags": [
+    "Vinícola Jolimont",
+    "Chalet Queijos e Salamarias",
+    "Fábrica de Chocolate",
+    "Transporte incluso",
+    "Saídas programadas"
+  ]
+},
   'tour-o-quatrilho': {
     id: 1,
     titulo: "Tour O Quatrilho",

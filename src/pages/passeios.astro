@@ -175,7 +175,29 @@ const passeios = [
     label2: "Reserva antecipada 48h",
     whatsappText: "Olá! Quero reservar o Tour Linha Bella.",
     tags: ["Vinícola + degustação", "Casarão centenário Marcon", "Cantina Italiana", "Almoço típico completo", "História e cultura"]
-  }
+  },
+{
+  "id": 11,
+  "titulo": "Rota Sensorial",
+  "subtitulo": "Vinícola Jolimont, Chalet Queijos e Salamarias e Fábrica de Chocolate",
+  "categoria": "PASSEIOS",
+  "imagem": "/images/rota-sensorial-rlm.png",
+  "price1": 229,
+  "label1": "Por pessoa",
+  "price2": 229,
+  "label2": "Por pessoa",
+  "precoUnico": true,
+  "slug": "rota-sensorial",
+  "whatsappText": "Olá! Quero reservar a Rota Sensorial, por R$ 229,00 por pessoa, com transporte incluso. Quais são as próximas saídas?",
+  "tags": [
+    "Transporte incluso",
+    "Saídas programadas",
+    "3 experiências"
+  ],
+  "avaliacao": 0,
+  "totalAvaliacoes": 0,
+  "duracao": "A consultar"
+}
 ];
 ---
 
@@ -264,17 +286,17 @@ const passeios = [
                     {passeio.categoria}
                   </span>
                 </div>
-                <div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
+                {passeio.totalAvaliacoes > 0 && (<div class="absolute top-3 right-3 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
                   ⭐ {passeio.avaliacao}
-                </div>
+                </div>)}
               </div>
               
               <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
                 <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-1">
+                  {passeio.totalAvaliacoes > 0 && (<div class="flex items-center gap-1">
                     <StarRating rating={passeio.avaliacao} />
                     <span class="text-sm text-gray-500 dark:text-gray-400 ml-1 font-medium">({passeio.totalAvaliacoes})</span>
-                  </div>
+                  </div>)}
                   <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
                     ⏱ {passeio.duracao}
                   </span>
@@ -296,19 +318,19 @@ const passeios = [
                 </div>
                 
                 <div class="border-t border-gray-100 dark:border-gray-700 pt-4 space-y-3">
-                  <div class="grid grid-cols-2 gap-3">
+                  <div class:list={["grid gap-3", passeio.precoUnico ? "grid-cols-1" : "grid-cols-2"]}>
                     <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
                       <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
                       <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
                         R$ {passeio.price1.toFixed(2).replace('.', ',')}
                       </p>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
+                    {!passeio.precoUnico && (<div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
                       <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label2}</p>
                       <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
                         R$ {passeio.price2.toFixed(2).replace('.', ',')}
                       </p>
-                    </div>
+                    </div>)}
                   </div>
                 </div>
 
