@@ -1,0 +1,179 @@
+---
+const { id = 'services-search' } = Astro.props;
+---
+<div class="service-search" data-service-search>
+  <label class="search-field">
+    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" /></svg>
+    <span class="sr-only">Pesquisar passeios e ingressos</span>
+    <input id={id} type="search" placeholder="Pesquisar serviços..." autocomplete="off" aria-controls={id + '-results'} />
+  </label>
+  <div id={id + '-results'} class="search-results" hidden aria-live="polite"></div>
+</div>
+<script>
+  const todosPasseios = [
+    // Ingressos e Atrações (5) — CarrosselPasseios.astro
+    {
+      id: 1,
+      titulo: "Era do Fogo Fondue Temático",
+      subtitulo: "Fondue na Caverna Pré-Histórica",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/era-do-fogo"
+    },
+    {
+      id: 2,
+      titulo: "Ferrovia Secreta Hector",
+      subtitulo: "Trem Mágico com Comida Americana",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/ferrovia-secreta"
+    },
+    {
+      id: 3,
+      titulo: "Hector Pizzaria",
+      subtitulo: "Rodízio de Pizza na Escola Ônyra",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/hector-pizzaria"
+    },
+    {
+      id: 4,
+      titulo: "Gatzz Fondue & Show",
+      subtitulo: "Dinner Show de Broadway na Serra Gaúcha",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/gatzz"
+    },
+    {
+      id: 5,
+      titulo: "ParksNet Passaporte",
+      subtitulo: "Parques e Atrações da Serra Gaúcha",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/parksnet"
+    },
+    // Passeios e Receptivo (10) — CarrosselPasseiosReceptivo.astro
+    {
+      id: 6,
+      titulo: "City Tour Privativo",
+      subtitulo: "Roteiro personalizado com motorista/guia",
+      categoria: "CITY TOUR",
+      tipo: "passeios",
+      href: "/passeio/city-tour-privativo"
+    },
+    {
+      id: 7,
+      titulo: "Transporte Olivas",
+      subtitulo: "Translado para as Olivas de Gramado",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-olivas"
+    },
+    {
+      id: 8,
+      titulo: "Transporte Jolimont",
+      subtitulo: "Translado para a Vinícola Jolimont",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-jolimont"
+    },
+    {
+      id: 9,
+      titulo: "Transporte Sky Glass",
+      subtitulo: "Translado para a Skyglass Canela",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-sky-glass"
+    },
+    {
+      id: 10,
+      titulo: "Bondinhos Transporte",
+      subtitulo: "Translado para os Bondinhos Aéreos",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/bondinhos-transporte"
+    },
+    {
+      id: 11,
+      titulo: "City Tour Nova Petrópolis",
+      subtitulo: "Roteiro completo por Nova Petrópolis",
+      categoria: "CITY TOUR",
+      tipo: "passeios",
+      href: "/passeio/city-tour-nova-petropolis"
+    },
+    {
+      id: 12,
+      titulo: "Lumni Transporte",
+      subtitulo: "Translado para a experiência Lumni",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/lumni-transporte"
+    },
+    {
+      id: 13,
+      titulo: "Trem Maria Fumaça",
+      subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+      categoria: "TREM",
+      tipo: "passeios",
+      href: "/passeio/maria-fumaca"
+    },
+    {
+      id: 14,
+      titulo: "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela",
+      subtitulo: "Transporte privativo executivo com motorista/guia",
+      categoria: "RECEPTIVO",
+      tipo: "passeios",
+      href: "/transfer-privativo"
+    },
+    {
+      id: 15,
+      titulo: "Tour Linha Bella",
+      subtitulo: "História, cultura e sabores da Serra Gaúcha",
+      categoria: "CULTURA",
+      tipo: "passeios",
+      href: "/passeio/tour-linha-bella"
+    }
+  ];
+
+
+  document.querySelectorAll<HTMLElement>('[data-service-search]').forEach(root => {
+    const input = root.querySelector('input')!;
+    const results = root.querySelector<HTMLElement>('.search-results')!;
+    const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    input.addEventListener('input', () => {
+      const query = normalize(input.value.trim());
+      results.replaceChildren();
+      results.hidden = !query;
+      if (!query) return;
+      const matches = todosPasseios.filter(item => normalize(item.titulo + ' ' + item.subtitulo).includes(query));
+      for (const item of matches) {
+        const link = document.createElement('a');
+        link.href = item.href;
+        const title = document.createElement('strong');
+        title.textContent = item.titulo;
+        const subtitle = document.createElement('span');
+        subtitle.textContent = item.subtitulo;
+        link.append(title, subtitle);
+        results.append(link);
+      }
+      if (!matches.length) results.textContent = 'Nenhum serviço encontrado.';
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !root.contains(event.target)) results.hidden = true;
+    });
+    input.addEventListener('focus', () => { if (input.value.trim()) results.hidden = false; });
+    input.addEventListener('keydown', event => { if (event.key === 'Escape') results.hidden = true; });
+  });
+</script>
+<style>
+  .service-search { position: relative; }
+  .search-field { display: flex; align-items: center; gap: 12px; padding: 0 20px; min-height: 60px; border-radius: 18px; background: #0d5268; color: white; }
+  .search-field:focus-within { outline: 3px solid #81b595; outline-offset: 3px; }
+  input { width: 100%; min-width: 0; padding: 18px 0; background: transparent; color: white; border: 0; outline: none; font-size: 14px; }
+  input::placeholder { color: white; opacity: 1; }
+  .search-results { position: absolute; top: calc(100% + 8px); left: 0; right: 0; max-height: 320px; overflow-y: auto; padding: 12px; border-radius: 14px; background: white; color: #16465b; box-shadow: 0 12px 35px #0003; z-index: 60; }
+  .search-results a { display: block; padding: 12px; border-radius: 8px; }
+  .search-results a:hover, .search-results a:focus-visible { background: #eef5f7; }
+  .search-results strong, .search-results span { display: block; }
+  .search-results span { margin-top: 4px; font-size: 13px; }
+</style>

@@ -1,0 +1,44 @@
+---
+import ServiceSearch from './ServiceSearch.astro';
+---
+
+<nav class="service-menu" aria-label="Encontre seu passeio ou ingresso">
+  <div class="service-links">
+    <a href="/passeios">
+      <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2" /><path d="M8 3v4m8-4v4M4 11h16m-12 4h2m4 0h2m-8 3h2" /></svg></span>
+      <span><strong>Passeios e Transfer</strong><small>Escolha o passeio</small></span>
+      <span aria-hidden="true">›</span>
+    </a>
+    <a href="/ingressos">
+      <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 5h16v5a2 2 0 0 0 0 4v5H4v-5a2 2 0 0 0 0-4V5Z" /><path stroke-dasharray="2 2" d="M14 5v14" /></svg></span>
+      <span><strong>Ingressos e Atrações</strong><small>Veja os ingressos</small></span>
+      <span aria-hidden="true">›</span>
+    </a>
+  </div>
+  <ServiceSearch />
+</nav>
+
+<style>
+  .service-menu { position: relative; z-index: 30; width: min(720px, calc(100% - 32px)); margin: -44px auto 24px; padding: 16px; border-radius: 26px; background: white; box-shadow: 0 12px 40px #0000000d; color: #0d5268; }
+  .service-links { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 10px; }
+  a { display: flex; align-items: center; gap: 14px; padding: 18px 14px; min-width: 0; }
+  a + a { border-left: 1px solid #dde5ec; }
+  a:hover, a:focus-visible { background: #f2f7f9; border-radius: 12px; }
+  .service-icon { display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; background: #ecf3f5; border-radius: 12px; }
+  strong, small { display: block; }
+  strong { font-size: 13px; }
+  small { margin-top: 6px; font-size: 14px; color: #728096; }
+  a > span:last-child { margin-left: auto; }
+  @media (max-width: 600px) {
+    .service-menu { padding: 12px; }
+    a { gap: 8px; padding: 14px 6px; }
+    .service-icon { width: 40px; height: 48px; }
+    strong { font-size: 11px; }
+    small { font-size: 11px; }
+  }
+  @media (max-width: 359px) {
+    a { gap: 5px; padding-inline: 3px; }
+    .service-icon { width: 30px; }
+    strong { font-size: 10px; }
+  }
+</style>
