@@ -1,4 +1,5 @@
 ---
+import { EXIBIR_PRECOS, textoPublico } from '../config/precos';
 const passeiosReceptivo = [
   {
     id: 1,
@@ -262,7 +263,7 @@ const passeiosReceptivo = [
                     </div>
                   )}
 
-                  <div class="border-t border-gray-100 dark:border-gray-700 pt-3 mt-auto space-y-3">
+                  {EXIBIR_PRECOS && (<div class="border-t border-gray-100 dark:border-gray-700 pt-3 mt-auto space-y-3">
                     <div class:list={["grid gap-3", passeio.precoUnico ? "grid-cols-1" : "grid-cols-2"]}>
                       <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 text-center">
                         <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
@@ -277,7 +278,7 @@ const passeiosReceptivo = [
                         </p>
                       </div>)}
                     </div>
-                  </div>
+                  </div>)}
 
                   <div class="flex flex-col gap-2 mt-auto">
                     <a
@@ -288,7 +289,7 @@ const passeiosReceptivo = [
                     </a>
                     
                     <a
-                      href={`https://wa.me/5554996474071?text=${encodeURIComponent(passeio.whatsappText || `Olá! Gostaria de reservar o passeio: ${passeio.title}`)}`}
+                      href={`https://wa.me/5554996474071?text=${encodeURIComponent((EXIBIR_PRECOS ? passeio.whatsappText : undefined) || `Olá! Gostaria de reservar o passeio: ${passeio.title}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="w-full border-2 border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"

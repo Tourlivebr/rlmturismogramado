@@ -1,4 +1,5 @@
 ---
+import { EXIBIR_PRECOS, textoPublico } from '../config/precos';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -43,7 +44,7 @@ const passeio = {
 
 const whatsappAgencia = "5554996474071";
 const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo}. Valor 1 trecho R$ ${passeio.price1.toFixed(2).replace('.', ',')} / Ida e Volta R$ ${passeio.price2.toFixed(2).replace('.', ',')}.`;
-const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(textoPublico(whatsappMessage))}`;
 ---
 
 <BaseLayout
@@ -150,7 +151,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
           </div>
 
           <!-- Tabela de Preços -->
-          <div class="bg-white rounded-2xl border border-gray-200 dark:border-gray-700/60 p-6 lg:p-8 shadow-sm">
+          {EXIBIR_PRECOS && (<div class="bg-white rounded-2xl border border-gray-200 dark:border-gray-700/60 p-6 lg:p-8 shadow-sm">
             <h3 class="text-xl font-bold mb-5">
               Valores
             </h3>
@@ -183,7 +184,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                 </p>
               </div>
             </div>
-          </div>
+          </div>)}
         </div>
 
         <!-- Sidebar: Formulario ESPECIFICO de Transfer (IDA / VOLTA / IDA+VOLTA) -->
@@ -257,12 +258,12 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                           passageiro(s)
                         </span>
                       </div>
-                      <p id="tf_dica_preco" class="mt-1.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                      {EXIBIR_PRECOS && (<p id="tf_dica_preco" class="mt-1.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                         * Valor por veiculo - 1 a 4 passageiros: R$ 380,00 por trecho · 5 a 6 passageiros: R$ 480,00 por trecho · Mais de 7 pessoas: consultar no WhatsApp
-                      </p>
+                      </p>)}
                     </div>
 
-                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700/60 sm:border-t-0 sm:pt-0 sm:border-l sm:pl-3 flex flex-col justify-center">
+                    {EXIBIR_PRECOS && (<div class="pt-3 border-t border-gray-200 dark:border-gray-700/60 sm:border-t-0 sm:pt-0 sm:border-l sm:pl-3 flex flex-col justify-center">
                       <div class="flex items-center justify-between">
                         <span class="text-sm font-bold text-gray-700 dark:text-gray-200">
                           Valor total:
@@ -271,7 +272,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
                           R$ 700,00
                         </span>
                       </div>
-                    </div>
+                    </div>)}
                   </div>
                 </div>
               </div>
@@ -519,15 +520,15 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
 
   <Footer />
 
-  <script is:inline>
+  <script is:inline define:vars={{ EXIBIR_PRECOS, precoAte4: EXIBIR_PRECOS ? 380 : null, precoAte6: EXIBIR_PRECOS ? 480 : null }}>
     (function () {
       const AGENCIA_WHATSAPP = "5554996474071";
       const TITULO_PASSEIO = "Transfer Ida e Volta - Porto Alegre / Gramado ou Canela";
 
       function precoPorTrechoPorPax(qtd) {
-        if (qtd >= 7) return null;
-        if (qtd >= 5) return 480.00;
-        return 380.00;
+        if (!EXIBIR_PRECOS || qtd >= 7) return null;
+        if (qtd >= 5) return precoAte6;
+        return precoAte4;
       }
 
       const $ = (id) => document.getElementById(id);
@@ -563,6 +564,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
       }
 
       function atualizarValor() {
+        if (!EXIBIR_PRECOS) return;
         const { valor, qtdTrechos, qtd, porTrecho } = calcularValor();
         const dica = $("tf_dica_preco");
 
@@ -710,7 +712,7 @@ const whatsappUrl = `https://wa.me/${whatsappAgencia}?text=${encodeURIComponent(
         msg += `Tipo: ${tl}\n`;
         msg += `${tipoLabelMsg}\n`;
         msg += `Passageiros: ${qtd} pessoa(s)\n`;
-        msg += `VALOR TOTAL ESTIMADO: ${valorStr}${obsPax}\n\n`;
+        if (EXIBIR_PRECOS) msg += `VALOR TOTAL ESTIMADO: ${valorStr}${obsPax}\n\n`;
 
         msg += `DADOS PESSOAIS\n`;
         msg += `- Nome completo: ${nome}\n`;
