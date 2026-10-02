@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StarRating from '../components/StarRating.astro';
+import CardPromocaoOutubro from '../components/CardPromocaoOutubro.astro';
 
 // Dados dos passeios (RECEPTIVO / PASSEIOS PRIVATIVOS) — TODOS os 8 cards do CarrosselPasseiosReceptivo.astro na home (mesma ordem)
 const passeios = [
@@ -273,36 +274,9 @@ const passeios = [
     <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div class="container mx-auto px-4">
         <div id="passeios-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <article class="passeio-card h-full group" data-category="promocao">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-accent-500 h-full flex flex-col">
-              <a href="/images/promocao-outubro.png" target="_blank" rel="noopener noreferrer" aria-label="Ver a arte completa da promoção de outubro">
-                <img
-                  src="/images/promocao-outubro.png"
-                  alt="Promoção de outubro da RLM Turismo Gramado: reserva antecipada de transfer aeroporto ida e volta mais city tour em carro de 7 lugares, de R$ 1.599,00 por R$ 1.299,00."
-                  width="1254"
-                  height="1254"
-                  class="w-full h-auto aspect-square object-contain"
-                />
-              </a>
-              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
-                <span class="self-start bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">Promoção de outubro · Reserva antecipada</span>
-                <h2 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight">Transfer ida e volta + City Tour</h2>
-                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Viva uma experiência mágica na Serra Gaúcha! Reserve antecipadamente seu transfer de aeroporto, ida e volta, e aproveite um city tour em carro de 7 lugares para conhecer Gramado e Canela.</p>
-                <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Explore os encantos da região: parques temáticos, Igreja Matriz de Canela, bondinho aéreo, Cascata do Caracol e Vila Capivari. Consulte o roteiro e as condições da oferta pelo WhatsApp.</p>
-                <div class="bg-primary-50 dark:bg-primary-900/30 rounded-xl p-4">
-                  <p class="text-sm text-gray-500 dark:text-gray-400">De <del>R$ 1.599,00</del></p>
-                  <p class="text-sm font-medium text-primary-700 dark:text-primary-300">Por apenas</p>
-                  <p class="text-3xl font-extrabold text-primary-600 dark:text-primary-400">R$ 1.299,00</p>
-                </div>
-                <a
-                  href={`https://wa.me/5554992460547?text=${encodeURIComponent('Olá! Quero reservar a promoção de outubro: transfer aeroporto ida e volta + city tour em carro de 7 lugares, de R$ 1.599,00 por R$ 1.299,00. Pode me informar as datas disponíveis, o roteiro e as condições da oferta?')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-auto w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
-                >Reservar promoção no WhatsApp</a>
-              </div>
-            </div>
-          </article>
+          <div class="passeio-card md:col-span-2 h-full" data-category="promocao">
+            <CardPromocaoOutubro />
+          </div>
           {passeios.map((passeio) => (
             <div class="passeio-card h-full group" data-category={passeio.categoria.toLowerCase().replace(' ', '-').replace('passeios-privativos', 'privativos')}>
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col">
