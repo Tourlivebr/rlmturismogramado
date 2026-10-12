@@ -226,14 +226,14 @@ const passeiosReceptivo = [
       </div>
     </div>
 
-    <div class="relative z-20 group/carousel">
-      <div class="overflow-hidden" id="carousel-viewport-passeios-receptivo">
-        <div id="carousel-track-passeios-receptivo" class="flex transition-transform duration-[850ms] ease-out will-change-transform [backface-visibility:hidden] [transform:translateZ(0)]">
-          <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3">
+    <div class="relative z-20">
+      <div>
+        <div id="lista-passeios-receptivo" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="w-full" data-passeio-card>
             <CardPromocaoOutubro />
           </div>
-          {passeiosReceptivo.map((passeio) => (
-            <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3">
+          {passeiosReceptivo.map((passeio, index) => (
+            <div class="w-full" data-passeio-card hidden={index >= 3}>
               <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
                 <div class="relative h-52 lg:h-56 overflow-hidden">
                   <img 
@@ -308,310 +308,54 @@ const passeiosReceptivo = [
         </div>
       </div>
 
-      <button 
-        id="prev-btn-passeios-receptivo"
-        class="hidden sm:flex absolute sm:-left-1 lg:-left-2 top-1/2 -translate-y-1/2 sm:-translate-x-2 lg:-translate-x-1/2 bg-white dark:bg-gray-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
-
-               sm:w-[52px] sm:h-[52px] sm:p-3
-               lg:w-14 lg:h-14 lg:p-3
-
-               opacity-0 sm:opacity-80 sm:hover:opacity-100
-               translate-z-0 will-change-transform"
-        aria-label="Anterior"
-        type="button"
-        tabindex="0"
-      >
-        <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
-        </svg>
-      </button>
-      
-      <button 
-        id="next-btn-passeios-receptivo"
-        class="hidden sm:flex absolute sm:-right-1 lg:-right-2 top-1/2 -translate-y-1/2 sm:translate-x-2 lg:translate-x-1/2 bg-white dark:bg-gray-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
-
-               sm:w-[52px] sm:h-[52px] sm:p-3
-               lg:w-14 lg:h-14 lg:p-3
-
-               opacity-0 sm:opacity-80 sm:hover:opacity-100
-               translate-z-0 will-change-transform"
-        aria-label="Próximo"
-        type="button"
-        tabindex="0"
-      >
-        <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
     </div>
 
-    <div id="indicators-passeios-receptivo" class="flex items-center justify-center mt-5 mb-2 gap-2.5 relative z-20 touch-manipulation">
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-6">
+      <button id="ver-mais-passeios" type="button" aria-controls="lista-passeios-receptivo" class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors">Ver mais</button>
+      <button id="ver-menos-passeios" type="button" aria-controls="lista-passeios-receptivo" class="border-2 border-primary-600 text-primary-600 dark:text-primary-400 font-semibold py-3 px-6 rounded-xl transition-colors" hidden>Ver menos</button>
     </div>
   </div>
 
 
 </section>
 
+<style>
+  [data-passeio-card][hidden], button[hidden] {
+    display: none;
+  }
+</style>
+
 <script>
-  function initCarouselPasseiosReceptivo() {
-    let currentSlide = 0;
-    const carouselTrack = document.getElementById('carousel-track-passeios-receptivo');
-    const viewport = document.getElementById('carousel-viewport-passeios-receptivo');
-    const prevBtn = document.getElementById('prev-btn-passeios-receptivo');
-    const nextBtn = document.getElementById('next-btn-passeios-receptivo');
-    const indicatorsContainer = document.getElementById('indicators-passeios-receptivo');
+  function initListaPasseios() {
+    const list = document.getElementById('lista-passeios-receptivo');
+    const more = document.getElementById('ver-mais-passeios');
+    const less = document.getElementById('ver-menos-passeios');
+    if (!list || !more || !less || list.dataset.initialized) return;
+    list.dataset.initialized = 'true';
+    const cards = Array.from(list.querySelectorAll<HTMLElement>('[data-passeio-card]'));
+    const batchSize = 4;
+    let visibleCount = Math.min(batchSize, cards.length);
 
-    if (!carouselTrack || !indicatorsContainer) return;
-
-    const visibleItems = [...carouselTrack.children];
-    let isAnimating = false;
-
-    function isMobile() {
-      return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    function updateCards() {
+      cards.forEach((card, index) => { card.hidden = index >= visibleCount; });
+      more.hidden = visibleCount >= cards.length;
+      less.hidden = visibleCount <= batchSize;
     }
 
-    function getSlidesPerView() {
-      const width = window.innerWidth;
-      if (width >= 1280) return 4;
-      if (width >= 1024) return 3;
-      if (width >= 640) return 2;
-      return 1;
-    }
-    
-    function getTotalSlides() {
-      const slidesPerView = getSlidesPerView();
-      return Math.max(1, Math.ceil(visibleItems.length - slidesPerView + 1));
-    }
-
-    function updateIndicators() {
-      const totalSlides = getTotalSlides();
-      const mobile = isMobile();
-      indicatorsContainer.innerHTML = '';
-      
-      for (let i = 0; i < totalSlides; i++) {
-        const indicator = document.createElement('button');
-        const active = i === currentSlide;
-        if (mobile) {
-          indicator.className = `h-1.5 rounded-full transition-all duration-300 ease-out touch-manipulation ${
-            active
-              ? 'w-8 bg-primary-600 shadow-sm shadow-primary-600/40'
-              : 'w-2 bg-gray-300 dark:bg-gray-600'
-          }`;
-        } else {
-          indicator.className = `h-3 w-3 rounded-full transition-colors duration-200 touch-manipulation ${
-            active ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'
-          }`;
-        }
-        indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
-        indicator.addEventListener('click', () => {
-          if (isAnimating) return;
-          currentSlide = i;
-          updateCarousel();
-        });
-        indicatorsContainer.appendChild(indicator);
-      }
-    }
-    
-    function updateCarousel() {
-      if (!visibleItems || visibleItems.length === 0) return;
-      isAnimating = true;
-      const firstItem = visibleItems[0];
-      const itemWidth = firstItem.getBoundingClientRect().width;
-      carouselTrack.style.transform = `translate3d(-${currentSlide * itemWidth}px, 0, 0)`;
-      updateIndicators();
-      setTimeout(() => { isAnimating = false; }, 900);
-    }
-
-    function nextSlide() {
-      if (isAnimating) return;
-      const totalSlides = getTotalSlides();
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateCarousel();
-    }
-    
-    function prevSlide() {
-      if (isAnimating) return;
-      const totalSlides = getTotalSlides();
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateCarousel();
-    }
-
-    nextBtn?.addEventListener('click', nextSlide);
-    prevBtn?.addEventListener('click', prevSlide);
-
-    let startX = 0;
-    let startY = 0;
-    let isDragging = false;
-    let deltaX = 0;
-    let deltaY = 0;
-    let startTime = 0;
-    let axisLocked = false;
-    let isHorizontal = false;
-
-    // Touch swipe MELHORADO (detecta eixo X vs Y + threshold progressivo)
-    if (carouselTrack) {
-      carouselTrack.style.touchAction = 'pan-y';
-    }
-
-    carouselTrack.addEventListener('touchstart', (e) => {
-      if (!e.touches || e.touches.length === 0) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      deltaX = 0;
-      deltaY = 0;
-      isDragging = true;
-      axisLocked = false;
-      isHorizontal = false;
-      startTime = Date.now();
-      stopAutoPlay();
-    }, { passive: true });
-
-    carouselTrack.addEventListener('touchmove', (e) => {
-      if (!isDragging || !e.touches || e.touches.length === 0) return;
-      const cx = e.touches[0].clientX;
-      const cy = e.touches[0].clientY;
-      deltaX = startX - cx;
-      deltaY = Math.abs(startY - cy);
-
-      if (!axisLocked) {
-        const dxAbs = Math.abs(deltaX);
-        if (dxAbs > 10 || deltaY > 10) {
-          axisLocked = true;
-          isHorizontal = dxAbs >= deltaY;
-        }
-      }
-      // Se for movimento vertical, NÃO interrompa o scroll do navegador
-      if (axisLocked && !isHorizontal) {
-        isDragging = false;
-        return;
-      }
-      // Feedback visual enquanto arrasta (só no mobile)
-      if (axisLocked && isHorizontal && isMobile() && carouselTrack && visibleItems[0]) {
-        const itemWidth = visibleItems[0].getBoundingClientRect().width;
-        const base = currentSlide * itemWidth;
-        const overflow = Math.abs(deltaX) > itemWidth ? (deltaX > 0 ? 1 : -1) * itemWidth * 0.2 : 0;
-        carouselTrack.style.transform = `translate3d(-${base + deltaX - overflow}px, 0, 0)`;
-      }
-    }, { passive: true });
-    
-    carouselTrack.addEventListener('touchend', (e) => {
-      if (!isDragging) return;
-      const elapsed = Date.now() - startTime;
-      const absDx = Math.abs(deltaX);
-      const firstItem = visibleItems[0];
-      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
-
-      // Só considera swipe em eixo HORIZONTAL (evita conflito scroll vertical da pagina)
-      const triggerSwipe = axisLocked && isHorizontal && (
-        absDx >= itemWidth * 0.2 || (elapsed < 280 && absDx >= 30)
-      );
-
-      if (triggerSwipe && absDx > 0) {
-        if (deltaX > 0) {
-          nextSlide();
-        } else if (deltaX < 0) {
-          prevSlide();
-        }
-      } else {
-        // Nenhum swipe valido: retorna suavemente para posicao original
-        if (isMobile()) {
-          updateCarousel();
-        }
-      }
-      
-      deltaX = 0;
-      isDragging = false;
-      axisLocked = false;
-      isHorizontal = false;
-      
-      setTimeout(() => {
-        startAutoPlay();
-      }, isMobile() ? 6000 : 2000);
-    }, { passive: true });
-
-    // Evita clique acidental em card apos swipe longo
-    let lastSwipeTime = 0;
-    carouselTrack.addEventListener('click', (ev) => {
-      if (Date.now() - lastSwipeTime < 280 && Math.abs(deltaX) > 20) {
-        ev.preventDefault();
-        ev.stopPropagation();
-      }
-    }, true);
-
-    let autoPlayInterval;
-    function startAutoPlay() {
-      stopAutoPlay();
-      const mobile = isMobile();
-      const interval = mobile ? 11000 : 5000; // <=== MOBILE MAIS LENTO: 11s vs desktop 5s
-      autoPlayInterval = setInterval(() => {
-        if (document.hidden || document.visibilityState === 'hidden') return;
-        nextSlide();
-      }, interval);
-    }
-    
-    function stopAutoPlay() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = undefined;
-      }
-    }
-
-    // Pausa em qualquer interacao do usuario mobile
-    viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
-    viewport?.addEventListener('touchend', stopAutoPlay, { passive: true });
-    viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
-
-    carouselTrack.addEventListener('mouseenter', stopAutoPlay);
-    carouselTrack.addEventListener('mouseleave', startAutoPlay);
-    carouselTrack.addEventListener('touchstart', () => { lastSwipeTime = Date.now(); }, { passive: true });
-
-    // Pausa AUTOMATICAMENTE quando a aba nao estiver visivel (economia bateria mobile)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAutoPlay();
-      } else {
-        startAutoPlay();
-      }
+    more.addEventListener('click', () => {
+      visibleCount = Math.min(visibleCount + batchSize, cards.length);
+      updateCards();
+      if (more.hidden) less.focus({ preventScroll: true });
     });
-
-    // ============== DESKTOP: SCROLL WHEEL no CARROSSEL (nunca mais trava a rolagem) ==============
-    let lastWheelSlide2 = 0;
-    function onWheelReceptivo(evt) {
-      if (isAnimating) return;
-      const dx = Math.abs(evt.deltaX);
-      const dy = Math.abs(evt.deltaY);
-      const isHorizontal = (dx > dy) || (evt.shiftKey && dy > 0);
-      if (isHorizontal) {
-        if (Date.now() - lastWheelSlide2 < 450) return;
-        lastWheelSlide2 = Date.now();
-        if (evt.deltaX > 1 || evt.deltaY > 1) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-      // Vertical SEM PREVENT DEFAULT => rola pagina normal!
-    }
-    if (viewport) {
-      viewport.addEventListener('wheel', onWheelReceptivo, { passive: true });
-    }
-
-    let resizeTimer = null;
-    window.addEventListener('resize', () => {
-      if (resizeTimer) clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        currentSlide = 0;
-        updateCarousel();
-      }, 180);
+    less.addEventListener('click', () => {
+      visibleCount = Math.max(batchSize, (Math.ceil(visibleCount / batchSize) - 1) * batchSize);
+      updateCards();
+      if (less.hidden) more.focus({ preventScroll: true });
+      (less.hidden ? more : less).scrollIntoView({ block: 'nearest' });
     });
-
-    updateCarousel();
-    startAutoPlay();
+    updateCards();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarouselPasseiosReceptivo);
-  } else {
-    initCarouselPasseiosReceptivo();
-  }
+  initListaPasseios();
+  document.addEventListener('astro:page-load', initListaPasseios);
 </script>
