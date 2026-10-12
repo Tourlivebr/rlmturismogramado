@@ -170,6 +170,22 @@ const ogHeight =
       html {
         scroll-behavior: smooth;
       }
+      :global(button),
+      :global(input[type="button"]),
+      :global(input[type="submit"]),
+      :global(a[role="button"]),
+      :global(a[class*="rounded"][class*="py-"]),
+      :global(.whatsapp-button) {
+        border-radius: 9999px !important;
+      }
+      :global(button),
+      :global(input[type="button"]),
+      :global(input[type="submit"]),
+      :global(a[role="button"]),
+      :global(a[class*="rounded"][class*="py-"]),
+      :global(.whatsapp-button) {
+        border-radius: 9999px !important;
+      }
       ::selection {
         background: var(--clr-primary);
         color: #ffffff;

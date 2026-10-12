@@ -1,20 +1,17 @@
 ---
 import ListaIngressos from './ListaIngressos.astro';
 ---
-<section class="tickets-section" aria-labelledby="tickets-title">
+<section class="relative pt-0 pb-12 lg:pb-20 bg-white dark:bg-dark-900" aria-labelledby="tickets-title">
   <div class="container mx-auto px-4">
-    <div class="tickets-heading">
-      <div><h2 id="tickets-title">Ingressos e Atrações</h2><p>Garanta seus ingressos para as principais atrações da região.</p></div>
-      <a href="/ingressos">Ver todos os ingressos <span aria-hidden="true">→</span></a>
+    <div class="text-center">
+      <div class="flex items-center justify-center mb-6">
+        <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+        <h2 id="tickets-title" class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mx-8">
+          Ingressos e <span class="text-primary-600 dark:text-primary-400">Atrações</span>
+        </h2>
+        <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+      </div>
     </div>
     <ListaIngressos preview />
   </div>
 </section>
-<style>
-  .tickets-section { padding: 32px 0 45px; background: #f0f4f1; }
-  .tickets-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
-  h2 { color: #29352e; font-size: clamp(24px, 3vw, 32px); font-weight: 700; }
-  p { margin-top: 5px; color: #646464; font-size: 14px; }
-  .tickets-heading > a { color: #123e2a; font-size: 14px; font-weight: 600; }
-  @media (max-width: 540px) { .tickets-heading { align-items: flex-start; flex-direction: column; gap: 12px; } }
-</style>

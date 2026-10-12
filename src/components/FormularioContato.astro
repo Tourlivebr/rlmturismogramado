@@ -1,12 +1,6 @@
 ---
-/* Lista COMPLETA de TODOS passeios e ingressos disponíveis (15 itens = 5 ingressos + 10 receptivo) */
+/* Serviços disponíveis para orçamento de translados e passeios. */
 const passeios = [
-  // Ingressos e Atrações (5) — CarrosselPasseios.astro
-  'Era do Fogo Fondue Temático',
-  'Ferrovia Secreta Hector',
-  'Hector Pizzaria',
-  'Gatzz Fondue & Show',
-  'ParksNet Passaporte',
   // Passeios e Receptivo (10) — CarrosselPasseiosReceptivo.astro
   'City Tour Privativo (Roteiro personalizado)',
   'Transporte Olivas de Gramado',
@@ -28,14 +22,14 @@ const passeios = [
       <!-- Chamada e Orientações -->
       <div class="text-center">
         <h2 class="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Reserve Seu Passeio dos Sonhos!
+          Reserve Seus Translados e Passeios!
         </h2>
 
         <!-- Balão de Fala -->
         <div class="relative bg-[#f6f7f7] dark:bg-dark-800 rounded-3xl p-4 lg:p-6 shadow-sm border border-gray-200/70">
           <div class="text-center">
             <p class="text-base lg:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Escolha os passeios, que nós montamos a melhor programação para você e sua família! 
+              Escolha os translados e passeios, que nós montamos a melhor programação para você e sua família! 
               <span class="font-semibold text-blue-600 dark:text-blue-400">É rápido e gratuito!</span>
             </p>
           </div>
@@ -140,7 +134,7 @@ const passeios = [
           <!-- Passeios (Seleção Múltipla com Dropdown) -->
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-              Passeios de Interesse * <span class="text-sm text-gray-500">(Selecione um ou mais)</span>
+              Translados e Passeios de Interesse * <span class="text-sm text-gray-500">(Selecione um ou mais)</span>
             </label>
             
             <!-- Dropdown personalizado -->
@@ -390,10 +384,10 @@ const passeios = [
 
       // ===== Mensagem para WhatsApp (com emojis e negrito) =====
       const mensagemWhatsApp =
-        `🌟 *Solicitação de Passeios* 🌟\n\n` +
+        `🌟 *Solicitação de Translados e Passeios* 🌟\n\n` +
         `👤 *Nome:* ${nome}\n` +
         `📅 *Data Desejada:* ${dataFormatada}\n\n` +
-        `🎯 *Passeios de Interesse:*\n${passeiosTexto}\n\n` +
+        `🎯 *Translados e Passeios de Interesse:*\n${passeiosTexto}\n\n` +
         `📱 *Telefone:* ${telefone}\n` +
         `💬 *Mensagem:* ${mensagem}\n\n` +
         `📍 *Enviado através do site* - RLM Turismo Gramado Turismo\n` +
